@@ -3658,382 +3658,388 @@ function buildManojResumePdf() {
   const pageHeight = 841.89;
   const marginX = 36;
   const contentWidth = pageWidth - (marginX * 2);
-  let y = 104; // Page 1 starts below executive navy banner
+  let y = 120; // Page 1 starts cleanly below the executive navy banner
   let pageNumber = 1;
 
-  function checkBreak(requiredHeight) {
-    if (y + requiredHeight > pageHeight - 34) {
+  function checkBreak(neededHeight) {
+    if (y + neededHeight > pageHeight - 38) {
       doc.addPage();
       pageNumber++;
-      y = 38; // Below running header on pages 2+
+      y = 54; // Below running header on pages 2+
       return true;
     }
     return false;
   }
 
-  // Draw Page 1 Executive Top Banner
+  // Draw Page 1 Executive Top Banner (Height: 100pt)
   doc.setFillColor(15, 23, 42); // #0f172a Slate 900
-  doc.rect(0, 0, pageWidth, 88, 'F');
+  doc.rect(0, 0, pageWidth, 100, 'F');
 
   // Cyan Accent Line
   doc.setFillColor(56, 189, 248); // #38bdf8 Sky 400
-  doc.rect(0, 85, pageWidth, 3, 'F');
+  doc.rect(0, 97, pageWidth, 3, 'F');
 
   // Left Blue Vertical Accent Pill
   doc.setFillColor(37, 99, 235); // #2563eb Blue 600
-  doc.rect(0, 0, 5, 85, 'F');
+  doc.rect(0, 0, 5, 97, 'F');
 
-  // Name
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(21);
+  // Name (22pt Bold White)
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(22);
   doc.setTextColor(255, 255, 255);
-  doc.text("MANOJ KUMAR SHARMA", marginX, 32);
+  doc.text('MANOJ KUMAR SHARMA', marginX, 36);
 
-  // Title / Subtitle
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(10.5);
+  // Designation (12pt Bold Cyan)
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(12);
   doc.setTextColor(56, 189, 248);
-  doc.text("SENIOR SOFTWARE ENGINEER & CLOUD ARCHITECT", marginX, 48);
+  doc.text('SENIOR SOFTWARE ENGINEER & CLOUD ARCHITECT', marginX, 55);
 
-  // Contact line
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(8.2);
+  // Contact line (9.5pt Crisp White/Slate)
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9.5);
   doc.setTextColor(241, 245, 249);
-  doc.text("Email: it13manoj@gmail.com    |    Phone: +91 93403 34221    |    Location: Buxar, Bihar – 802101, India", marginX, 63);
+  doc.text('Email: it13manoj@gmail.com    |    Phone: +91 93403 34221    |    Location: Buxar, Bihar – 802101, India', marginX, 72);
 
-  // Executive Core Stack Summary Bar
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(8.0);
+  // Executive Core Stack Summary Bar (9.0pt Light Cyan)
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9.0);
   doc.setTextColor(186, 230, 253);
-  doc.text("Core Stack: Java 17 · Spring Boot Microservices · AWS Cloud · React.js · Node.js · Docker · MySQL · OAuth 2.0", marginX, 75);
+  doc.text('Core Stack: Java 17 · Spring Boot Microservices · AWS Cloud · React.js · Node.js · Docker · MySQL', marginX, 86);
 
-  // Helper for executive section headings
+  // Helper for executive section headings (11pt Bold, Height 22pt)
   function addSectionHeader(title) {
-    checkBreak(30);
+    checkBreak(42);
     doc.setFillColor(241, 245, 249); // #f1f5f9
-    doc.roundedRect(marginX, y, contentWidth, 18, 3, 3, 'F');
+    doc.roundedRect(marginX, y, contentWidth, 22, 3, 3, 'F');
 
     doc.setFillColor(37, 99, 235); // #2563eb
-    doc.roundedRect(marginX, y, 4, 18, 2, 2, 'F');
+    doc.roundedRect(marginX, y, 4, 22, 2, 2, 'F');
 
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(9.2);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(11);
     doc.setTextColor(15, 23, 42);
-    doc.text(title.toUpperCase(), marginX + 10, y + 12.5);
-    y += 24;
+    doc.text(title.toUpperCase(), marginX + 12, y + 15);
+    y += 30;
   }
 
-  // Helper for bullet items
-  function addBullet(bulletText, indent = 12) {
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(8.2);
+  // Helper for bullet items (9.2pt Normal, 12.2pt Line-height)
+  function addBullet(bulletText, indent = 14) {
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9.2);
     doc.setTextColor(51, 65, 85);
-    const lines = doc.splitTextToSize(bulletText, contentWidth - indent - 4);
-    checkBreak(lines.length * 10.5 + 2.5);
+    const lines = doc.splitTextToSize(bulletText, contentWidth - indent - 6);
+    checkBreak(lines.length * 12.2 + 3);
 
     doc.setFillColor(37, 99, 235);
-    doc.circle(marginX + indent - 5, y - 2.8, 1.6, 'F');
+    doc.circle(marginX + indent - 6, y - 3, 1.8, 'F');
 
     doc.text(lines, marginX + indent, y);
-    y += lines.length * 10.5 + 2.5;
+    y += lines.length * 12.2 + 3.5;
   }
 
-  // Helper for company header card
+  // Helper for company header card (11pt Bold, 8.8pt duration pill)
   function addCompanyHeader(companyName, durationText, roleText, clientText) {
-    checkBreak(38);
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(9.8);
+    checkBreak(54);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(11);
     doc.setTextColor(15, 23, 42);
     doc.text(companyName, marginX, y);
 
     // Duration pill
-    const pillW = doc.getTextWidth(durationText) + 14;
+    const pillW = doc.getTextWidth(durationText) + 16;
     const pillX = marginX + contentWidth - pillW;
     doc.setFillColor(239, 246, 255);
     doc.setDrawColor(191, 219, 254);
     doc.setLineWidth(0.6);
-    doc.roundedRect(pillX, y - 9.5, pillW, 14, 3, 3, 'FD');
+    doc.roundedRect(pillX, y - 11, pillW, 16, 3, 3, 'FD');
 
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(7.8);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(8.8);
     doc.setTextColor(29, 78, 216);
     doc.text(durationText, pillX + pillW / 2, y, { align: 'center' });
-    y += 12;
+    y += 15;
 
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(8.5);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(9.8);
     doc.setTextColor(37, 99, 235);
     doc.text(roleText, marginX, y);
-    y += 10;
+    y += 13;
 
     if (clientText) {
-      doc.setFont("helvetica", "italic");
-      doc.setFontSize(7.8);
+      doc.setFont('helvetica', 'italic');
+      doc.setFontSize(9.0);
       doc.setTextColor(100, 116, 139);
       doc.text(clientText, marginX, y);
-      y += 10;
+      y += 13;
     }
   }
 
-  // Helper for project block
+  // Helper for project block (10.2pt Bold, Dynamic Tech Box, ZERO Overlap)
   function addProjectHeader(projTitle, projDates, projTech) {
-    checkBreak(28);
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(8.8);
+    checkBreak(44);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(10.2);
     doc.setTextColor(15, 23, 42);
     doc.text(projTitle, marginX + 6, y);
 
     if (projDates) {
-      doc.setFont("helvetica", "normal");
-      doc.setFontSize(7.8);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8.8);
       doc.setTextColor(71, 85, 105);
       doc.text(projDates, marginX + contentWidth, y, { align: 'right' });
     }
-    y += 10;
+    y += 14;
 
     if (projTech) {
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(8.5);
+      const techLines = doc.splitTextToSize('TECH: ' + projTech, contentWidth - 18);
+      const boxHeight = techLines.length * 12 + 6;
       doc.setFillColor(248, 250, 252);
       doc.setDrawColor(226, 232, 240);
       doc.setLineWidth(0.5);
-      doc.roundedRect(marginX + 6, y - 8.5, contentWidth - 6, 12, 2, 2, 'FD');
+      doc.roundedRect(marginX + 6, y - 9, contentWidth - 6, boxHeight, 2, 2, 'FD');
 
-      doc.setFont("helvetica", "bold");
-      doc.setFontSize(7.2);
       doc.setTextColor(30, 64, 175);
-      doc.text("TECH: " + projTech, marginX + 10, y);
-      y += 10;
+      doc.text(techLines, marginX + 10, y);
+      y += boxHeight + 5; // Guaranteed clearance before next element
     }
   }
 
   // --- SECTION: PROFESSIONAL SUMMARY ---
-  addSectionHeader("Professional Summary");
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(8.2);
+  addSectionHeader('Professional Summary');
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9.5);
   doc.setTextColor(51, 65, 85);
-  const sumText = "Trained, results-driven engineering professional with 9.6+ years of specialized experience in software architecture, distributed systems, and enterprise application engineering. Proven track record architecting resilient microservices using Java 17, Spring Boot, and AWS, paired with dynamic reactive frontends in React.js and Vue.js. Expert in designing secure OAuth 2.0 authentication handshakes, multi-tenant databases, bidirectional synchronization connectors, and government SaaS portals (BPSC client site). Recognized for technical squad leadership, code quality, and delivering scalable enterprise platforms across healthcare, CRM, and cloud services.";
+  const sumText = 'Trained, results-driven engineering professional with 9.6+ years of specialized experience in software architecture, distributed systems, and enterprise application engineering. Proven track record architecting resilient microservices using Java 17, Spring Boot, and AWS, paired with dynamic reactive frontends in React.js and Vue.js. Expert in designing secure OAuth 2.0 authentication handshakes, multi-tenant databases, bidirectional synchronization connectors, and government SaaS portals (BPSC client site). Recognized for technical squad leadership, code quality, and delivering scalable enterprise platforms across healthcare, CRM, and cloud services.';
   const sumLines = doc.splitTextToSize(sumText, contentWidth);
-  checkBreak(sumLines.length * 10.5 + 4);
+  checkBreak(sumLines.length * 13 + 6);
   doc.text(sumLines, marginX, y);
-  y += sumLines.length * 10.5 + 6;
+  y += sumLines.length * 13 + 8;
 
   // --- SECTION: TECHNICAL EXPERTISE ---
-  addSectionHeader("Technical Expertise & Core Competencies");
+  addSectionHeader('Technical Expertise & Core Competencies');
   const skillsData = [
-    { cat: "Languages & Core:", list: "Java 8 / 11 / 17, JavaScript (ES6+), TypeScript, PHP, SQL, HTML5, CSS3" },
-    { cat: "Frameworks & Backend:", list: "Spring Boot, Spring Security, Hibernate ORM, Microservices, Node.js, Express, JPA" },
-    { cat: "Frontend & UI:", list: "React.js, Vue.js, Next.js, Redux, Component Design Systems, Thymeleaf" },
-    { cat: "Cloud & DevOps:", list: "AWS (EC2, S3, RDS, Lambda, ECS, CloudWatch), Docker, Git, GitHub, CI/CD" },
-    { cat: "Databases & APIs:", list: "MySQL, RESTful APIs, OAuth 2.0, Stripe, PayPal, Jira API, Khoros & Salesforce APIs" }
+    { cat: 'Languages & Core:', list: 'Java 8 / 11 / 17, JavaScript (ES6+), TypeScript, PHP, SQL, HTML5, CSS3' },
+    { cat: 'Frameworks & Backend:', list: 'Spring Boot, Spring Security, Hibernate ORM, Microservices, Node.js, Express, JPA' },
+    { cat: 'Frontend & UI:', list: 'React.js, Vue.js, Next.js, Redux, Component Design Systems, Thymeleaf' },
+    { cat: 'Cloud & DevOps:', list: 'AWS (EC2, S3, RDS, Lambda, ECS, CloudWatch), Docker, Git, GitHub, CI/CD' },
+    { cat: 'Databases & APIs:', list: 'MySQL, RESTful APIs, OAuth 2.0, Stripe, PayPal, Jira API, Khoros & Salesforce APIs' }
   ];
 
   skillsData.forEach(sk => {
-    checkBreak(14);
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(8.2);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(9.5);
     doc.setTextColor(15, 23, 42);
+    const itemLines = doc.splitTextToSize(sk.list, contentWidth - 140);
+    checkBreak(itemLines.length * 13.5 + 3);
     doc.text(sk.cat, marginX + 4, y);
 
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(8.2);
+    doc.setFont('helvetica', 'normal');
     doc.setTextColor(51, 65, 85);
-    doc.text(sk.list, marginX + 120, y);
-    y += 12;
+    doc.text(itemLines, marginX + 140, y);
+    y += Math.max(itemLines.length * 13.5, 15) + 3;
   });
-  y += 4;
+  y += 6;
 
   // --- SECTION: WORK EXPERIENCE & PROJECTS ---
-  addSectionHeader("Work Experience & Flagship Projects");
+  addSectionHeader('Work Experience & Flagship Projects');
 
   // 1. SMB Group
   addCompanyHeader(
-    "SMB Group — Sr. Software Engineer",
-    "2026 – Present",
-    "Senior Software Engineer & Lead Architect",
-    "Client Site: Bihar Public Service Commission (BPSC) · Cloud & Enterprise Systems"
+    'SMB Group — Sr. Software Engineer',
+    '2026 – Present',
+    'Senior Software Engineer & Lead Architect',
+    'Client Site: Bihar Public Service Commission (BPSC) · Cloud & Enterprise Systems'
   );
-  addBullet("Architecting mission-critical public service portals, cloud infrastructure, and enterprise database migrations.");
-  addBullet("Designing high-concurrency Spring Boot microservices handling multi-million citizen records with zero downtime.");
-  addBullet("Implementing automated CI/CD deployment pipelines on AWS cloud with rigorous security compliance.");
-  y += 4;
+  addBullet('Architecting mission-critical public service portals, cloud infrastructure, and enterprise database migrations.');
+  addBullet('Designing high-concurrency Spring Boot microservices handling multi-million citizen records with zero downtime.');
+  addBullet('Implementing automated CI/CD deployment pipelines on AWS cloud with rigorous security compliance.');
+  y += 6;
 
   // 2. Grazitti Interactive
   addCompanyHeader(
-    "Grazitti Interactive — Sr. Software Engineer",
-    "Mar 2021 – 2026 (5 Years)",
-    "Senior Software Engineer · Module & Team Lead",
-    "Panchkula, India · Enterprise Cloud & Integrations Practice"
+    'Grazitti Interactive — Sr. Software Engineer',
+    'Mar 2021 – 2026 (5 Years)',
+    'Senior Software Engineer · Module & Team Lead',
+    'Panchkula, India · Enterprise Cloud & Integrations Practice'
   );
 
   // Project 1: Knowbler
   addProjectHeader(
-    "Project 1: Knowbler (Chrome Extension & Community Suite)",
-    "Jul 2023 – Present",
-    "Java 17, Spring Boot, Hibernate, Spring Security, AWS, SQL, React.js · Team: 4"
+    'Project 1: Knowbler (Chrome Extension & Community Suite)',
+    'Jul 2023 – Present',
+    'Java 17, Spring Boot, Hibernate, Spring Security, AWS, SQL, React.js · Team: 4'
   );
-  addBullet("Designed OAuth 2.0 authentication handshake and secure token rotation for Khoros and Salesforce communities.");
-  addBullet("Engineered high-throughput Articles, Roles, and Boards microservice APIs using Spring Boot and Hibernate.");
-  addBullet("Implemented dynamic configuration endpoints for Chrome Extension connection and user session mapping.");
-  addBullet("Conducted team sprint planning, architectural code reviews, and AWS deployment automation.");
-  y += 3;
+  addBullet('Designed OAuth 2.0 authentication handshake and secure token rotation for Khoros and Salesforce communities.');
+  addBullet('Engineered high-throughput Articles, Roles, and Boards microservice APIs using Spring Boot and Hibernate.');
+  addBullet('Implemented dynamic configuration endpoints for Chrome Extension connection and user session mapping.');
+  addBullet('Conducted team sprint planning, architectural code reviews, and AWS deployment automation.');
+  y += 5;
 
   // Project 2: Task Tool Manager
   addProjectHeader(
-    "Project 2: Task Tool Manager (Internal Enterprise System)",
-    "Aug 2022 – May 2023",
-    "Java, Spring Boot, Hibernate, Spring Security, AWS, Thymeleaf · Team: 4"
+    'Project 2: Task Tool Manager (Internal Enterprise System)',
+    'Aug 2022 – May 2023',
+    'Java, Spring Boot, Hibernate, Spring Security, AWS, Thymeleaf · Team: 4'
   );
-  addBullet("Created comprehensive project workflows, task assignment engine, commenting, and role-based user access panel.");
-  addBullet("Established bidirectional synchronization between Jira REST APIs and internal database.");
-  addBullet("Reduced manual status reporting overhead by 40% through automated event notification webhooks.");
-  y += 3;
+  addBullet('Created comprehensive project workflows, task assignment engine, commenting, and role-based user access panel.');
+  addBullet('Established bidirectional synchronization between Jira REST APIs and internal database.');
+  addBullet('Reduced manual status reporting overhead by 40% through automated event notification webhooks.');
+  y += 5;
 
   // Project 3: Nintex Template Gallery
   addProjectHeader(
-    "Project 3: Nintex Template Gallery",
-    "Jan 2022 – Jul 2022",
-    "Node.js, Express, MySQL, Git · Team: 3"
+    'Project 3: Nintex Template Gallery',
+    'Jan 2022 – Jul 2022',
+    'Node.js, Express, MySQL, Git · Team: 3'
   );
-  addBullet("Configured Node.js REST API microservice for template curation and analytics with MySQL query optimization.");
-  addBullet("Implemented administrative RESTful CRUD APIs with validation and security filtering.");
-  y += 3;
+  addBullet('Configured Node.js REST API microservice for template curation and analytics with MySQL query optimization.');
+  addBullet('Implemented administrative RESTful CRUD APIs with validation and security filtering.');
+  y += 5;
 
   // Project 4: Connector
   addProjectHeader(
-    "Project 4: Connector (Khoros <-> Salesforce)",
-    "Apr 2021 – Nov 2021",
-    "MySQL, React.js, Spring Boot, Git · Team: 3"
+    'Project 4: Connector (Khoros <-> Salesforce)',
+    'Apr 2021 – Nov 2021',
+    'MySQL, React.js, Spring Boot, Git · Team: 3'
   );
-  addBullet("Created bi-directional data migration service synchronizing records between Khoros and Salesforce with token refresh APIs.");
-  addBullet("Built React.js administrative dashboard showing real-time migration throughput and status logs.");
-  addBullet("Engineered robust error-handling retry mechanisms preventing synchronization anomalies.");
-  y += 5;
+  addBullet('Created bi-directional data migration service synchronizing records between Khoros and Salesforce with token refresh APIs.');
+  addBullet('Built React.js administrative dashboard showing real-time migration throughput and status logs.');
+  addBullet('Engineered robust error-handling retry mechanisms preventing synchronization anomalies.');
+  y += 8;
 
   // 3. iMark Infotech
   addCompanyHeader(
-    "iMark Infotech Pvt. Ltd. — Sr. Software Engineer",
-    "Oct 2019 – Mar 2021 (1.5 Years)",
-    "Senior Software Engineer",
-    "Chandigarh, India · Full-Stack Web & SaaS Products"
+    'iMark Infotech Pvt. Ltd. — Sr. Software Engineer',
+    'Oct 2019 – Mar 2021 (1.5 Years)',
+    'Senior Software Engineer',
+    'Chandigarh, India · Full-Stack Web & SaaS Products'
   );
 
   // Project 5: CineCave
   addProjectHeader(
-    "Project 5: CineCave (Web Audio Mixing Suite)",
-    "Aug 2020 – Feb 2021",
-    "Vue.js, Spring Boot, Web Audio API, MySQL"
+    'Project 5: CineCave (Web Audio Mixing Suite)',
+    'Aug 2020 – Feb 2021',
+    'Vue.js, Spring Boot, Web Audio API, MySQL'
   );
-  addBullet("Architected dynamic frontend user interface in Vue.js with timeline controls and Spring Boot REST catalog APIs.");
-  addBullet("Optimized audio asset caching in browser memory for seamless multi-track playback.");
-  y += 3;
+  addBullet('Architected dynamic frontend user interface in Vue.js with timeline controls and Spring Boot REST catalog APIs.');
+  addBullet('Optimized audio asset caching in browser memory for seamless multi-track playback.');
+  y += 5;
 
   // Project 6: Nikah Online
   addProjectHeader(
-    "Project 6: Nikah Online (Digital Marriage Portal)",
-    "Feb 2020 – Jul 2020",
-    "Vue.js, PHP / Laravel, MySQL, REST API"
+    'Project 6: Nikah Online (Digital Marriage Portal)',
+    'Feb 2020 – Jul 2020',
+    'Vue.js, PHP / Laravel, MySQL, REST API'
   );
-  addBullet("Designed reactive Vue.js interface with document verification, witness attestations, and event booking.");
-  addBullet("Implemented multi-lingual localized user interfaces and secure file upload encryption.");
-  y += 3;
+  addBullet('Designed reactive Vue.js interface with document verification, witness attestations, and event booking.');
+  addBullet('Implemented multi-lingual localized user interfaces and secure file upload encryption.');
+  y += 5;
 
   // Project 7: Gym-Team
   addProjectHeader(
-    "Project 7: Gym-Team (Trainer & Client Platform)",
-    "Oct 2019 – Feb 2020",
-    "Node.js, Express, Stripe, PayPal, Socket.io"
+    'Project 7: Gym-Team (Trainer & Client Platform)',
+    'Oct 2019 – Feb 2020',
+    'Node.js, Express, Stripe, PayPal, Socket.io'
   );
-  addBullet("Integrated Stripe & PayPal checkout flows and developed live chat between trainers and clients via Node.js.");
-  addBullet("Automated subscription renewal webhooks and transaction auditing ledgers.");
-  y += 5;
+  addBullet('Integrated Stripe & PayPal checkout flows and developed live chat between trainers and clients via Node.js.');
+  addBullet('Automated subscription renewal webhooks and transaction auditing ledgers.');
+  y += 8;
 
   // 4. Protolabz eService
   addCompanyHeader(
-    "Protolabz eService — Software Engineer",
-    "May 2018 – Oct 2019 (1.5 Years)",
-    "Software Engineer · Healthcare Systems",
-    "Mohali, India · Enterprise Healthcare Solutions"
+    'Protolabz eService — Software Engineer',
+    'May 2018 – Oct 2019 (1.5 Years)',
+    'Software Engineer · Healthcare Systems',
+    'Mohali, India · Enterprise Healthcare Solutions'
   );
   addProjectHeader(
-    "Project 8: Aggarwal Hospital Management System",
-    "May 2018 – Oct 2019",
-    "React.js, Node.js, Express, MySQL, AWS EC2 / RDS"
+    'Project 8: Aggarwal Hospital Management System',
+    'May 2018 – Oct 2019',
+    'React.js, Node.js, Express, MySQL, AWS EC2 / RDS'
   );
-  addBullet("Built core OPD, IPD, drug inventory, and payroll modules using React.js and Node.js on AWS EC2/RDS.");
-  addBullet("Created automated invoice generation and doctor appointment scheduling system.");
-  y += 5;
+  addBullet('Built core OPD, IPD, drug inventory, and payroll modules using React.js and Node.js on AWS EC2/RDS.');
+  addBullet('Created automated invoice generation and doctor appointment scheduling system.');
+  y += 8;
 
   // 5. Tech Global Solution
   addCompanyHeader(
-    "Tech Global Solution — Software Engineer",
-    "Jan 2017 – May 2018 (1.5 Years)",
-    "Software Engineer",
-    "Noida, India · Healthcare ERP & Enterprise Logic"
+    'Tech Global Solution — Software Engineer',
+    'Jan 2017 – May 2018 (1.5 Years)',
+    'Software Engineer',
+    'Noida, India · Healthcare ERP & Enterprise Logic'
   );
   addProjectHeader(
-    "Project 9: Metro Hospital ERP",
-    "Jan 2017 – May 2018",
-    "CodeIgniter, PHP, MySQL, Biometric API Integration"
+    'Project 9: Metro Hospital ERP',
+    'Jan 2017 – May 2018',
+    'CodeIgniter, PHP, MySQL, Biometric API Integration'
   );
-  addBullet("Programmed IPD/OPD controller logic in CodeIgniter and integrated biometric fingerprint hardware for staff attendance.");
-  addBullet("Implemented cashier handover module balancing daily cash register against hospital revenue ledger.");
-  y += 5;
+  addBullet('Programmed IPD/OPD controller logic in CodeIgniter and integrated biometric fingerprint hardware for staff attendance.');
+  addBullet('Implemented cashier handover module balancing daily cash register against hospital revenue ledger.');
+  y += 8;
 
   // --- SECTION: ACADEMIC CREDENTIALS ---
-  addSectionHeader("Academic Credentials");
-  checkBreak(32);
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(9);
+  addSectionHeader('Academic Credentials');
+  checkBreak(42);
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(11);
   doc.setTextColor(15, 23, 42);
-  doc.text("B.Tech in Information Technology", marginX, y);
-  doc.setFont("helvetica", "normal");
+  doc.text('B.Tech in Information Technology', marginX, y);
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9.8);
   doc.setTextColor(29, 78, 216);
-  doc.text("Year: 2015 · 72% Marks", marginX + contentWidth, y, { align: 'right' });
-  y += 11;
-  doc.setFont("helvetica", "normal");
+  doc.text('Year: 2015 · 72% Marks', marginX + contentWidth, y, { align: 'right' });
+  y += 15;
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9.5);
   doc.setTextColor(71, 85, 105);
-  doc.text("Aryabhatta Institute of Engineering & Management, Durgapur · WBUT, Kolkata", marginX, y);
-  y += 14;
+  doc.text('Aryabhatta Institute of Engineering & Management, Durgapur · WBUT, Kolkata', marginX, y);
+  y += 20;
 
-  checkBreak(24);
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(9);
+  checkBreak(36);
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(11);
   doc.setTextColor(15, 23, 42);
-  doc.text("Senior Secondary (10+2)", marginX, y);
-  doc.setFont("helvetica", "normal");
+  doc.text('Senior Secondary (10+2)', marginX, y);
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9.8);
   doc.setTextColor(29, 78, 216);
-  doc.text("Year: 2010 · 54% Marks", marginX + contentWidth, y, { align: 'right' });
-  y += 11;
-  doc.setFont("helvetica", "normal");
+  doc.text('Year: 2010 · 54% Marks', marginX + contentWidth, y, { align: 'right' });
+  y += 15;
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9.5);
   doc.setTextColor(71, 85, 105);
-  doc.text("M.V. College, Buxar, Bihar · BSEB Board", marginX, y);
+  doc.text('M.V. College, Buxar, Bihar · BSEB Board', marginX, y);
 
   // Add Headers & Footers to all pages
   const totalPages = doc.internal.getNumberOfPages();
   for (let i = 1; i <= totalPages; i++) {
     doc.setPage(i);
 
-    // If page > 1, draw running top header
+    // If page > 1, draw running top header (Height: 28pt)
     if (i > 1) {
       doc.setFillColor(15, 23, 42);
-      doc.rect(0, 0, pageWidth, 25, 'F');
+      doc.rect(0, 0, pageWidth, 28, 'F');
 
       doc.setFillColor(56, 189, 248);
-      doc.rect(0, 23.5, pageWidth, 1.5, 'F');
+      doc.rect(0, 26.5, pageWidth, 1.5, 'F');
 
-      doc.setFont("helvetica", "bold");
-      doc.setFontSize(8.5);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9.5);
       doc.setTextColor(255, 255, 255);
-      doc.text("MANOJ KUMAR SHARMA", marginX, 16);
+      doc.text('MANOJ KUMAR SHARMA', marginX, 18);
 
-      doc.setFont("helvetica", "normal");
-      doc.setFontSize(8);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9.0);
       doc.setTextColor(56, 189, 248);
-      doc.text("Sr. Software Engineer & Cloud Architect", 165, 16);
+      doc.text('Sr. Software Engineer & Cloud Architect', 175, 18);
 
-      doc.setFont("helvetica", "normal");
-      doc.setFontSize(7.5);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8.5);
       doc.setTextColor(203, 213, 225);
-      doc.text("it13manoj@gmail.com  |  +91 93403 34221", marginX + contentWidth, 16, { align: 'right' });
+      doc.text('it13manoj@gmail.com  |  +91 93403 34221', marginX + contentWidth, 18, { align: 'right' });
     }
 
     // Bottom Running Footer on every page
@@ -4041,13 +4047,13 @@ function buildManojResumePdf() {
     doc.setLineWidth(0.6);
     doc.line(marginX, pageHeight - 24, marginX + contentWidth, pageHeight - 24);
 
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(7.5);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8.5);
     doc.setTextColor(148, 163, 184);
-    doc.text("Manoj Kumar Sharma · Senior Software Engineer & Cloud Architect · Official CV", marginX, pageHeight - 12);
+    doc.text('Manoj Kumar Sharma · Senior Software Engineer & Cloud Architect · Official CV', marginX, pageHeight - 12);
 
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(7.5);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(8.5);
     doc.setTextColor(100, 116, 139);
     doc.text(`Page ${i} of ${totalPages}`, marginX + contentWidth, pageHeight - 12, { align: 'right' });
   }
