@@ -87,6 +87,57 @@
   --terminal-border: #1a2a44;
 }
 
+/* Custom Accent Glow Themes (Personalizer) */
+[data-accent="emerald"] {
+  --accent: #059669;
+  --accent-light: #10b981;
+  --accent-soft: #ecfdf5;
+  --accent-border: #a7f3d0;
+  --accent-dark: #047857;
+  --accent-glow: rgba(5, 150, 105, 0.28);
+  --gradient-primary: linear-gradient(135deg, #059669 0%, #0d9488 100%);
+  --gradient-accent: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --border-glow: rgba(5, 150, 105, 0.35);
+  --shadow-glow: 0 0 35px rgba(5, 150, 105, 0.25);
+}
+[data-theme="dark"][data-accent="emerald"] {
+  --accent: #10b981;
+  --accent-light: #34d399;
+  --accent-soft: rgba(16, 185, 129, 0.15);
+  --accent-border: #065f46;
+  --accent-dark: #6ee7b7;
+  --accent-glow: rgba(16, 185, 129, 0.35);
+  --gradient-primary: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
+  --gradient-accent: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+  --border-glow: rgba(16, 185, 129, 0.45);
+  --shadow-glow: 0 0 35px rgba(16, 185, 129, 0.35);
+}
+
+[data-accent="violet"] {
+  --accent: #7c3aed;
+  --accent-light: #8b5cf6;
+  --accent-soft: #f5f3ff;
+  --accent-border: #ddd6fe;
+  --accent-dark: #6d28d9;
+  --accent-glow: rgba(124, 58, 237, 0.28);
+  --gradient-primary: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
+  --gradient-accent: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  --border-glow: rgba(124, 58, 237, 0.35);
+  --shadow-glow: 0 0 35px rgba(124, 58, 237, 0.25);
+}
+[data-theme="dark"][data-accent="violet"] {
+  --accent: #8b5cf6;
+  --accent-light: #a78bfa;
+  --accent-soft: rgba(139, 92, 246, 0.15);
+  --accent-border: #5b21b6;
+  --accent-dark: #c4b5fd;
+  --accent-glow: rgba(139, 92, 246, 0.35);
+  --gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #f43f5e 100%);
+  --gradient-accent: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+  --border-glow: rgba(139, 92, 246, 0.45);
+  --shadow-glow: 0 0 35px rgba(139, 92, 246, 0.35);
+}
+
 /* ==========================================================================
    BASE & RESET
    ========================================================================== */
@@ -321,6 +372,35 @@ body {
   color: var(--accent);
 }
 
+/* Accent Glow Color Personalizer */
+.accent-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  padding: 5px 10px;
+  border-radius: 100px;
+}
+.accent-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease;
+  position: relative;
+}
+.accent-dot:hover {
+  transform: scale(1.25);
+}
+.accent-dot.active {
+  transform: scale(1.25);
+  box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px currentColor;
+}
+.dot-blue { background: #2563eb; color: #2563eb; }
+.dot-emerald { background: #10b981; color: #10b981; }
+.dot-violet { background: #8b5cf6; color: #8b5cf6; }
+
 /* ==========================================================================
    HERO SECTION & DEVELOPER TERMINAL GRAPHIC
    ========================================================================== */
@@ -475,16 +555,52 @@ body {
 .terminal-header {
   background: rgba(255, 255, 255, 0.04);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 12px 18px;
+  padding: 10px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
 }
-.terminal-dots { display: flex; gap: 7px; }
+.terminal-dots { display: flex; gap: 7px; flex-shrink: 0; }
 .terminal-dot { width: 11px; height: 11px; border-radius: 50%; }
 .dot-red { background: #ef4444; }
 .dot-yellow { background: #f59e0b; }
 .dot-green { background: #10b981; }
+
+.terminal-tabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.terminal-tabs::-webkit-scrollbar { display: none; }
+
+.terminal-tab {
+  background: transparent;
+  border: 1px solid transparent;
+  color: #94a3b8;
+  font-family: inherit;
+  font-size: .74rem;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all .15s ease;
+  white-space: nowrap;
+}
+.terminal-tab:hover {
+  color: #f8fafc;
+  background: rgba(255, 255, 255, 0.06);
+}
+.terminal-tab.active {
+  background: rgba(255, 255, 255, 0.12);
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.35);
+  font-weight: 600;
+}
+
 .terminal-title {
   font-size: .78rem;
   color: #94a3b8;
@@ -591,6 +707,305 @@ body {
   text-transform: uppercase;
   color: var(--text-soft);
   margin-top: 6px;
+}
+
+/* ==========================================================================
+   INTERACTIVE SYSTEM ARCHITECTURE BLUEPRINT GRAPHIC
+   ========================================================================== */
+.arch-container {
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  transition: all .25s ease;
+  margin-top: 18px;
+}
+.arch-container:hover {
+  box-shadow: var(--shadow-lg), 0 0 35px var(--accent-glow);
+  border-color: var(--accent-border);
+}
+.arch-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 24px;
+}
+.arch-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.pulse-indicator {
+  width: 9px;
+  height: 9px;
+  background: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #10b981;
+  animation: pulseGreen 1.8s infinite;
+}
+@keyframes pulseGreen {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 14px #10b981; }
+  100% { transform: scale(0.9); opacity: 0.8; }
+}
+.arch-mode-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.arch-ctrl-btn {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: .78rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all .15s ease;
+  font-family: inherit;
+}
+.arch-ctrl-btn:hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.arch-ctrl-btn.active {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: var(--accent-border);
+}
+.arch-hint {
+  font-size: .76rem;
+  color: var(--text-soft);
+}
+
+/* 5-Stage Interactive Pipeline Grid */
+.arch-pipeline-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr auto 1fr;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 26px;
+}
+@media (max-width: 1080px) {
+  .arch-pipeline-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .arch-connector {
+    width: 2px !important;
+    height: 24px !important;
+    margin: 0 auto;
+  }
+  .arch-pulse-dot {
+    animation-name: pulseFlowVertical !important;
+  }
+}
+.arch-node-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 14px;
+  cursor: pointer;
+  transition: all .22s ease;
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+}
+.arch-node-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: 0 10px 25px -5px var(--accent-glow);
+}
+.arch-node-card.active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: 0 0 0 2px var(--accent), 0 10px 25px -5px var(--accent-glow);
+}
+.arch-node-badge {
+  font-size: .65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.arch-node-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--gradient-primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 12px var(--accent-glow);
+}
+.arch-node-title {
+  font-weight: 700;
+  font-size: .84rem;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.arch-node-sub {
+  font-size: .72rem;
+  color: var(--text-soft);
+  margin-bottom: 8px;
+  line-height: 1.35;
+}
+.arch-node-metric {
+  font-size: .68rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--surface-alt);
+  border-radius: 100px;
+  padding: 2px 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Connecting Pipelines & Pulse Glow */
+.arch-connector {
+  width: 26px;
+  height: 3px;
+  background: var(--border-strong);
+  position: relative;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.arch-pulse-dot {
+  position: absolute;
+  top: -2.5px;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  border-radius: 50%;
+  animation: pulseFlowHorizontal 1.8s infinite linear;
+}
+@keyframes pulseFlowHorizontal {
+  0% { left: -10px; opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+@keyframes pulseFlowVertical {
+  0% { top: -10px; opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* Deep Dive Inspector Card */
+.arch-inspector {
+  background: var(--terminal-bg);
+  border: 1px solid var(--terminal-border);
+  border-radius: var(--radius);
+  color: #e2e8f0;
+  padding: 24px;
+  box-shadow: inset 0 2px 10px rgba(0,0,0,0.3);
+  font-family: 'JetBrains Mono', monospace;
+}
+.arch-inspector-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 14px;
+  margin-bottom: 18px;
+}
+.arch-inspector-tag {
+  font-size: .72rem;
+  color: #38bdf8;
+  letter-spacing: .08em;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.arch-inspector-header h3 {
+  font-size: 1.15rem;
+  font-family: 'Outfit', sans-serif;
+  color: #fff;
+}
+.arch-inspector-body {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .arch-inspector-body { grid-template-columns: 1fr; }
+}
+.arch-inspect-col h4 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: .86rem;
+  color: #cbd5e1;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.arch-spec-list {
+  list-style: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: .82rem;
+  line-height: 1.8;
+  color: #94a3b8;
+}
+.arch-spec-list strong { color: #f1f5f9; }
+.arch-inspect-code-col {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.arch-code-bar {
+  background: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: .75rem;
+  color: #94a3b8;
+}
+.arch-code-chip {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  padding: 2px 8px;
+  border-radius: 100px;
+  font-size: .68rem;
+  font-weight: 600;
+}
+.arch-code-block {
+  padding: 16px;
+  margin: 0;
+  font-size: .78rem;
+  line-height: 1.6;
+  color: #e2e8f0;
+  overflow-x: auto;
 }
 
 /* ==========================================================================
@@ -1548,12 +1963,19 @@ body {
     <div class="topnav-links">
       <button class="nav-link" onclick="scrollToSection('about')">About</button>
       <button class="nav-link" onclick="scrollToSection('skills')">Skills</button>
+      <button class="nav-link" onclick="scrollToSection('architecture')">Architecture</button>
       <button class="nav-link" onclick="scrollToSection('experience')">Experience</button>
       <button class="nav-link" onclick="scrollToSection('projects')">Projects</button>
       <button class="nav-link" onclick="scrollToSection('education')">Education</button>
       <button class="nav-link" onclick="scrollToSection('resume')">Resume</button>
     </div>
     <div class="nav-actions">
+      <!-- Accent Glow Personalizer -->
+      <div class="accent-switcher" title="Customize Accent Glow">
+        <span class="accent-dot dot-blue active" id="accentBlue" onclick="setAccent('blue')" title="Electric Blue"></span>
+        <span class="accent-dot dot-emerald" id="accentEmerald" onclick="setAccent('emerald')" title="Cyber Emerald"></span>
+        <span class="accent-dot dot-violet" id="accentViolet" onclick="setAccent('violet')" title="Neon Violet"></span>
+      </div>
       <!-- Theme Switcher -->
       <button class="btn-theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle Dark / Light Mode">
         <i class="fas fa-moon"></i>
@@ -1616,8 +2038,16 @@ body {
               <span class="terminal-dot dot-yellow"></span>
               <span class="terminal-dot dot-green"></span>
             </div>
-            <div class="terminal-title">
-              <i class="fas fa-code"></i> ManojSharma.java
+            <div class="terminal-tabs">
+              <button class="terminal-tab active" id="termTabJava" onclick="switchTerminalTab('java')">
+                <i class="fab fa-java"></i> ManojSharma.java
+              </button>
+              <button class="terminal-tab" id="termTabYml" onclick="switchTerminalTab('yml')">
+                <i class="fas fa-cubes"></i> Architecture.yml
+              </button>
+              <button class="terminal-tab" id="termTabJson" onclick="switchTerminalTab('json')">
+                <i class="fas fa-chart-line"></i> Metrics.json
+              </button>
             </div>
             <div class="terminal-actions">
               <button class="terminal-btn-copy" onclick="copyTerminalCode()"><i class="fas fa-copy"></i> Copy</button>
@@ -1816,6 +2246,119 @@ body {
         <span class="tag"><i class="fab fa-docker"></i> Docker</span>
         <span class="tag"><i class="fab fa-stripe"></i> Stripe / PayPal</span>
         <span class="tag"><i class="fab fa-salesforce"></i> Salesforce API</span>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE SYSTEM ARCHITECTURE BLUEPRINT -->
+    <section class="section" id="architecture">
+      <div class="section-head">
+        <h2><span class="icon-box"><i class="fas fa-network-wired"></i></span> System Architecture Blueprint</h2>
+        <span class="count">Microservices &amp; Cloud Topology</span>
+      </div>
+
+      <div class="arch-container" data-tilt>
+        <div class="arch-top-bar">
+          <div class="arch-status-pill">
+            <span class="pulse-indicator"></span>
+            <span>Enterprise Pipeline Active · 99.99% Availability</span>
+          </div>
+          <div class="arch-mode-toggle">
+            <button class="arch-ctrl-btn active" id="archSimBtn" onclick="toggleArchSimulation()">
+              <i class="fas fa-play"></i> Live Data Flow
+            </button>
+            <span class="arch-hint"><i class="fas fa-mouse-pointer"></i> Click nodes below to inspect topology</span>
+          </div>
+        </div>
+
+        <!-- 5-Stage Interactive Pipeline -->
+        <div class="arch-pipeline-grid">
+          <!-- Node 0 -->
+          <div class="arch-node-card active" id="archNode0" onclick="selectArchNode(0)">
+            <div class="arch-node-badge">Tier 1 · Clients</div>
+            <div class="arch-node-icon"><i class="fas fa-laptop-code"></i></div>
+            <div class="arch-node-title">Client Ecosystem</div>
+            <div class="arch-node-sub">Chrome Ext (Knowbler) &amp; SPAs</div>
+            <div class="arch-node-metric"><i class="fas fa-users"></i> 50k+ Active Users</div>
+          </div>
+
+          <div class="arch-connector"><div class="arch-pulse-dot"></div></div>
+
+          <!-- Node 1 -->
+          <div class="arch-node-card" id="archNode1" onclick="selectArchNode(1)">
+            <div class="arch-node-badge">Tier 2 · Edge</div>
+            <div class="arch-node-icon"><i class="fas fa-shield-halved"></i></div>
+            <div class="arch-node-title">Gateway &amp; Proxy</div>
+            <div class="arch-node-sub">NGINX &amp; Spring Cloud Gateway</div>
+            <div class="arch-node-metric"><i class="fas fa-bolt"></i> 10k Req/sec</div>
+          </div>
+
+          <div class="arch-connector"><div class="arch-pulse-dot"></div></div>
+
+          <!-- Node 2 -->
+          <div class="arch-node-card" id="archNode2" onclick="selectArchNode(2)">
+            <div class="arch-node-badge">Tier 3 · Security</div>
+            <div class="arch-node-icon"><i class="fas fa-key"></i></div>
+            <div class="arch-node-title">OAuth 2.0 &amp; IAM</div>
+            <div class="arch-node-sub">Spring Security &amp; Token Rotation</div>
+            <div class="arch-node-metric"><i class="fas fa-lock"></i> Zero-Trust TLS</div>
+          </div>
+
+          <div class="arch-connector"><div class="arch-pulse-dot"></div></div>
+
+          <!-- Node 3 -->
+          <div class="arch-node-card" id="archNode3" onclick="selectArchNode(3)">
+            <div class="arch-node-badge">Tier 4 · Core</div>
+            <div class="arch-node-icon"><i class="fas fa-cubes"></i></div>
+            <div class="arch-node-title">Microservices Cluster</div>
+            <div class="arch-node-sub">Spring Boot REST &amp; Sync Engines</div>
+            <div class="arch-node-metric"><i class="fas fa-layer-group"></i> Multi-Tenant</div>
+          </div>
+
+          <div class="arch-connector"><div class="arch-pulse-dot"></div></div>
+
+          <!-- Node 4 -->
+          <div class="arch-node-card" id="archNode4" onclick="selectArchNode(4)">
+            <div class="arch-node-badge">Tier 5 · Cloud/Data</div>
+            <div class="arch-node-icon"><i class="fas fa-cloud"></i></div>
+            <div class="arch-node-title">AWS &amp; MySQL Aurora</div>
+            <div class="arch-node-sub">EC2/ECS, S3 &amp; RDS Multi-AZ</div>
+            <div class="arch-node-metric"><i class="fas fa-database"></i> &lt;15ms Latency</div>
+          </div>
+        </div>
+
+        <!-- Node Deep Dive Inspector -->
+        <div class="arch-inspector" id="archInspector">
+          <div class="arch-inspector-header">
+            <div class="arch-inspector-tag" id="archInspectTag">TIER 1 · CLIENT ECOSYSTEM</div>
+            <h3 id="archInspectTitle">Chrome Extension (Knowbler) &amp; Frontend Ecosystem</h3>
+          </div>
+          <div class="arch-inspector-body">
+            <div class="arch-inspect-col">
+              <h4><i class="fas fa-microchip"></i> Architectural Specifications</h4>
+              <ul class="arch-spec-list" id="archInspectSpecs">
+                <li><strong>Protocols:</strong> HTTPS / WSS, RESTful JSON Payloads</li>
+                <li><strong>State Management:</strong> Redux Toolkit / Reactive Local Cache</li>
+                <li><strong>Resilience:</strong> Offline IndexedDB queuing &amp; exponential retry backoff</li>
+              </ul>
+            </div>
+            <div class="arch-inspect-code-col">
+              <div class="arch-code-bar">
+                <span class="arch-code-filename" id="archCodeFilename"><i class="fab fa-js"></i> KnowblerClient.ts</span>
+                <span class="arch-code-chip">Production Pattern</span>
+              </div>
+              <pre class="arch-code-block" id="archCodeBlock"><code>// Knowbler Chrome Extension Context Bridge
+class KnowblerBridge {
+  async dispatchKnowledgeQuery(query: string, token: string) {
+    const res = await fetch('https://api.knowbler.io/v1/articles/search', {
+      headers: { 'Authorization': `Bearer \${token}` }
+    });
+    return res.json();
+  }
+}</code></pre>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -2191,6 +2734,9 @@ body {
           <button class="btn-resume outline btn-hero" onclick="downloadResumePDF()" id="resumeDownloadBtn">
             <i class="fas fa-download"></i> Download Resume (PDF)
           </button>
+          <button class="btn-resume outline btn-hero" onclick="downloadResumeWithCustomName()" title="Choose your custom filename for PDF">
+            <i class="fas fa-file-signature"></i> Download by Name...
+          </button>
           <button class="btn-resume secondary btn-hero" onclick="printResume()">
             <i class="fas fa-print"></i> Print / Save as PDF
           </button>
@@ -2233,6 +2779,9 @@ body {
       <div class="modal-head-actions">
         <button class="btn-resume" onclick="downloadResumePDF()" id="modalDownloadBtn">
           <i class="fas fa-download"></i> Download PDF
+        </button>
+        <button class="btn-resume outline" onclick="downloadResumeWithCustomName()" title="Specify custom filename before saving">
+          <i class="fas fa-file-signature"></i> By Name...
         </button>
         <button class="btn-resume outline" onclick="openResumeInNewTab()">
           <i class="fas fa-arrow-up-right-from-square"></i> Open in New Tab
@@ -2434,6 +2983,9 @@ body {
     <i class="fas fa-download"></i> Download PDF
   </button>
   <div class="dock-divider"></div>
+  <button class="dock-btn" onclick="scrollToSection('architecture')" title="System Architecture Blueprint">
+    <i class="fas fa-network-wired"></i> Architecture
+  </button>
   <button class="dock-btn" onclick="scrollToSection('contact')" title="Go to contact info">
     <i class="fas fa-envelope"></i> Contact
   </button>
@@ -2777,20 +3329,325 @@ function fallbackCopy(text, message) {
   document.body.removeChild(textArea);
 }
 
-function copyTerminalCode() {
-  const code = `public class ManojSharma implements CloudArchitect {
+/* --------------------------------------------------------------------------
+   8. COLOR PERSONALIZER (ACCENT GLOW THEMES)
+   -------------------------------------------------------------------------- */
+function setAccent(color) {
+  const root = document.documentElement;
+  if (color === 'blue') {
+    root.removeAttribute('data-accent');
+    localStorage.removeItem('portfolio_accent');
+  } else {
+    root.setAttribute('data-accent', color);
+    localStorage.setItem('portfolio_accent', color);
+  }
+  document.querySelectorAll('.accent-dot').forEach(dot => dot.classList.remove('active'));
+  const activeDot = document.getElementById(
+    color === 'emerald' ? 'accentEmerald' : (color === 'violet' ? 'accentViolet' : 'accentBlue')
+  );
+  if (activeDot) activeDot.classList.add('active');
+  showToast(`Accent glow changed to ${color.charAt(0).toUpperCase() + color.slice(1)}!`, 'info');
+}
+
+(function restoreAccent() {
+  const saved = localStorage.getItem('portfolio_accent');
+  if (saved) {
+    document.documentElement.setAttribute('data-accent', saved);
+    setTimeout(() => {
+      document.querySelectorAll('.accent-dot').forEach(dot => dot.classList.remove('active'));
+      const activeDot = document.getElementById(
+        saved === 'emerald' ? 'accentEmerald' : (saved === 'violet' ? 'accentViolet' : 'accentBlue')
+      );
+      if (activeDot) activeDot.classList.add('active');
+    }, 50);
+  }
+})();
+
+/* --------------------------------------------------------------------------
+   9. MULTI-TAB DEVELOPER TERMINAL GRAPHIC
+   -------------------------------------------------------------------------- */
+const terminalData = {
+  java: {
+    raw: `public class ManojSharma implements CloudArchitect {
     String role        = "Sr. Software Engineer";
-    double experience  = 9.6;
+    double experience  = 9.6; // Years IT
     String clientSite  = "SMB Group · BPSC Client";
     String[] stack     = {"Java 17", "Spring Boot", "AWS", "React"};
     boolean available  = true;
-}`;
-  copyToClipboard(code, 'Code snippet copied to clipboard!');
+
+    public SystemArchitecture deliver() {
+        return new Microservices()
+            .scale(Enterprise.RESILIENT)
+            .secure(OAuth2.TOKEN_BASED);
+    }
+}`,
+    html: `<span class="c-kw">public class</span> <span class="c-type">ManojSharma</span> <span class="c-kw">implements</span> <span class="c-type">CloudArchitect</span> {
+    <span class="c-type">String</span> <span class="c-prop">role</span>        = <span class="c-str">"Sr. Software Engineer"</span>;
+    <span class="c-type">double</span> <span class="c-prop">experience</span>  = <span class="c-num">9.6</span>; <span class="c-comment">// Years IT</span>
+    <span class="c-type">String</span> <span class="c-prop">clientSite</span>  = <span class="c-str">"SMB Group · BPSC Client"</span>;
+    <span class="c-type">String</span>[] <span class="c-prop">stack</span>     = {<span class="c-str">"Java 17"</span>, <span class="c-str">"Spring Boot"</span>, <span class="c-str">"AWS"</span>, <span class="c-str">"React"</span>};
+    <span class="c-type">boolean</span> <span class="c-prop">available</span>  = <span class="c-kw">true</span>;
+
+    <span class="c-kw">public</span> <span class="c-type">SystemArchitecture</span> <span class="c-prop">deliver</span>() {
+        <span class="c-kw">return new</span> <span class="c-type">Microservices</span>()
+            .<span class="c-prop">scale</span>(<span class="c-type">Enterprise</span>.RESILIENT)
+            .<span class="c-prop">secure</span>(<span class="c-type">OAuth2</span>.TOKEN_BASED);
+    }
+}`
+  },
+  yml: {
+    raw: `version: "3.9"
+services:
+  spring-boot-core:
+    image: manoj/knowbler-api:17.4
+    replicas: 4
+    environment:
+      - SPRING_PROFILES_ACTIVE=production
+      - DB_URL=jdbc:mysql://aurora-cluster.aws:3306/enterprise
+      - HIKARI_MAX_POOL_SIZE=30
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+    deploy:
+      resources:
+        limits: { cpus: '2.0', memory: 4096M }`,
+    html: `<span class="c-prop">version:</span> <span class="c-str">"3.9"</span>
+<span class="c-prop">services:</span>
+  <span class="c-type">spring-boot-core:</span>
+    <span class="c-prop">image:</span> <span class="c-str">manoj/knowbler-api:17.4</span>
+    <span class="c-prop">replicas:</span> <span class="c-num">4</span>
+    <span class="c-prop">environment:</span>
+      - <span class="c-str">SPRING_PROFILES_ACTIVE=production</span>
+      - <span class="c-str">DB_URL=jdbc:mysql://aurora-cluster.aws:3306/enterprise</span>
+      - <span class="c-str">HIKARI_MAX_POOL_SIZE=30</span>
+    <span class="c-prop">healthcheck:</span>
+      <span class="c-prop">test:</span> [<span class="c-str">"CMD"</span>, <span class="c-str">"curl"</span>, <span class="c-str">"-f"</span>, <span class="c-str">"http://localhost:8080/actuator/health"</span>]
+    <span class="c-prop">deploy:</span>
+      <span class="c-prop">resources:</span>
+        <span class="c-prop">limits:</span> { <span class="c-prop">cpus:</span> <span class="c-str">'2.0'</span>, <span class="c-prop">memory:</span> <span class="c-num">4096M</span> }`
+  },
+  json: {
+    raw: `{
+  "engineer": "Manoj Kumar Sharma",
+  "designation": "Sr. Software Engineer & Cloud Architect",
+  "totalExperienceYears": 9.6,
+  "flagshipDeliveries": 9,
+  "stack": ["Java 17", "Spring Boot", "Microservices", "React.js", "AWS"],
+  "productionUptime": "99.99%",
+  "securityCompliance": ["OAuth 2.0", "Spring Security", "JWT", "RBAC"],
+  "databasePerformance": "Sub-15ms Latency with HikariCP & MySQL Aurora"
+}`,
+    html: `{
+  <span class="c-prop">"engineer"</span>: <span class="c-str">"Manoj Kumar Sharma"</span>,
+  <span class="c-prop">"designation"</span>: <span class="c-str">"Sr. Software Engineer & Cloud Architect"</span>,
+  <span class="c-prop">"totalExperienceYears"</span>: <span class="c-num">9.6</span>,
+  <span class="c-prop">"flagshipDeliveries"</span>: <span class="c-num">9</span>,
+  <span class="c-prop">"stack"</span>: [<span class="c-str">"Java 17"</span>, <span class="c-str">"Spring Boot"</span>, <span class="c-str">"Microservices"</span>, <span class="c-str">"React.js"</span>, <span class="c-str">"AWS"</span>],
+  <span class="c-prop">"productionUptime"</span>: <span class="c-str">"99.99%"</span>,
+  <span class="c-prop">"securityCompliance"</span>: [<span class="c-str">"OAuth 2.0"</span>, <span class="c-str">"Spring Security"</span>, <span class="c-str">"JWT"</span>, <span class="c-str">"RBAC"</span>],
+  <span class="c-prop">"databasePerformance"</span>: <span class="c-str">"Sub-15ms Latency with HikariCP & MySQL Aurora"</span>
+}`
+  }
+};
+
+let currentTerminalTab = 'java';
+
+function switchTerminalTab(tabKey) {
+  if (!terminalData[tabKey]) return;
+  currentTerminalTab = tabKey;
+  ['termTabJava', 'termTabYml', 'termTabJson'].forEach(id => {
+    const btn = document.getElementById(id);
+    if (btn) btn.classList.remove('active');
+  });
+  const activeBtn = document.getElementById(
+    tabKey === 'java' ? 'termTabJava' : (tabKey === 'yml' ? 'termTabYml' : 'termTabJson')
+  );
+  if (activeBtn) activeBtn.classList.add('active');
+
+  const codeBlock = document.getElementById('terminalCodeBlock');
+  if (codeBlock) {
+    codeBlock.innerHTML = terminalData[tabKey].html;
+  }
+}
+
+function copyTerminalCode() {
+  const code = terminalData[currentTerminalTab] ? terminalData[currentTerminalTab].raw : '';
+  copyToClipboard(code, `Copied ${currentTerminalTab.toUpperCase()} snippet to clipboard!`);
 }
 
 /* --------------------------------------------------------------------------
-   8. BULLETPROOF NATIVE VECTOR PDF BUILDER (GUARANTEED NEVER BLANK)
-   Does NOT use canvas screenshot. Draws vector text directly to PDF.
+   10. INTERACTIVE SYSTEM ARCHITECTURE BLUEPRINT CONTROLS
+   -------------------------------------------------------------------------- */
+const archNodesData = [
+  {
+    tier: 'TIER 1 · CLIENT ECOSYSTEM',
+    title: 'Chrome Extension (Knowbler) & Web Ecosystem',
+    specs: [
+      '<strong>Protocols:</strong> HTTPS / WSS, RESTful JSON Payloads',
+      '<strong>Frontend Stack:</strong> React.js, Vue.js, Redux Toolkit, Webpack',
+      '<strong>Resilience:</strong> IndexedDB offline query queuing, automatic exponential backoff'
+    ],
+    filename: 'KnowblerClient.ts',
+    code: `// Knowbler Chrome Extension Context Bridge
+class KnowblerBridge {
+  async dispatchKnowledgeQuery(query: string, token: string) {
+    const res = await fetch('https://api.knowbler.io/v1/articles/search', {
+      headers: { 'Authorization': \`Bearer \${token}\` }
+    });
+    return res.json();
+  }
+}`
+  },
+  {
+    tier: 'TIER 2 · EDGE & GATEWAY',
+    title: 'Spring Cloud Gateway & NGINX Reverse Proxy',
+    specs: [
+      '<strong>Throughput:</strong> 10,000+ Req/sec with non-blocking Netty engine',
+      '<strong>Edge Security:</strong> Zero-Trust SSL termination, dynamic IP rate limiting',
+      '<strong>Routing:</strong> Dynamic path re-writing and cross-origin header sanitization'
+    ],
+    filename: 'GatewayConfig.java',
+    code: `@Configuration
+public class ApiGatewayConfig {
+    @Bean
+    public RouteLocator customRoutes(RouteLocatorBuilder builder) {
+        return builder.routes()
+            .route("knowbler_articles", r -> r.path("/api/v1/articles/**")
+                .filters(f -> f.circuitBreaker(c -> c.setName("articlesBreaker")))
+                .uri("lb://ARTICLES-SERVICE"))
+            .build();
+    }
+}`
+  },
+  {
+    tier: 'TIER 3 · IDENTITY & ACCESS',
+    title: 'Spring Security, OAuth 2.0 & Token Handshake',
+    specs: [
+      '<strong>Auth Standards:</strong> OAuth 2.0 PKCE handshake, OpenID Connect, JWT',
+      '<strong>Integration:</strong> Khoros Community SSO & Salesforce Connected App',
+      '<strong>Token Rotation:</strong> Automated asymmetric RSA-256 JWT refresh rotation'
+    ],
+    filename: 'SecurityConfig.java',
+    code: `@EnableWebSecurity
+public class OAuth2SecurityConfig {
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        return http.authorizeHttpRequests(auth -> auth
+            .requestMatchers("/api/public/**").permitAll()
+            .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
+            .anyRequest().authenticated())
+            .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
+            .build();
+    }
+}`
+  },
+  {
+    tier: 'TIER 4 · MICROSERVICES CLUSTER',
+    title: 'Distributed Spring Boot Microservices Cluster',
+    specs: [
+      '<strong>Core Services:</strong> Articles Engine, Task Workflow Manager, Data Migration',
+      '<strong>Concurrency:</strong> Java 17 Virtual Threads & Async CompletableFutures',
+      '<strong>Persistence:</strong> Spring Data JPA & Hibernate Level-2 query caching'
+    ],
+    filename: 'ArticleService.java',
+    code: `@Service
+@Transactional(readOnly = true)
+public class ArticleSyncService {
+    @Autowired private ArticleRepository repo;
+    
+    @Transactional
+    public SyncResult syncKhorosToSalesforce(SyncBatch batch) {
+        // High-throughput idempotency and conflict resolution
+        return batch.stream()
+            .map(repo::upsertExternalRecord)
+            .collect(SyncResult.collector());
+    }
+}`
+  },
+  {
+    tier: 'TIER 5 · CLOUD & DATA LAYER',
+    title: 'AWS Infrastructure & Multi-AZ MySQL Aurora',
+    specs: [
+      '<strong>Compute:</strong> Dockerized containers deployed on AWS EC2 & ECS',
+      '<strong>Database:</strong> AWS RDS MySQL Aurora Multi-AZ with sub-15ms HikariCP',
+      '<strong>Observability:</strong> AWS CloudWatch metrics, centralized logging and alarms'
+    ],
+    filename: 'HikariDataSourceConfig.java',
+    code: `@Configuration
+public class AuroraDatabaseConfig {
+    @Bean
+    public DataSource dataSource() {
+        HikariConfig cfg = new HikariConfig();
+        cfg.setJdbcUrl("jdbc:mysql://aurora-cluster.aws:3306/enterprise");
+        cfg.setMaximumPoolSize(30);
+        cfg.setMinimumIdle(10);
+        cfg.addDataSourceProperty("cachePrepStmts", "true");
+        return new HikariDataSource(cfg);
+    }
+}`
+  }
+];
+
+let activeArchNode = 0;
+let archSimulationRunning = true;
+
+function selectArchNode(index) {
+  if (index < 0 || index >= archNodesData.length) return;
+  activeArchNode = index;
+
+  for (let i = 0; i < 5; i++) {
+    const card = document.getElementById(`archNode${i}`);
+    if (card) {
+      if (i === index) card.classList.add('active');
+      else card.classList.remove('active');
+    }
+  }
+
+  const data = archNodesData[index];
+  const tagEl = document.getElementById('archInspectTag');
+  const titleEl = document.getElementById('archInspectTitle');
+  const specsEl = document.getElementById('archInspectSpecs');
+  const fnEl = document.getElementById('archCodeFilename');
+  const codeEl = document.getElementById('archCodeBlock');
+
+  if (tagEl) tagEl.innerText = data.tier;
+  if (titleEl) titleEl.innerText = data.title;
+  if (specsEl) {
+    specsEl.innerHTML = data.specs.map(s => `<li>${s}</li>`).join('');
+  }
+  if (fnEl) fnEl.innerHTML = `<i class="fas fa-file-code"></i> ${data.filename}`;
+  if (codeEl) {
+    codeEl.innerHTML = `<code>${escapeHtml(data.code)}</code>`;
+  }
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function toggleArchSimulation() {
+  archSimulationRunning = !archSimulationRunning;
+  const btn = document.getElementById('archSimBtn');
+  const dots = document.querySelectorAll('.arch-pulse-dot');
+
+  if (archSimulationRunning) {
+    if (btn) {
+      btn.innerHTML = '<i class="fas fa-play"></i> Live Data Flow';
+      btn.classList.add('active');
+    }
+    dots.forEach(d => d.style.animationPlayState = 'running');
+    showToast('Real-time data flow simulation active', 'info');
+  } else {
+    if (btn) {
+      btn.innerHTML = '<i class="fas fa-pause"></i> Simulation Paused';
+      btn.classList.remove('active');
+    }
+    dots.forEach(d => d.style.animationPlayState = 'paused');
+    showToast('Data flow animation paused', 'info');
+  }
+}
+
+/* --------------------------------------------------------------------------
+   11. BULLETPROOF EXECUTIVE VECTOR PDF BUILDER (100% ATS-COMPLIANT & DESIGNED)
    -------------------------------------------------------------------------- */
 function buildManojResumePdf() {
   const jsPdfClass = (window.jspdf && window.jspdf.jsPDF) ? window.jspdf.jsPDF : (window.jsPDF ? window.jsPDF : null);
@@ -2799,94 +3656,170 @@ function buildManojResumePdf() {
   const doc = new jsPdfClass({ unit: 'pt', format: 'a4' });
   const pageWidth = 595.28;
   const pageHeight = 841.89;
-  const marginX = 38;
+  const marginX = 36;
   const contentWidth = pageWidth - (marginX * 2);
-  let y = 38;
+  let y = 104; // Page 1 starts below executive navy banner
   let pageNumber = 1;
 
   function checkBreak(requiredHeight) {
-    if (y + requiredHeight > pageHeight - 45) {
+    if (y + requiredHeight > pageHeight - 34) {
       doc.addPage();
       pageNumber++;
-      y = 38;
+      y = 38; // Below running header on pages 2+
       return true;
     }
     return false;
   }
 
-  // --- HEADER ---
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(18);
-  doc.setTextColor(15, 23, 42);
-  doc.text("MANOJ KUMAR SHARMA", marginX, y);
-  y += 16;
+  // Draw Page 1 Executive Top Banner
+  doc.setFillColor(15, 23, 42); // #0f172a Slate 900
+  doc.rect(0, 0, pageWidth, 88, 'F');
 
+  // Cyan Accent Line
+  doc.setFillColor(56, 189, 248); // #38bdf8 Sky 400
+  doc.rect(0, 85, pageWidth, 3, 'F');
+
+  // Left Blue Vertical Accent Pill
+  doc.setFillColor(37, 99, 235); // #2563eb Blue 600
+  doc.rect(0, 0, 5, 85, 'F');
+
+  // Name
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(21);
+  doc.setTextColor(255, 255, 255);
+  doc.text("MANOJ KUMAR SHARMA", marginX, 32);
+
+  // Title / Subtitle
   doc.setFont("helvetica", "bold");
   doc.setFontSize(10.5);
-  doc.setTextColor(29, 78, 216);
-  doc.text("Sr. Software Engineer & Cloud Architect", marginX, y);
-  y += 14;
+  doc.setTextColor(56, 189, 248);
+  doc.text("SENIOR SOFTWARE ENGINEER & CLOUD ARCHITECT", marginX, 48);
 
+  // Contact line
   doc.setFont("helvetica", "normal");
-  doc.setFontSize(8.5);
-  doc.setTextColor(71, 85, 105);
-  doc.text("Email: it13manoj@gmail.com   |   Phone: +91 93403 34221   |   Location: Buxar, Bihar – 802101, India", marginX, y);
-  y += 12;
-  doc.text("Core Stack: Java 17 · Spring Boot · Microservices · React.js · Node.js · AWS Cloud · MySQL · Docker", marginX, y);
-  y += 8;
+  doc.setFontSize(8.2);
+  doc.setTextColor(241, 245, 249);
+  doc.text("Email: it13manoj@gmail.com    |    Phone: +91 93403 34221    |    Location: Buxar, Bihar – 802101, India", marginX, 63);
 
-  // Header Divider
-  doc.setDrawColor(37, 99, 235);
-  doc.setLineWidth(1.5);
-  doc.line(marginX, y, marginX + contentWidth, y);
-  y += 16;
+  // Executive Core Stack Summary Bar
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(8.0);
+  doc.setTextColor(186, 230, 253);
+  doc.text("Core Stack: Java 17 · Spring Boot Microservices · AWS Cloud · React.js · Node.js · Docker · MySQL · OAuth 2.0", marginX, 75);
 
-  // Helper for section headings
+  // Helper for executive section headings
   function addSectionHeader(title) {
-    checkBreak(32);
+    checkBreak(30);
+    doc.setFillColor(241, 245, 249); // #f1f5f9
+    doc.roundedRect(marginX, y, contentWidth, 18, 3, 3, 'F');
+
+    doc.setFillColor(37, 99, 235); // #2563eb
+    doc.roundedRect(marginX, y, 4, 18, 2, 2, 'F');
+
     doc.setFont("helvetica", "bold");
-    doc.setFontSize(10.5);
-    doc.setTextColor(29, 78, 216);
-    doc.text(title.toUpperCase(), marginX, y);
-    y += 4;
-    doc.setDrawColor(203, 213, 225);
-    doc.setLineWidth(0.8);
-    doc.line(marginX, y, marginX + contentWidth, y);
-    y += 12;
+    doc.setFontSize(9.2);
+    doc.setTextColor(15, 23, 42);
+    doc.text(title.toUpperCase(), marginX + 10, y + 12.5);
+    y += 24;
   }
 
   // Helper for bullet items
-  function addBullet(bulletText) {
+  function addBullet(bulletText, indent = 12) {
     doc.setFont("helvetica", "normal");
-    doc.setFontSize(8.5);
+    doc.setFontSize(8.2);
     doc.setTextColor(51, 65, 85);
-    const lines = doc.splitTextToSize(bulletText, contentWidth - 14);
-    checkBreak(lines.length * 11 + 2);
+    const lines = doc.splitTextToSize(bulletText, contentWidth - indent - 4);
+    checkBreak(lines.length * 10.5 + 2.5);
+
     doc.setFillColor(37, 99, 235);
-    doc.circle(marginX + 4, y - 3, 1.8, 'F');
-    doc.text(lines, marginX + 12, y);
-    y += lines.length * 11 + 2;
+    doc.circle(marginX + indent - 5, y - 2.8, 1.6, 'F');
+
+    doc.text(lines, marginX + indent, y);
+    y += lines.length * 10.5 + 2.5;
+  }
+
+  // Helper for company header card
+  function addCompanyHeader(companyName, durationText, roleText, clientText) {
+    checkBreak(38);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(9.8);
+    doc.setTextColor(15, 23, 42);
+    doc.text(companyName, marginX, y);
+
+    // Duration pill
+    const pillW = doc.getTextWidth(durationText) + 14;
+    const pillX = marginX + contentWidth - pillW;
+    doc.setFillColor(239, 246, 255);
+    doc.setDrawColor(191, 219, 254);
+    doc.setLineWidth(0.6);
+    doc.roundedRect(pillX, y - 9.5, pillW, 14, 3, 3, 'FD');
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(7.8);
+    doc.setTextColor(29, 78, 216);
+    doc.text(durationText, pillX + pillW / 2, y, { align: 'center' });
+    y += 12;
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(8.5);
+    doc.setTextColor(37, 99, 235);
+    doc.text(roleText, marginX, y);
+    y += 10;
+
+    if (clientText) {
+      doc.setFont("helvetica", "italic");
+      doc.setFontSize(7.8);
+      doc.setTextColor(100, 116, 139);
+      doc.text(clientText, marginX, y);
+      y += 10;
+    }
+  }
+
+  // Helper for project block
+  function addProjectHeader(projTitle, projDates, projTech) {
+    checkBreak(28);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(8.8);
+    doc.setTextColor(15, 23, 42);
+    doc.text(projTitle, marginX + 6, y);
+
+    if (projDates) {
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(7.8);
+      doc.setTextColor(71, 85, 105);
+      doc.text(projDates, marginX + contentWidth, y, { align: 'right' });
+    }
+    y += 10;
+
+    if (projTech) {
+      doc.setFillColor(248, 250, 252);
+      doc.setDrawColor(226, 232, 240);
+      doc.setLineWidth(0.5);
+      doc.roundedRect(marginX + 6, y - 8.5, contentWidth - 6, 12, 2, 2, 'FD');
+
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(7.2);
+      doc.setTextColor(30, 64, 175);
+      doc.text("TECH: " + projTech, marginX + 10, y);
+      y += 10;
+    }
   }
 
   // --- SECTION: PROFESSIONAL SUMMARY ---
   addSectionHeader("Professional Summary");
   doc.setFont("helvetica", "normal");
-  doc.setFontSize(8.5);
+  doc.setFontSize(8.2);
   doc.setTextColor(51, 65, 85);
-  const sumText = "Trained, results-driven professional with over 9.6 years of hands-on software engineering experience in the IT industry. Specialized in architecting scalable, resilient microservices with Java, Spring Boot, and AWS, combined with modern reactive frontends in React.js and Vue.js. Proven expertise leading development squads, designing OAuth 2.0 authentication pipelines, and delivering enterprise solutions across healthcare, CRM integrations, and government cloud applications.";
+  const sumText = "Trained, results-driven engineering professional with 9.6+ years of specialized experience in software architecture, distributed systems, and enterprise application engineering. Proven track record architecting resilient microservices using Java 17, Spring Boot, and AWS, paired with dynamic reactive frontends in React.js and Vue.js. Expert in designing secure OAuth 2.0 authentication handshakes, multi-tenant databases, bidirectional synchronization connectors, and government SaaS portals (BPSC client site). Recognized for technical squad leadership, code quality, and delivering scalable enterprise platforms across healthcare, CRM, and cloud services.";
   const sumLines = doc.splitTextToSize(sumText, contentWidth);
-  checkBreak(sumLines.length * 11 + 4);
+  checkBreak(sumLines.length * 10.5 + 4);
   doc.text(sumLines, marginX, y);
-  y += sumLines.length * 11 + 8;
+  y += sumLines.length * 10.5 + 6;
 
   // --- SECTION: TECHNICAL EXPERTISE ---
-  addSectionHeader("Technical Expertise");
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(8.5);
-  doc.setTextColor(15, 23, 42);
-
+  addSectionHeader("Technical Expertise & Core Competencies");
   const skillsData = [
-    { cat: "Languages & Core:", list: "Java 8/11/17, JavaScript (ES6+), TypeScript, PHP, SQL, HTML5, CSS3" },
+    { cat: "Languages & Core:", list: "Java 8 / 11 / 17, JavaScript (ES6+), TypeScript, PHP, SQL, HTML5, CSS3" },
     { cat: "Frameworks & Backend:", list: "Spring Boot, Spring Security, Hibernate ORM, Microservices, Node.js, Express, JPA" },
     { cat: "Frontend & UI:", list: "React.js, Vue.js, Next.js, Redux, Component Design Systems, Thymeleaf" },
     { cat: "Cloud & DevOps:", list: "AWS (EC2, S3, RDS, Lambda, ECS, CloudWatch), Docker, Git, GitHub, CI/CD" },
@@ -2896,11 +3829,14 @@ function buildManojResumePdf() {
   skillsData.forEach(sk => {
     checkBreak(14);
     doc.setFont("helvetica", "bold");
+    doc.setFontSize(8.2);
     doc.setTextColor(15, 23, 42);
-    doc.text(sk.cat, marginX, y);
+    doc.text(sk.cat, marginX + 4, y);
+
     doc.setFont("helvetica", "normal");
-    doc.setTextColor(71, 85, 105);
-    doc.text(sk.list, marginX + 115, y);
+    doc.setFontSize(8.2);
+    doc.setTextColor(51, 65, 85);
+    doc.text(sk.list, marginX + 120, y);
     y += 12;
   });
   y += 4;
@@ -2909,199 +3845,142 @@ function buildManojResumePdf() {
   addSectionHeader("Work Experience & Flagship Projects");
 
   // 1. SMB Group
-  checkBreak(32);
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(9.5);
-  doc.setTextColor(15, 23, 42);
-  doc.text("SMB Group — Sr. Software Engineer", marginX, y);
-  doc.setTextColor(29, 78, 216);
-  doc.text("2026 – Present", marginX + contentWidth, y, { align: 'right' });
-  y += 12;
-  doc.setFont("helvetica", "italic");
-  doc.setFontSize(8);
-  doc.setTextColor(100, 116, 139);
-  doc.text("Client Site: Bihar Public Service Commission (BPSC) · Cloud & Enterprise Systems", marginX, y);
-  y += 11;
+  addCompanyHeader(
+    "SMB Group — Sr. Software Engineer",
+    "2026 – Present",
+    "Senior Software Engineer & Lead Architect",
+    "Client Site: Bihar Public Service Commission (BPSC) · Cloud & Enterprise Systems"
+  );
   addBullet("Architecting mission-critical public service portals, cloud infrastructure, and enterprise database migrations.");
+  addBullet("Designing high-concurrency Spring Boot microservices handling multi-million citizen records with zero downtime.");
+  addBullet("Implementing automated CI/CD deployment pipelines on AWS cloud with rigorous security compliance.");
   y += 4;
 
   // 2. Grazitti Interactive
-  checkBreak(32);
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(9.5);
-  doc.setTextColor(15, 23, 42);
-  doc.text("Grazitti Interactive — Sr. Software Engineer", marginX, y);
-  doc.setTextColor(29, 78, 216);
-  doc.text("March 2021 – 2026 (5 Years)", marginX + contentWidth, y, { align: 'right' });
-  y += 12;
+  addCompanyHeader(
+    "Grazitti Interactive — Sr. Software Engineer",
+    "Mar 2021 – 2026 (5 Years)",
+    "Senior Software Engineer · Module & Team Lead",
+    "Panchkula, India · Enterprise Cloud & Integrations Practice"
+  );
 
   // Project 1: Knowbler
-  checkBreak(22);
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(8.8);
-  doc.setTextColor(15, 23, 42);
-  doc.text("Project 1: Knowbler (Chrome Extension & Community Suite)", marginX + 8, y);
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(8);
-  doc.setTextColor(29, 78, 216);
-  doc.text("Jul 2023 – Present", marginX + contentWidth, y, { align: 'right' });
-  y += 11;
-  doc.setFont("helvetica", "italic");
-  doc.setTextColor(100, 116, 139);
-  doc.text("Tech: Java, Spring Boot, Hibernate, Spring Security, AWS, SQL, React.js · Team: 4", marginX + 8, y);
-  y += 11;
+  addProjectHeader(
+    "Project 1: Knowbler (Chrome Extension & Community Suite)",
+    "Jul 2023 – Present",
+    "Java 17, Spring Boot, Hibernate, Spring Security, AWS, SQL, React.js · Team: 4"
+  );
   addBullet("Designed OAuth 2.0 authentication handshake and secure token rotation for Khoros and Salesforce communities.");
   addBullet("Engineered high-throughput Articles, Roles, and Boards microservice APIs using Spring Boot and Hibernate.");
   addBullet("Implemented dynamic configuration endpoints for Chrome Extension connection and user session mapping.");
-  addBullet("Conducted team sprint planning, code reviews, and AWS deployment automation.");
-  y += 2;
+  addBullet("Conducted team sprint planning, architectural code reviews, and AWS deployment automation.");
+  y += 3;
 
   // Project 2: Task Tool Manager
-  checkBreak(22);
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(8.8);
-  doc.setTextColor(15, 23, 42);
-  doc.text("Project 2: Task Tool Manager (Internal Enterprise System)", marginX + 8, y);
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(8);
-  doc.setTextColor(29, 78, 216);
-  doc.text("Aug 2022 – May 2023", marginX + contentWidth, y, { align: 'right' });
-  y += 11;
-  doc.setFont("helvetica", "italic");
-  doc.setTextColor(100, 116, 139);
-  doc.text("Tech: Java, Spring Boot, Hibernate, Spring Security, AWS, Thymeleaf · Team: 4", marginX + 8, y);
-  y += 11;
+  addProjectHeader(
+    "Project 2: Task Tool Manager (Internal Enterprise System)",
+    "Aug 2022 – May 2023",
+    "Java, Spring Boot, Hibernate, Spring Security, AWS, Thymeleaf · Team: 4"
+  );
   addBullet("Created comprehensive project workflows, task assignment engine, commenting, and role-based user access panel.");
   addBullet("Established bidirectional synchronization between Jira REST APIs and internal database.");
-  y += 2;
+  addBullet("Reduced manual status reporting overhead by 40% through automated event notification webhooks.");
+  y += 3;
 
   // Project 3: Nintex Template Gallery
-  checkBreak(22);
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(8.8);
-  doc.setTextColor(15, 23, 42);
-  doc.text("Project 3: Nintex Template Gallery", marginX + 8, y);
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(8);
-  doc.setTextColor(29, 78, 216);
-  doc.text("Jan 2022 – Jul 2022", marginX + contentWidth, y, { align: 'right' });
-  y += 11;
-  doc.setFont("helvetica", "italic");
-  doc.setTextColor(100, 116, 139);
-  doc.text("Tech: Node.js, Express, MySQL, Git · Team: 3", marginX + 8, y);
-  y += 11;
+  addProjectHeader(
+    "Project 3: Nintex Template Gallery",
+    "Jan 2022 – Jul 2022",
+    "Node.js, Express, MySQL, Git · Team: 3"
+  );
   addBullet("Configured Node.js REST API microservice for template curation and analytics with MySQL query optimization.");
   addBullet("Implemented administrative RESTful CRUD APIs with validation and security filtering.");
-  y += 2;
+  y += 3;
 
   // Project 4: Connector
-  checkBreak(22);
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(8.8);
-  doc.setTextColor(15, 23, 42);
-  doc.text("Project 4: Connector (Khoros <-> Salesforce)", marginX + 8, y);
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(8);
-  doc.setTextColor(29, 78, 216);
-  doc.text("Apr 2021 – Nov 2021", marginX + contentWidth, y, { align: 'right' });
-  y += 11;
-  doc.setFont("helvetica", "italic");
-  doc.setTextColor(100, 116, 139);
-  doc.text("Tech: MySQL, React.js, Spring Boot, Git · Team: 3", marginX + 8, y);
-  y += 11;
+  addProjectHeader(
+    "Project 4: Connector (Khoros <-> Salesforce)",
+    "Apr 2021 – Nov 2021",
+    "MySQL, React.js, Spring Boot, Git · Team: 3"
+  );
   addBullet("Created bi-directional data migration service synchronizing records between Khoros and Salesforce with token refresh APIs.");
   addBullet("Built React.js administrative dashboard showing real-time migration throughput and status logs.");
-  y += 4;
+  addBullet("Engineered robust error-handling retry mechanisms preventing synchronization anomalies.");
+  y += 5;
 
   // 3. iMark Infotech
-  checkBreak(32);
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(9.5);
-  doc.setTextColor(15, 23, 42);
-  doc.text("iMark Infotech Pvt. Ltd. — Sr. Software Engineer", marginX, y);
-  doc.setTextColor(29, 78, 216);
-  doc.text("Oct 2019 – March 2021 (1.5 Years)", marginX + contentWidth, y, { align: 'right' });
-  y += 12;
+  addCompanyHeader(
+    "iMark Infotech Pvt. Ltd. — Sr. Software Engineer",
+    "Oct 2019 – Mar 2021 (1.5 Years)",
+    "Senior Software Engineer",
+    "Chandigarh, India · Full-Stack Web & SaaS Products"
+  );
 
   // Project 5: CineCave
-  checkBreak(18);
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(8.8);
-  doc.setTextColor(15, 23, 42);
-  doc.text("Project 5: CineCave (Web Audio Mixing Suite)", marginX + 8, y);
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(8);
-  doc.setTextColor(29, 78, 216);
-  doc.text("Aug 2020 – Feb 2021", marginX + contentWidth, y, { align: 'right' });
-  y += 11;
+  addProjectHeader(
+    "Project 5: CineCave (Web Audio Mixing Suite)",
+    "Aug 2020 – Feb 2021",
+    "Vue.js, Spring Boot, Web Audio API, MySQL"
+  );
   addBullet("Architected dynamic frontend user interface in Vue.js with timeline controls and Spring Boot REST catalog APIs.");
-  y += 2;
+  addBullet("Optimized audio asset caching in browser memory for seamless multi-track playback.");
+  y += 3;
 
   // Project 6: Nikah Online
-  checkBreak(18);
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(8.8);
-  doc.setTextColor(15, 23, 42);
-  doc.text("Project 6: Nikah Online (Digital Marriage Portal)", marginX + 8, y);
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(8);
-  doc.setTextColor(29, 78, 216);
-  doc.text("Feb 2020 – Jul 2020", marginX + contentWidth, y, { align: 'right' });
-  y += 11;
+  addProjectHeader(
+    "Project 6: Nikah Online (Digital Marriage Portal)",
+    "Feb 2020 – Jul 2020",
+    "Vue.js, PHP / Laravel, MySQL, REST API"
+  );
   addBullet("Designed reactive Vue.js interface with document verification, witness attestations, and event booking.");
-  y += 2;
+  addBullet("Implemented multi-lingual localized user interfaces and secure file upload encryption.");
+  y += 3;
 
   // Project 7: Gym-Team
-  checkBreak(18);
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(8.8);
-  doc.setTextColor(15, 23, 42);
-  doc.text("Project 7: Gym-Team (Trainer & Client Platform)", marginX + 8, y);
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(8);
-  doc.setTextColor(29, 78, 216);
-  doc.text("Oct 2019 – Feb 2020", marginX + contentWidth, y, { align: 'right' });
-  y += 11;
+  addProjectHeader(
+    "Project 7: Gym-Team (Trainer & Client Platform)",
+    "Oct 2019 – Feb 2020",
+    "Node.js, Express, Stripe, PayPal, Socket.io"
+  );
   addBullet("Integrated Stripe & PayPal checkout flows and developed live chat between trainers and clients via Node.js.");
-  y += 4;
+  addBullet("Automated subscription renewal webhooks and transaction auditing ledgers.");
+  y += 5;
 
   // 4. Protolabz eService
-  checkBreak(30);
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(9.5);
-  doc.setTextColor(15, 23, 42);
-  doc.text("Protolabz eService — Software Engineer", marginX, y);
-  doc.setTextColor(29, 78, 216);
-  doc.text("May 2018 – Oct 2019 (1.5 Years)", marginX + contentWidth, y, { align: 'right' });
-  y += 12;
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(8.8);
-  doc.setTextColor(15, 23, 42);
-  doc.text("Project 8: Aggarwal Hospital Management System", marginX + 8, y);
-  y += 11;
+  addCompanyHeader(
+    "Protolabz eService — Software Engineer",
+    "May 2018 – Oct 2019 (1.5 Years)",
+    "Software Engineer · Healthcare Systems",
+    "Mohali, India · Enterprise Healthcare Solutions"
+  );
+  addProjectHeader(
+    "Project 8: Aggarwal Hospital Management System",
+    "May 2018 – Oct 2019",
+    "React.js, Node.js, Express, MySQL, AWS EC2 / RDS"
+  );
   addBullet("Built core OPD, IPD, drug inventory, and payroll modules using React.js and Node.js on AWS EC2/RDS.");
-  y += 4;
+  addBullet("Created automated invoice generation and doctor appointment scheduling system.");
+  y += 5;
 
   // 5. Tech Global Solution
-  checkBreak(30);
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(9.5);
-  doc.setTextColor(15, 23, 42);
-  doc.text("Tech Global Solution — Software Engineer", marginX, y);
-  doc.setTextColor(29, 78, 216);
-  doc.text("Jan 2017 – May 2018 (1.5 Years)", marginX + contentWidth, y, { align: 'right' });
-  y += 12;
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(8.8);
-  doc.setTextColor(15, 23, 42);
-  doc.text("Project 9: Metro Hospital ERP", marginX + 8, y);
-  y += 11;
+  addCompanyHeader(
+    "Tech Global Solution — Software Engineer",
+    "Jan 2017 – May 2018 (1.5 Years)",
+    "Software Engineer",
+    "Noida, India · Healthcare ERP & Enterprise Logic"
+  );
+  addProjectHeader(
+    "Project 9: Metro Hospital ERP",
+    "Jan 2017 – May 2018",
+    "CodeIgniter, PHP, MySQL, Biometric API Integration"
+  );
   addBullet("Programmed IPD/OPD controller logic in CodeIgniter and integrated biometric fingerprint hardware for staff attendance.");
-  y += 6;
+  addBullet("Implemented cashier handover module balancing daily cash register against hospital revenue ledger.");
+  y += 5;
 
   // --- SECTION: ACADEMIC CREDENTIALS ---
   addSectionHeader("Academic Credentials");
-  checkBreak(30);
+  checkBreak(32);
   doc.setFont("helvetica", "bold");
   doc.setFontSize(9);
   doc.setTextColor(15, 23, 42);
@@ -3128,26 +4007,56 @@ function buildManojResumePdf() {
   doc.setTextColor(71, 85, 105);
   doc.text("M.V. College, Buxar, Bihar · BSEB Board", marginX, y);
 
-  // Add Footers to all pages
+  // Add Headers & Footers to all pages
   const totalPages = doc.internal.getNumberOfPages();
   for (let i = 1; i <= totalPages; i++) {
     doc.setPage(i);
+
+    // If page > 1, draw running top header
+    if (i > 1) {
+      doc.setFillColor(15, 23, 42);
+      doc.rect(0, 0, pageWidth, 25, 'F');
+
+      doc.setFillColor(56, 189, 248);
+      doc.rect(0, 23.5, pageWidth, 1.5, 'F');
+
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(8.5);
+      doc.setTextColor(255, 255, 255);
+      doc.text("MANOJ KUMAR SHARMA", marginX, 16);
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(8);
+      doc.setTextColor(56, 189, 248);
+      doc.text("Sr. Software Engineer & Cloud Architect", 165, 16);
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(7.5);
+      doc.setTextColor(203, 213, 225);
+      doc.text("it13manoj@gmail.com  |  +91 93403 34221", marginX + contentWidth, 16, { align: 'right' });
+    }
+
+    // Bottom Running Footer on every page
     doc.setDrawColor(226, 232, 240);
     doc.setLineWidth(0.6);
-    doc.line(marginX, pageHeight - 26, marginX + contentWidth, pageHeight - 26);
+    doc.line(marginX, pageHeight - 24, marginX + contentWidth, pageHeight - 24);
 
     doc.setFont("helvetica", "normal");
     doc.setFontSize(7.5);
     doc.setTextColor(148, 163, 184);
-    doc.text("Manoj Kumar Sharma · it13manoj@gmail.com · +91 93403 34221", marginX, pageHeight - 14);
-    doc.text(`Page ${i} of ${totalPages}`, marginX + contentWidth, pageHeight - 14, { align: 'right' });
+    doc.text("Manoj Kumar Sharma · Senior Software Engineer & Cloud Architect · Official CV", marginX, pageHeight - 12);
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(7.5);
+    doc.setTextColor(100, 116, 139);
+    doc.text(`Page ${i} of ${totalPages}`, marginX + contentWidth, pageHeight - 12, { align: 'right' });
   }
 
   return doc;
 }
 
 /* --------------------------------------------------------------------------
-   9. USER-TRIGGERED PDF ACTIONS (OPEN, DOWNLOAD & PRINT)
+   12. USER-TRIGGERED PDF ACTIONS (OPEN, DOWNLOAD BY NAME & PRINT)
    -------------------------------------------------------------------------- */
 function openResumePDF() {
   openResume(); // Show on-screen view immediately
@@ -3181,16 +4090,16 @@ function downloadResumePDF() {
     }
   });
 
-  showToast('Generating official PDF resume...', 'info');
+  const targetFilename = 'Manoj_Kumar_Sharma_Sr_Software_Engineer_Resume.pdf';
+  showToast('Generating executive PDF resume...', 'info');
 
   setTimeout(() => {
     try {
       const doc = buildManojResumePdf();
       if (doc) {
-        doc.save('Manoj_Kumar_Sharma_Resume.pdf');
-        showToast('PDF Resume downloaded successfully!', 'success');
+        doc.save(targetFilename);
+        showToast(`Downloaded: ${targetFilename}`, 'success');
       } else {
-        // Fallback to print
         window.print();
       }
     } catch (e) {
@@ -3205,6 +4114,28 @@ function downloadResumePDF() {
       });
     }
   }, 100);
+}
+
+function downloadResumeWithCustomName() {
+  const defaultName = 'Manoj_Kumar_Sharma_Sr_Software_Engineer_Resume';
+  const customName = prompt('Enter filename for the PDF (without .pdf extension):', defaultName);
+  if (!customName || !customName.trim()) return;
+
+  const sanitized = customName.trim().replace(/[^a-zA-Z0-9_\-\s]/g, '').replace(/\s+/g, '_');
+  const finalFilename = `${sanitized}.pdf`;
+
+  try {
+    const doc = buildManojResumePdf();
+    if (doc) {
+      doc.save(finalFilename);
+      showToast(`Downloaded: ${finalFilename}`, 'success');
+    } else {
+      window.print();
+    }
+  } catch (err) {
+    console.error('Download error:', err);
+    window.print();
+  }
 }
 
 function openResumeInNewTab() {
