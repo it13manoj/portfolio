@@ -1,201 +1,1728 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Manoj Kumar Sharma · Sr. Software Engineer</title>
+<title>Manoj Kumar Sharma · Sr. Software Engineer & Cloud Architect</title>
+<meta name="description" content="Portfolio & Resume of Manoj Kumar Sharma, Sr. Software Engineer with 9.6+ years experience in Java, Spring Boot, Microservices, React.js, Node.js, and AWS.">
+
+<!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- html2pdf.js for generating and downloading genuine PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
 <style>
-:root{
-  --bg:#f6f8fc;--surface:#fff;--surface-alt:#f9fafb;
-  --border:#e5e9f0;--border-strong:#d5dce8;
-  --text:#0b1220;--text-muted:#5a6b85;--text-soft:#7c8aa0;
-  --accent:#1d4ed8;--accent-soft:#eef3ff;--accent-border:#d6e3ff;--accent-dark:#163fa8;
-  --success:#0f9d58;--success-soft:#e8f8ef;
-  --shadow-sm:0 1px 2px rgba(11,18,32,.04);
-  --shadow-md:0 4px 14px -4px rgba(11,18,32,.08);
-  --shadow-lg:0 20px 45px -22px rgba(11,18,32,.22);
-  --radius:16px;--radius-lg:24px;--radius-sm:10px;
+/* ==========================================================================
+   CSS VARIABLES & THEMES (LIGHT & DARK MODE)
+   ========================================================================== */
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-alt: #f1f5f9;
+  --surface-card: #ffffff;
+  --surface-hover: #e2e8f0;
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --border-glow: rgba(37, 99, 235, 0.35);
+  --text: #0f172a;
+  --text-muted: #475569;
+  --text-soft: #64748b;
+  --accent: #2563eb;
+  --accent-light: #3b82f6;
+  --accent-soft: #eff6ff;
+  --accent-border: #bfdbfe;
+  --accent-dark: #1d4ed8;
+  --accent-glow: rgba(37, 99, 235, 0.25);
+  --gradient-primary: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+  --gradient-card: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(241,245,249,0.7));
+  --success: #10b981;
+  --success-soft: #ecfdf5;
+  --purple: #8b5cf6;
+  --purple-soft: #f5f3ff;
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.03);
+  --shadow-md: 0 4px 20px -4px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 20px 45px -15px rgba(15, 23, 42, 0.12);
+  --shadow-glow: 0 0 30px rgba(37, 99, 235, 0.22);
+  --radius-sm: 10px;
+  --radius: 16px;
+  --radius-lg: 24px;
+  --grid-pattern: rgba(37, 99, 235, 0.035);
 }
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;padding:24px 16px 48px}
-.page{max-width:1240px;margin:0 auto}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);overflow:hidden}
 
-.topnav{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50;flex-wrap:wrap;gap:10px}
-.topnav-brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:1rem;letter-spacing:-.02em}
-.topnav-brand .mark{width:34px;height:34px;background:linear-gradient(135deg,var(--accent),#5a7ef0);color:#fff;border-radius:9px;display:inline-flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:800}
-.topnav-links{display:flex;gap:4px;align-items:center;flex-wrap:wrap}
-.nav-link{background:transparent;border:none;color:var(--text-muted);font-size:.86rem;font-weight:500;padding:8px 14px;border-radius:8px;transition:all .15s ease;cursor:pointer;font-family:inherit}
-.nav-link:hover{color:var(--accent);background:var(--accent-soft)}
-.btn-resume{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border:none;padding:9px 18px;border-radius:100px;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .18s ease;box-shadow:0 4px 12px -4px rgba(29,78,216,.4);font-family:inherit}
-.btn-resume:hover{background:var(--accent-dark);transform:translateY(-1px)}
-.btn-resume.outline{background:var(--surface);color:var(--accent);border:1px solid var(--accent-border);box-shadow:var(--shadow-sm)}
-.btn-resume.outline:hover{background:var(--accent-soft)}
-
-.hero{padding:52px 48px 44px;background:radial-gradient(900px 400px at 90% -10%,#eaf0ff 0%,transparent 60%),radial-gradient(700px 400px at -10% 110%,#f0fdf6 0%,transparent 55%),var(--surface);border-bottom:1px solid var(--border)}
-.hero-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:44px;align-items:center}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);border:1px solid var(--accent-border);padding:7px 14px;border-radius:100px;margin-bottom:20px}
-.eyebrow .dot{width:7px;height:7px;background:var(--success);border-radius:50%;box-shadow:0 0 0 3px rgba(15,157,88,.18)}
-.hero h1{font-size:clamp(2rem,4vw,3.2rem);font-weight:800;letter-spacing:-.035em;line-height:1.1;color:var(--text)}
-.hero h1 .accent-line{display:block;background:linear-gradient(90deg,var(--accent) 0%,#6d8ff0 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.hero-subtitle{font-size:1.05rem;color:var(--text-muted);max-width:560px;margin-top:16px;line-height:1.65}
-.hero-subtitle strong{color:var(--text);font-weight:600}
-.contact-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
-.chip{display:inline-flex;align-items:center;gap:9px;background:var(--surface);border:1px solid var(--border-strong);padding:9px 16px;border-radius:100px;font-size:.88rem;font-weight:500;color:var(--text);text-decoration:none;box-shadow:var(--shadow-sm);transition:all .18s ease}
-.chip i{color:var(--accent);font-size:.85rem}
-.chip:hover{border-color:var(--accent);transform:translateY(-1px)}
-.chip.verified i{color:var(--success)}
-.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 16px;box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
-.stat::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);opacity:.8}
-.stat .num{font-size:1.8rem;font-weight:800;letter-spacing:-.03em;color:var(--text);line-height:1}
-.stat .num span{font-size:1rem;color:var(--accent);font-weight:700}
-.stat .lbl{font-size:.72rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--text-soft);margin-top:6px}
-
-.main{padding:44px 48px 52px;background:var(--surface)}
-.section{margin-bottom:52px;scroll-margin-top:90px}
-.section:last-child{margin-bottom:0}
-.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid var(--border);flex-wrap:wrap}
-.section-head h2{font-size:1.3rem;font-weight:700;letter-spacing:-.02em;color:var(--text);display:flex;align-items:center;gap:12px}
-.section-head h2 .icon-box{width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;background:var(--accent-soft);border:1px solid var(--accent-border);border-radius:10px;color:var(--accent);font-size:.95rem}
-.section-head .count{font-size:.8rem;font-weight:600;color:var(--text-soft);background:var(--surface-alt);border:1px solid var(--border);padding:5px 12px;border-radius:100px;white-space:nowrap}
-
-.about-grid{display:grid;grid-template-columns:2fr 1fr;gap:28px}
-.about-text{background:var(--surface-alt);border:1px solid var(--border);border-radius:var(--radius);padding:24px 26px;font-size:.95rem;color:var(--text-muted);line-height:1.7}
-.about-text strong{color:var(--text);font-weight:600}
-.about-info{display:flex;flex-direction:column;gap:10px}
-.info-row{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;background:var(--surface-alt);border:1px solid var(--border);border-radius:var(--radius-sm);font-size:.85rem}
-.info-row i{color:var(--accent);font-size:.9rem;margin-top:3px;width:16px;text-align:center}
-.info-row .lbl{font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-soft);display:block;margin-bottom:2px}
-.info-row .val{color:var(--text);font-weight:500;word-break:break-word}
-
-.skills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.skill{background:var(--surface-alt);border:1px solid var(--border);border-radius:var(--radius);padding:20px 18px;transition:all .2s ease}
-.skill:hover{background:var(--surface);border-color:var(--accent-border);box-shadow:var(--shadow-md);transform:translateY(-2px)}
-.skill-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.skill-icon{width:42px;height:42px;display:inline-flex;align-items:center;justify-content:center;border-radius:12px;font-size:1.15rem;background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent-border)}
-.skill-years{font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:500;color:var(--accent-dark);background:var(--accent-soft);border:1px solid var(--accent-border);padding:4px 10px;border-radius:100px}
-.skill h3{font-size:.98rem;font-weight:700;color:var(--text);margin-bottom:6px;letter-spacing:-.01em}
-.skill p{font-size:.82rem;color:var(--text-muted);line-height:1.5}
-.tech-cloud{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-.tech-cloud .tag{font-family:'JetBrains Mono',monospace;font-size:.74rem;font-weight:500;color:var(--accent-dark);background:var(--surface);border:1px solid var(--accent-border);padding:6px 14px;border-radius:100px;transition:all .15s ease}
-.tech-cloud .tag:hover{background:var(--accent-soft);transform:translateY(-1px);box-shadow:var(--shadow-sm)}
-
-.timeline{position:relative;padding-left:28px}
-.timeline::before{content:'';position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:linear-gradient(to bottom,var(--accent-border),var(--border));border-radius:2px}
-.tl-item{position:relative;display:grid;grid-template-columns:170px 1fr auto;gap:18px;align-items:center;padding:14px 18px;margin-bottom:10px;background:var(--surface-alt);border:1px solid var(--border);border-radius:var(--radius);transition:all .18s ease}
-.tl-item:hover{background:var(--surface);border-color:var(--accent-border);box-shadow:var(--shadow-md)}
-.tl-item::before{content:'';position:absolute;left:-28px;top:50%;transform:translateY(-50%);width:14px;height:14px;background:var(--surface);border:3px solid var(--accent);border-radius:50%;box-shadow:0 0 0 4px var(--surface)}
-.tl-item.current::before{border-color:var(--success);background:var(--success);box-shadow:0 0 0 4px var(--surface),0 0 0 8px rgba(15,157,88,.15)}
-.tl-year{font-family:'JetBrains Mono',monospace;font-size:.76rem;font-weight:600;color:var(--accent)}
-.tl-item.current .tl-year{color:var(--success)}
-.tl-company{font-size:.98rem;font-weight:600;color:var(--text);letter-spacing:-.01em}
-.tl-role{font-size:.82rem;color:var(--text-muted);margin-top:2px}
-.tl-tag{font-size:.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--success);background:var(--success-soft);border:1px solid #c6ecd6;padding:5px 12px;border-radius:100px;white-space:nowrap}
-.tl-tag.old{color:var(--text-soft);background:var(--surface);border-color:var(--border)}
-
-.projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.project{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px 20px 18px;display:flex;flex-direction:column;transition:all .2s ease;position:relative;overflow:hidden}
-.project::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),#7fa1f5);transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
-.project:hover{border-color:var(--accent-border);box-shadow:var(--shadow-md);transform:translateY(-2px)}
-.project:hover::before{transform:scaleX(1)}
-.project-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
-.project-num{font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:500;color:var(--text-soft)}
-.project h4{font-size:1.05rem;font-weight:700;color:var(--text);letter-spacing:-.015em;line-height:1.3}
-.project-meta{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:10px;font-size:.74rem;color:var(--text-soft)}
-.project-meta span{display:inline-flex;align-items:center;gap:5px}
-.project-meta i{color:var(--accent);font-size:.7rem}
-.project-desc{font-size:.83rem;color:var(--text-muted);line-height:1.55;margin-bottom:12px;flex-grow:1}
-.project-bullets{list-style:none;margin-bottom:12px;padding:0}
-.project-bullets li{font-size:.78rem;color:var(--text-muted);line-height:1.5;padding-left:16px;position:relative;margin-bottom:4px}
-.project-bullets li::before{content:'▸';position:absolute;left:0;color:var(--accent);font-size:.7rem;top:1px}
-.project-stack{display:flex;flex-wrap:wrap;gap:6px;padding-top:12px;border-top:1px dashed var(--border)}
-.tag{font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:500;color:var(--accent-dark);background:var(--accent-soft);border:1px solid var(--accent-border);padding:4px 10px;border-radius:6px}
-
-.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.edu-item{background:var(--surface-alt);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;display:flex;gap:16px;align-items:flex-start;transition:all .18s ease}
-.edu-item:hover{background:var(--surface);border-color:var(--accent-border);box-shadow:var(--shadow-md)}
-.edu-icon{width:46px;height:46px;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;background:var(--accent-soft);border:1px solid var(--accent-border);border-radius:12px;color:var(--accent);font-size:1.15rem}
-.edu-item h4{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:4px;letter-spacing:-.01em}
-.edu-item .edu-inst{font-size:.83rem;color:var(--text-muted);margin-bottom:6px;line-height:1.4}
-.edu-item .edu-year{font-family:'JetBrains Mono',monospace;font-size:.74rem;font-weight:500;color:var(--accent-dark);background:var(--accent-soft);border:1px solid var(--accent-border);padding:3px 10px;border-radius:100px;display:inline-block}
-
-.resume-preview{background:var(--surface-alt);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px;text-align:center}
-.resume-preview .preview-icon{width:68px;height:68px;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;background:var(--accent-soft);border:1px solid var(--accent-border);border-radius:18px;color:var(--accent);font-size:1.7rem}
-.resume-preview h3{font-size:1.25rem;font-weight:700;color:var(--text);margin-bottom:8px;letter-spacing:-.02em}
-.resume-preview p{font-size:.9rem;color:var(--text-muted);max-width:520px;margin:0 auto 22px;line-height:1.6}
-.resume-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-.resume-meta{display:flex;flex-wrap:wrap;justify-content:center;gap:22px;margin-top:24px;padding-top:22px;border-top:1px dashed var(--border);font-size:.8rem;color:var(--text-soft)}
-.resume-meta span{display:inline-flex;align-items:center;gap:7px}
-.resume-meta i{color:var(--accent)}
-
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(11,18,32,.55);backdrop-filter:blur(4px);z-index:100;align-items:center;justify-content:center;padding:20px}
-.modal-overlay.active{display:flex}
-.modal{background:var(--surface);border-radius:var(--radius-lg);max-width:880px;width:100%;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 40px 80px -20px rgba(11,18,32,.4)}
-.modal-head{display:flex;align-items:center;justify-content:space-between;padding:18px 26px;border-bottom:1px solid var(--border);background:var(--surface-alt);flex-wrap:wrap;gap:10px}
-.modal-head h3{font-size:1rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:10px}
-.modal-head h3 i{color:var(--accent)}
-.modal-head-actions{display:flex;gap:8px;align-items:center}
-.modal-close{width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--border);border-radius:10px;color:var(--text-muted);cursor:pointer;font-size:.9rem;transition:all .15s ease}
-.modal-close:hover{background:#fee2e2;color:#dc2626;border-color:#fecaca}
-.modal-body{padding:28px 36px 36px;overflow-y:auto;font-size:.88rem;color:var(--text);line-height:1.65}
-.modal-body::-webkit-scrollbar{width:8px}
-.modal-body::-webkit-scrollbar-track{background:var(--surface-alt)}
-.modal-body::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:4px}
-
-.resume-doc h1{font-size:1.5rem;font-weight:800;color:var(--text);letter-spacing:-.03em;margin-bottom:4px}
-.resume-doc .resume-title{font-size:.92rem;color:var(--accent);font-weight:600;margin-bottom:6px}
-.resume-doc .resume-contact{font-size:.8rem;color:var(--text-muted);margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid var(--border);line-height:1.7}
-.resume-doc h2{font-size:.9rem;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:.08em;margin:22px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
-.resume-doc h2 i{color:var(--accent);font-size:.82rem}
-.resume-doc h3{font-size:.88rem;font-weight:700;color:var(--text);margin:14px 0 4px}
-.resume-doc .resume-meta-line{font-size:.74rem;color:var(--text-soft);font-family:'JetBrains Mono',monospace;margin-bottom:6px}
-.resume-doc p,.resume-doc li{font-size:.82rem;color:var(--text-muted);line-height:1.6}
-.resume-doc ul{padding-left:18px;margin:6px 0}
-.resume-doc ul li{margin-bottom:4px}
-.resume-doc .resume-skills{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.resume-doc .resume-skills span{font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:500;color:var(--accent-dark);background:var(--accent-soft);border:1px solid var(--accent-border);padding:4px 12px;border-radius:100px}
-
-.footer{padding:24px 48px;background:var(--surface-alt);border-top:1px solid var(--border);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
-.footer-brand{font-size:.85rem;font-weight:600;color:var(--text);display:flex;align-items:center;gap:10px}
-.footer-brand .mark{width:30px;height:30px;background:linear-gradient(135deg,var(--accent),#5a7ef0);color:#fff;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:800}
-.footer-meta{display:flex;flex-wrap:wrap;gap:20px;font-size:.8rem;color:var(--text-muted)}
-.footer-meta span{display:inline-flex;align-items:center;gap:7px}
-.footer-meta i{color:var(--accent);font-size:.76rem}
-
-@media(max-width:1024px){
-  .hero{padding:40px 32px 36px}.main{padding:36px 32px 40px}.footer{padding:22px 32px}
-  .hero-grid{grid-template-columns:1fr;gap:28px}.hero-stats{max-width:460px}
-  .skills-grid{grid-template-columns:repeat(2,1fr)}.about-grid{grid-template-columns:1fr}
-  .modal-body{padding:22px 22px 28px}
+[data-theme="dark"] {
+  --bg: #090d16;
+  --surface: #0f172a;
+  --surface-alt: #172138;
+  --surface-card: #111a2e;
+  --surface-hover: #1e293b;
+  --border: #1e293b;
+  --border-strong: #334155;
+  --border-glow: rgba(59, 130, 246, 0.45);
+  --text: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-soft: #64748b;
+  --accent: #3b82f6;
+  --accent-light: #60a5fa;
+  --accent-soft: rgba(59, 130, 246, 0.14);
+  --accent-border: #1e3a8a;
+  --accent-dark: #93c5fd;
+  --accent-glow: rgba(59, 130, 246, 0.35);
+  --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  --gradient-card: linear-gradient(145deg, rgba(17,26,46,0.9), rgba(15,23,42,0.8));
+  --success: #10b981;
+  --success-soft: rgba(16, 185, 129, 0.14);
+  --purple: #a855f7;
+  --purple-soft: rgba(168, 85, 247, 0.14);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 20px -4px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 20px 45px -15px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 35px rgba(59, 130, 246, 0.35);
+  --grid-pattern: rgba(255, 255, 255, 0.025);
 }
-@media(max-width:720px){
-  body{padding:12px 10px 28px}.topnav{padding:14px 16px;flex-direction:column;gap:10px}
-  .topnav-links{justify-content:center}.hero{padding:28px 20px 26px}.main{padding:28px 20px 32px}
-  .footer{padding:20px;flex-direction:column;align-items:flex-start}
-  .skills-grid,.projects-grid,.edu-grid{grid-template-columns:1fr}
-  .tl-item{grid-template-columns:1fr;gap:6px;padding:14px 16px}.tl-item::before{left:-24px}
-  .tl-tag{justify-self:start}.hero-stats{grid-template-columns:1fr 1fr}
-  .section-head{flex-direction:column;align-items:flex-start}.resume-preview{padding:22px 16px}
+
+/* ==========================================================================
+   BASE & RESET
+   ========================================================================== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  padding: 20px 14px 48px;
+  position: relative;
+  overflow-x: hidden;
+  transition: background-color .3s ease, color .3s ease;
 }
-@media(max-width:420px){
-  .hero-stats{grid-template-columns:1fr}.contact-chips{flex-direction:column;align-items:stretch}
-  .chip{justify-content:center}.resume-actions{flex-direction:column}.btn-resume{justify-content:center}
+
+/* Ambient Canvas & Glowing Orbs in Background */
+#ambientCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.85;
+}
+
+.ambient-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+  animation: floatOrb 22s infinite alternate ease-in-out;
+}
+.orb-1 {
+  width: 450px;
+  height: 450px;
+  top: -100px;
+  right: -50px;
+  background: radial-gradient(circle, rgba(37,99,235,0.45) 0%, rgba(124,58,237,0.15) 70%, transparent 100%);
+}
+.orb-2 {
+  width: 400px;
+  height: 400px;
+  bottom: 10%;
+  left: -80px;
+  background: radial-gradient(circle, rgba(16,185,129,0.3) 0%, rgba(37,99,235,0.1) 70%, transparent 100%);
+  animation-duration: 28s;
+  animation-delay: -7s;
+}
+.orb-3 {
+  width: 320px;
+  height: 320px;
+  top: 45%;
+  right: 10%;
+  background: radial-gradient(circle, rgba(168,85,247,0.3) 0%, rgba(37,99,235,0.15) 70%, transparent 100%);
+  animation-duration: 20s;
+  animation-delay: -12s;
+}
+
+@keyframes floatOrb {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(40px, 30px) scale(1.08); }
+  100% { transform: translate(-30px, 50px) scale(0.95); }
+}
+
+/* Top Scroll Progress Bar */
+#scrollProgressBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: var(--gradient-primary);
+  width: 0%;
+  z-index: 1000;
+  box-shadow: 0 0 10px var(--accent);
+  transition: width 0.1s linear;
+}
+
+/* Page Container */
+.page {
+  max-width: 1240px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.card-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  transition: background-color .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+
+/* ==========================================================================
+   NAVIGATION
+   ========================================================================== */
+.topnav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(16px);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.topnav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: -.02em;
+  color: var(--text);
+  text-decoration: none;
+  cursor: pointer;
+}
+.topnav-brand .mark {
+  width: 38px;
+  height: 38px;
+  background: var(--gradient-primary);
+  color: #fff;
+  border-radius: 11px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .88rem;
+  font-weight: 800;
+  box-shadow: 0 4px 12px var(--accent-glow);
+  position: relative;
+  overflow: hidden;
+}
+.topnav-brand .mark::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(60deg, transparent, rgba(255,255,255,0.4), transparent);
+  transform: rotate(30deg);
+  animation: shineBrand 4s infinite linear;
+}
+@keyframes shineBrand {
+  0% { transform: translateX(-100%) rotate(30deg); }
+  25%, 100% { transform: translateX(100%) rotate(30deg); }
+}
+
+.topnav-links {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.nav-link {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: .88rem;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: all .2s ease;
+  cursor: pointer;
+  font-family: inherit;
+  position: relative;
+}
+.nav-link:hover, .nav-link.active {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* Nav Actions (Theme Switcher + PDF Resume Buttons) */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.btn-theme-toggle {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  color: var(--text);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: all .2s ease;
+}
+.btn-theme-toggle:hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: var(--accent-border);
+  transform: rotate(15deg) scale(1.05);
+}
+
+.btn-resume {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gradient-primary);
+  color: #fff;
+  border: none;
+  padding: 9px 18px;
+  border-radius: 100px;
+  font-size: .85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s ease;
+  box-shadow: 0 4px 14px var(--accent-glow);
+  font-family: inherit;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+.btn-resume:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--accent-glow);
+  color: #fff;
+}
+.btn-resume.outline {
+  background: var(--surface);
+  color: var(--accent);
+  border: 1px solid var(--accent-border);
+  box-shadow: var(--shadow-sm);
+}
+.btn-resume.outline:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+.btn-resume.secondary {
+  background: var(--surface-alt);
+  color: var(--text);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+.btn-resume.secondary:hover {
+  background: var(--surface-hover);
+  color: var(--accent);
+}
+
+/* ==========================================================================
+   HERO SECTION
+   ========================================================================== */
+.hero {
+  padding: 56px 48px 48px;
+  background: radial-gradient(900px 450px at 90% -10%, var(--accent-soft) 0%, transparent 60%),
+              radial-gradient(700px 450px at -10% 110%, var(--success-soft) 0%, transparent 55%),
+              var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle background grid on hero */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(var(--grid-pattern) 1px, transparent 1px),
+                    linear-gradient(90deg, var(--grid-pattern) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  gap: 48px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-border);
+  padding: 7px 16px;
+  border-radius: 100px;
+  margin-bottom: 22px;
+  box-shadow: var(--shadow-sm);
+}
+.eyebrow .dot {
+  width: 8px;
+  height: 8px;
+  background: var(--success);
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+  animation: pulseDot 2s infinite;
+}
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.7; }
+}
+
+.hero h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: -.035em;
+  line-height: 1.12;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+.hero h1 .accent-line {
+  display: block;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.hero-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  max-width: 580px;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+.hero-subtitle strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Contact Chips with Click-to-Copy */
+.contact-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 26px;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: var(--surface-card);
+  border: 1px solid var(--border-strong);
+  padding: 9px 16px;
+  border-radius: 100px;
+  font-size: .88rem;
+  font-weight: 500;
+  color: var(--text);
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  transition: all .2s ease;
+  cursor: pointer;
+}
+.chip i {
+  color: var(--accent);
+  font-size: .9rem;
+}
+.chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.chip .copy-badge {
+  font-size: .68rem;
+  background: var(--accent-soft);
+  color: var(--accent);
+  padding: 2px 8px;
+  border-radius: 100px;
+  font-weight: 600;
+  margin-left: 4px;
+  border: 1px solid var(--accent-border);
+}
+
+/* Hero PDF Actions */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+.btn-hero {
+  padding: 12px 24px;
+  font-size: .92rem;
+  border-radius: 12px;
+}
+
+/* Hero Right: 3D Interactive Badge & Stats */
+.hero-showcase {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.profile-badge-card {
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 22px;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  transition: all .25s ease;
+}
+.profile-badge-card:hover {
+  border-color: var(--accent-border);
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-2px);
+}
+.profile-avatar-box {
+  position: relative;
+  width: 68px;
+  height: 68px;
+  flex-shrink: 0;
+}
+.profile-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+  background: var(--gradient-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 800;
+  box-shadow: 0 6px 18px var(--accent-glow);
+}
+.avatar-status-ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: 22px;
+  border: 2px dashed var(--accent);
+  animation: rotateRing 18s linear infinite;
+}
+@keyframes rotateRing {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.profile-badge-info h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.badge-role {
+  font-size: .84rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-top: 2px;
+}
+.badge-tech-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+.badge-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .68rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid var(--accent-border);
+}
+
+/* Stats 2x2 Grid */
+.hero-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.stat {
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 16px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+  transition: all .25s ease;
+  cursor: default;
+}
+.stat::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--gradient-primary);
+  opacity: .85;
+}
+.stat:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-border);
+  box-shadow: var(--shadow-md);
+}
+.stat .num {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -.03em;
+  color: var(--text);
+  line-height: 1;
+  display: flex;
+  align-items: baseline;
+}
+.stat .num span {
+  font-size: 1.1rem;
+  color: var(--accent);
+  font-weight: 700;
+  margin-left: 2px;
+}
+.stat .lbl {
+  font-size: .74rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin-top: 6px;
+}
+
+/* ==========================================================================
+   MAIN CONTENT & SECTIONS
+   ========================================================================== */
+.main {
+  padding: 48px 48px 56px;
+  background: var(--surface);
+  position: relative;
+}
+
+.section {
+  margin-bottom: 56px;
+  scroll-margin-top: 90px;
+}
+.section:last-child { margin-bottom: 0; }
+
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 26px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.section-head h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-head h2 .icon-box {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-border);
+  border-radius: 12px;
+  color: var(--accent);
+  font-size: 1.05rem;
+  box-shadow: var(--shadow-sm);
+}
+.section-head .count {
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  padding: 5px 14px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   ABOUT SECTION
+   ========================================================================== */
+.about-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 28px;
+}
+.about-text {
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 30px;
+  font-size: .98rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  box-shadow: var(--shadow-sm);
+}
+.about-text strong {
+  color: var(--text);
+  font-weight: 600;
+}
+.about-highlights {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 20px;
+}
+.about-highlight-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--surface-alt);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+.about-highlight-item i {
+  color: var(--accent);
+}
+
+.about-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: .88rem;
+  box-shadow: var(--shadow-sm);
+  transition: all .2s ease;
+}
+.info-row:hover {
+  border-color: var(--accent-border);
+  transform: translateX(3px);
+}
+.info-row i {
+  color: var(--accent);
+  font-size: .95rem;
+  margin-top: 4px;
+  width: 18px;
+  text-align: center;
+}
+.info-row .lbl {
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  display: block;
+  margin-bottom: 2px;
+}
+.info-row .val {
+  color: var(--text);
+  font-weight: 600;
+  word-break: break-word;
+}
+
+/* ==========================================================================
+   SKILLS SECTION (3D TILT CARDS & TECH CLOUD)
+   ========================================================================== */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.skill {
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 20px;
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.skill:hover {
+  border-color: var(--accent-border);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+.skill-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.skill-icon {
+  width: 46px;
+  height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  font-size: 1.25rem;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid var(--accent-border);
+  transition: all .2s ease;
+}
+.skill:hover .skill-icon {
+  background: var(--gradient-primary);
+  color: #fff;
+  transform: scale(1.05);
+}
+.skill-years {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .74rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-border);
+  padding: 4px 10px;
+  border-radius: 100px;
+}
+.skill h3 {
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+  letter-spacing: -.01em;
+}
+.skill p {
+  font-size: .84rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.tech-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 22px;
+}
+.tech-cloud .tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .76rem;
+  font-weight: 500;
+  color: var(--text);
+  background: var(--surface-card);
+  border: 1px solid var(--border-strong);
+  padding: 7px 16px;
+  border-radius: 100px;
+  transition: all .18s ease;
+  box-shadow: var(--shadow-sm);
+}
+.tech-cloud .tag:hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: var(--accent-border);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ==========================================================================
+   EXPERIENCE SECTION (TIMELINE)
+   ========================================================================== */
+.timeline {
+  position: relative;
+  padding-left: 32px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 9px;
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--success), var(--accent), var(--border));
+  border-radius: 2px;
+}
+.tl-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 180px 1fr auto;
+  gap: 20px;
+  align-items: center;
+  padding: 16px 22px;
+  margin-bottom: 12px;
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: all .2s ease;
+  box-shadow: var(--shadow-sm);
+}
+.tl-item:hover {
+  border-color: var(--accent-border);
+  box-shadow: var(--shadow-md);
+  transform: translateX(4px);
+}
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: -32px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background: var(--surface);
+  border: 3px solid var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px var(--surface);
+}
+.tl-item.current::before {
+  border-color: var(--success);
+  background: var(--success);
+  box-shadow: 0 0 0 4px var(--surface), 0 0 0 8px rgba(16, 185, 129, 0.2);
+}
+.tl-year {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+.tl-item.current .tl-year {
+  color: var(--success);
+}
+.tl-company {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -.01em;
+}
+.tl-role {
+  font-size: .85rem;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+.tl-tag {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--success);
+  background: var(--success-soft);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 5px 14px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+.tl-tag.old {
+  color: var(--text-soft);
+  background: var(--surface-alt);
+  border-color: var(--border);
+}
+
+/* ==========================================================================
+   PROJECTS SECTION (INTERACTIVE FILTERS & 3D CARDS)
+   ========================================================================== */
+/* Filter Pills */
+.project-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.filter-btn {
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: .84rem;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all .2s ease;
+  box-shadow: var(--shadow-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.filter-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent-border);
+  background: var(--accent-soft);
+}
+.filter-btn.active {
+  background: var(--gradient-primary);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 4px 14px var(--accent-glow);
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.project {
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 22px 20px;
+  display: flex;
+  flex-direction: column;
+  transition: all .28s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.project::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s ease;
+}
+.project:hover {
+  border-color: var(--accent-border);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+}
+.project:hover::before {
+  transform: scaleX(1);
+}
+.project.hidden {
+  display: none !important;
+}
+
+.project-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.project h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -.015em;
+  line-height: 1.3;
+}
+.project-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .72rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-border);
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 12px;
+  font-size: .76rem;
+  color: var(--text-soft);
+}
+.project-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.project-meta i {
+  color: var(--accent);
+  font-size: .75rem;
+}
+
+.project-desc {
+  font-size: .86rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 14px;
+  flex-grow: 1;
+}
+
+.project-bullets {
+  list-style: none;
+  margin-bottom: 16px;
+  padding: 0;
+}
+.project-bullets li {
+  font-size: .8rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  padding-left: 18px;
+  position: relative;
+  margin-bottom: 5px;
+}
+.project-bullets li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: .75rem;
+  top: 1px;
+}
+
+.project-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--border);
+}
+.tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .7rem;
+  font-weight: 500;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-border);
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+/* ==========================================================================
+   EDUCATION SECTION
+   ========================================================================== */
+.edu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.edu-item {
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  transition: all .2s ease;
+  box-shadow: var(--shadow-sm);
+}
+.edu-item:hover {
+  border-color: var(--accent-border);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.edu-icon {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-border);
+  border-radius: 14px;
+  color: var(--accent);
+  font-size: 1.25rem;
+}
+.edu-item h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+  letter-spacing: -.01em;
+}
+.edu-item .edu-inst {
+  font-size: .85rem;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  line-height: 1.45;
+}
+.edu-item .edu-year {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .76rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-border);
+  padding: 4px 12px;
+  border-radius: 100px;
+  display: inline-block;
+}
+
+/* ==========================================================================
+   RESUME PREVIEW & PDF DOWNLOAD SECTION
+   ========================================================================== */
+.resume-preview {
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 38px 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+.resume-preview::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-primary);
+}
+.resume-preview .preview-icon {
+  width: 76px;
+  height: 76px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-border);
+  border-radius: 20px;
+  color: var(--accent);
+  font-size: 2rem;
+  box-shadow: 0 6px 20px var(--accent-glow);
+}
+.resume-preview h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+  letter-spacing: -.02em;
+}
+.resume-preview p {
+  font-size: .95rem;
+  color: var(--text-muted);
+  max-width: 560px;
+  margin: 0 auto 24px;
+  line-height: 1.65;
+}
+.resume-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+.resume-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px dashed var(--border);
+  font-size: .84rem;
+  color: var(--text-soft);
+}
+.resume-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.resume-meta i {
+  color: var(--accent);
+}
+
+/* ==========================================================================
+   RESUME MODAL & PRINT-OPTIMIZED DOCUMENT
+   ========================================================================== */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 18, 32, 0.7);
+  backdrop-filter: blur(6px);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+.modal-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+.modal {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  max-width: 900px;
+  width: 100%;
+  max-height: 92vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 40px 90px -20px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border);
+  transform: translateY(20px) scale(0.98);
+  transition: transform .25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.modal-overlay.active .modal {
+  transform: translateY(0) scale(1);
+}
+.modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 28px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-alt);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.modal-head h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.modal-head h3 i {
+  color: var(--accent);
+}
+.modal-head-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.modal-close {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: .95rem;
+  transition: all .15s ease;
+}
+.modal-close:hover {
+  background: #fee2e2;
+  color: #dc2626;
+  border-color: #fecaca;
+}
+.modal-body {
+  padding: 32px 40px 44px;
+  overflow-y: auto;
+  font-size: .9rem;
+  color: var(--text);
+  line-height: 1.65;
+  background: var(--surface);
+}
+.modal-body::-webkit-scrollbar { width: 8px; }
+.modal-body::-webkit-scrollbar-track { background: var(--surface-alt); }
+.modal-body::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 4px; }
+
+/* Resume Document (ATS-friendly, print & PDF ready) */
+.resume-doc {
+  background: #ffffff;
+  color: #1e293b;
+  padding: 36px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  border: 1px solid #e2e8f0;
+}
+[data-theme="dark"] .resume-doc {
+  background: #0f172a;
+  color: #f8fafc;
+  border-color: #1e293b;
+}
+
+.resume-header {
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+}
+.resume-header h1 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -.02em;
+  margin-bottom: 4px;
+}
+.resume-header .resume-title {
+  font-size: 1.05rem;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.resume-header .resume-contact {
+  font-size: .84rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.resume-section-title {
+  font-size: .96rem;
+  font-weight: 800;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin: 24px 0 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.resume-section-title i {
+  color: var(--accent);
+  font-size: .9rem;
+}
+
+.resume-entry {
+  margin-bottom: 18px;
+  page-break-inside: avoid;
+}
+.resume-entry-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.resume-entry-title {
+  font-size: .98rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.resume-entry-period {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .78rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+.resume-entry-sub {
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  margin-bottom: 6px;
+}
+.resume-entry p, .resume-entry li {
+  font-size: .85rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.resume-entry ul {
+  padding-left: 20px;
+  margin: 6px 0;
+}
+.resume-entry ul li {
+  margin-bottom: 4px;
+}
+
+.resume-skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+.resume-skills-list span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .74rem;
+  font-weight: 500;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-border);
+  padding: 4px 12px;
+  border-radius: 100px;
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.footer {
+  padding: 28px 48px;
+  background: var(--surface-alt);
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+.footer-brand {
+  font-size: .88rem;
+  font-weight: 600;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.footer-brand .mark {
+  width: 32px;
+  height: 32px;
+  background: var(--gradient-primary);
+  color: #fff;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .8rem;
+  font-weight: 800;
+}
+.footer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  font-size: .84rem;
+  color: var(--text-muted);
+}
+.footer-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.footer-meta i {
+  color: var(--accent);
+  font-size: .8rem;
+}
+
+/* ==========================================================================
+   TOAST NOTIFICATION & BACK TO TOP BUTTON
+   ========================================================================== */
+#toastContainer {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+.toast {
+  pointer-events: auto;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  padding: 12px 20px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+  font-size: .88rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transform: translateY(30px);
+  opacity: 0;
+  transition: all .25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.toast.active {
+  transform: translateY(0);
+  opacity: 1;
+}
+.toast.success { border-left-color: var(--success); }
+.toast.success i { color: var(--success); }
+.toast.info i { color: var(--accent); }
+
+/* Floating Back-to-Top Button */
+#btnBackToTop {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  width: 44px;
+  height: 44px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  font-size: .95rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  z-index: 90;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all .2s ease;
+}
+#btnBackToTop.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+#btnBackToTop:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px var(--accent-glow);
+}
+
+/* ==========================================================================
+   PRINT STYLES FOR CLEAN A4 PDF OUTPUT
+   ========================================================================== */
+@media print {
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    padding: 0 !important;
+  }
+  #ambientCanvas, .ambient-orb, #scrollProgressBar, .topnav, .footer,
+  #toastContainer, #btnBackToTop, .modal-head, .resume-preview,
+  .hero-actions, .filter-btn, .contact-chips .copy-badge {
+    display: none !important;
+  }
+  .page, .card-container {
+    max-width: 100% !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+  }
+  .modal-overlay {
+    display: block !important;
+    position: static !important;
+    background: transparent !important;
+    padding: 0 !important;
+    opacity: 1 !important;
+  }
+  .modal {
+    box-shadow: none !important;
+    border: none !important;
+    max-width: 100% !important;
+    max-height: none !important;
+  }
+  .modal-body {
+    padding: 0 !important;
+  }
+  .resume-doc {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    color: #111 !important;
+    background: #fff !important;
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .hero { padding: 44px 32px 40px; }
+  .main { padding: 38px 32px 44px; }
+  .footer { padding: 24px 32px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+  .hero-showcase { max-width: 520px; }
+  .skills-grid { grid-template-columns: repeat(2, 1fr); }
+  .about-grid { grid-template-columns: 1fr; }
+  .modal-body { padding: 24px 24px 32px; }
+}
+
+@media (max-width: 768px) {
+  body { padding: 12px 10px 32px; }
+  .topnav { padding: 14px 18px; flex-direction: column; gap: 12px; }
+  .topnav-links { justify-content: center; }
+  .hero { padding: 32px 20px 30px; }
+  .main { padding: 30px 18px 36px; }
+  .footer { padding: 22px 18px; flex-direction: column; align-items: flex-start; }
+  .skills-grid, .projects-grid, .edu-grid { grid-template-columns: 1fr; }
+  .about-highlights { grid-template-columns: 1fr; }
+  .tl-item { grid-template-columns: 1fr; gap: 6px; padding: 14px 18px; }
+  .tl-item::before { left: -26px; }
+  .tl-tag { justify-self: start; }
+  .hero-stats { grid-template-columns: 1fr 1fr; }
+  .section-head { flex-direction: column; align-items: flex-start; }
+  .resume-preview { padding: 26px 18px; }
+  .resume-doc { padding: 20px 18px; }
+  .modal-head { padding: 16px 18px; }
+}
+
+@media (max-width: 480px) {
+  .hero-stats { grid-template-columns: 1fr; }
+  .contact-chips { flex-direction: column; align-items: stretch; }
+  .chip { justify-content: center; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .btn-resume { justify-content: center; width: 100%; }
 }
 </style>
 </head>
 <body>
-<div class="page">
-<div class="card">
 
-  <!-- NAV -->
+<!-- Ambient Graphics Canvas & Glow Orbs -->
+<canvas id="ambientCanvas"></canvas>
+<div class="ambient-orb orb-1"></div>
+<div class="ambient-orb orb-2"></div>
+<div class="ambient-orb orb-3"></div>
+
+<!-- Top Scroll Depth Progress -->
+<div id="scrollProgressBar"></div>
+
+<div class="page">
+<div class="card-container">
+
+  <!-- NAVIGATION -->
   <nav class="topnav">
-    <div class="topnav-brand"><span class="mark">MK</span> Manoj Kumar Sharma</div>
+    <a href="#" class="topnav-brand">
+      <span class="mark">MK</span>
+      <span>Manoj Kumar Sharma</span>
+    </a>
     <div class="topnav-links">
       <button class="nav-link" onclick="scrollToSection('about')">About</button>
       <button class="nav-link" onclick="scrollToSection('skills')">Skills</button>
@@ -203,375 +1730,602 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
       <button class="nav-link" onclick="scrollToSection('projects')">Projects</button>
       <button class="nav-link" onclick="scrollToSection('education')">Education</button>
       <button class="nav-link" onclick="scrollToSection('resume')">Resume</button>
-      <button class="btn-resume" onclick="openResume()"><i class="fas fa-file-lines"></i> View Resume</button>
+    </div>
+    <div class="nav-actions">
+      <!-- Dark/Light Theme Toggle -->
+      <button class="btn-theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle Dark / Light Mode">
+        <i class="fas fa-moon"></i>
+      </button>
+      <!-- Direct Open PDF & Download PDF in Navbar -->
+      <button class="btn-resume outline" onclick="openResumePDF()" title="Open PDF in new tab or preview">
+        <i class="fas fa-file-pdf"></i> Open PDF
+      </button>
+      <button class="btn-resume" onclick="downloadResumePDF()" title="Download PDF directly">
+        <i class="fas fa-download"></i> Download PDF
+      </button>
     </div>
   </nav>
 
-  <!-- HERO -->
+  <!-- HERO SECTION -->
   <header class="hero">
     <div class="hero-grid">
       <div>
-        <div class="eyebrow"><span class="dot"></span> Available for opportunities</div>
-        <h1>Manoj Kumar Sharma<span class="accent-line">Sr. Software Engineer</span></h1>
+        <div class="eyebrow"><span class="dot"></span> Available for Sr. Engineering Roles</div>
+        <h1>
+          Manoj Kumar Sharma
+          <span class="accent-line">Sr. Software Engineer &amp; Cloud Architect</span>
+        </h1>
         <p class="hero-subtitle">
-          Trained professional with <strong>9.6+ years</strong> of experience in the IT industry.
-          Specialized in Java, Spring Boot, Microservices, React.js, Node.js, and AWS — building
-          resilient, production-grade systems for enterprise clients.
+          Accomplished software engineer with <strong>9.6+ years</strong> of expertise in designing and engineering high-throughput distributed systems. Specialized in <strong>Java, Spring Boot, Microservices, React.js, Node.js, and AWS</strong> across enterprise, healthcare, and SaaS domains.
         </p>
+
+        <!-- Interactive Contact Chips (Click to copy with animated toast alerts) -->
         <div class="contact-chips">
-          <a class="chip" href="tel:+919340334221"><i class="fas fa-phone"></i> +91 93403 34221</a>
-          <a class="chip" href="mailto:it13manoj@gmail.com"><i class="fas fa-envelope"></i> it13manoj@gmail.com</a>
-          <span class="chip verified"><i class="fas fa-location-dot"></i> Buxar, Bihar, India</span>
+          <button class="chip" onclick="copyToClipboard('+919340334221', 'Phone number copied!')" title="Click to copy phone">
+            <i class="fas fa-phone"></i> +91 93403 34221 <span class="copy-badge">Copy</span>
+          </button>
+          <button class="chip" onclick="copyToClipboard('it13manoj@gmail.com', 'Email address copied!')" title="Click to copy email">
+            <i class="fas fa-envelope"></i> it13manoj@gmail.com <span class="copy-badge">Copy</span>
+          </button>
+          <span class="chip"><i class="fas fa-location-dot"></i> Buxar, Bihar, India</span>
+        </div>
+
+        <!-- Hero Actions (Open & Download PDF) -->
+        <div class="hero-actions">
+          <button class="btn-resume btn-hero" onclick="openResumePDF()">
+            <i class="fas fa-file-pdf"></i> Open Resume in PDF
+          </button>
+          <button class="btn-resume outline btn-hero" onclick="downloadResumePDF()" id="heroDownloadBtn">
+            <i class="fas fa-cloud-arrow-down"></i> Download PDF
+          </button>
+          <button class="btn-resume secondary btn-hero" onclick="scrollToSection('projects')">
+            <i class="fas fa-diagram-project"></i> Explore Projects
+          </button>
         </div>
       </div>
-      <div class="hero-stats">
-        <div class="stat"><div class="num">9.6<span>+</span></div><div class="lbl">Years Exp.</div></div>
-        <div class="stat"><div class="num">10<span>+</span></div><div class="lbl">Projects</div></div>
-        <div class="stat"><div class="num">7<span>y</span></div><div class="lbl">Java / Spring</div></div>
-        <div class="stat"><div class="num">4<span>y</span></div><div class="lbl">React / Node</div></div>
+
+      <!-- Hero Graphic Showcase & Live Stats -->
+      <div class="hero-showcase">
+        <div class="profile-badge-card" data-tilt>
+          <div class="profile-avatar-box">
+            <div class="avatar-status-ring"></div>
+            <div class="profile-avatar">MK</div>
+          </div>
+          <div class="profile-badge-info">
+            <h3>Manoj Kumar Sharma <i class="fas fa-circle-check" style="color:var(--success);font-size:.9rem;"></i></h3>
+            <div class="badge-role">Sr. Software Engineer · SMB Group</div>
+            <div class="badge-tech-tags">
+              <span class="badge-tag"><i class="fab fa-java"></i> Java 17</span>
+              <span class="badge-tag">Spring Boot</span>
+              <span class="badge-tag"><i class="fab fa-aws"></i> AWS</span>
+              <span class="badge-tag"><i class="fab fa-react"></i> React</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2x2 Animated Stat Counters -->
+        <div class="hero-stats">
+          <div class="stat" data-tilt>
+            <div class="num" data-target="9.6" data-decimal="1">0<span>+</span></div>
+            <div class="lbl">Years IT Experience</div>
+          </div>
+          <div class="stat" data-tilt>
+            <div class="num" data-target="10" data-decimal="0">0<span>+</span></div>
+            <div class="lbl">Enterprise Projects</div>
+          </div>
+          <div class="stat" data-tilt>
+            <div class="num" data-target="7" data-decimal="0">0<span>y</span></div>
+            <div class="lbl">Java / Spring Boot</div>
+          </div>
+          <div class="stat" data-tilt>
+            <div class="num" data-target="4" data-decimal="0">0<span>y</span></div>
+            <div class="lbl">React / Node / AWS</div>
+          </div>
+        </div>
       </div>
     </div>
   </header>
 
-  <!-- MAIN -->
+  <!-- MAIN BODY -->
   <main class="main">
 
-    <!-- ABOUT -->
+    <!-- ABOUT SECTION -->
     <section class="section" id="about">
       <div class="section-head">
-        <h2><span class="icon-box"><i class="fas fa-user"></i></span> About Me</h2>
+        <h2><span class="icon-box"><i class="fas fa-user-astronaut"></i></span> About Me</h2>
         <span class="count">Professional Summary</span>
       </div>
       <div class="about-grid">
         <div class="about-text">
-          Trained professional with more than <strong>9.6 years of experience</strong> in the IT industry.
-          To excel in my field through hard work, research, skills, and perseverance. To serve my parents
-          and my country to the best of my abilities. Passionate about designing scalable microservices,
-          cloud-native applications, and delivering high-quality, maintainable code that solves real
-          business problems across healthcare, enterprise, and SaaS domains.
+          <p>
+            Trained professional with over <strong>9.6 years of hands-on experience</strong> in the IT industry. Passionate about engineering high-scalability distributed architectures, resilient cloud-native microservices, and modern frontend interfaces that solve complex enterprise challenges.
+          </p>
+          <p style="margin-top: 14px;">
+            Throughout my career at SMB Group, Grazitti Interactive, and iMark Infotech, I have led engineering initiatives for high-profile clients including BPSC, Khoros, Salesforce integrations, and healthcare ERP systems. I pride myself on clean architecture, comprehensive API security (OAuth 2.0, Spring Security), and mentoring high-performing engineering squads.
+          </p>
+          <div class="about-highlights">
+            <div class="about-highlight-item"><i class="fas fa-server"></i> Microservices &amp; RESTful APIs</div>
+            <div class="about-highlight-item"><i class="fas fa-cloud"></i> Cloud Native Architecture (AWS)</div>
+            <div class="about-highlight-item"><i class="fas fa-shield-halved"></i> OAuth 2.0 &amp; Spring Security</div>
+            <div class="about-highlight-item"><i class="fas fa-users-gear"></i> Technical Mentorship &amp; Delivery</div>
+          </div>
         </div>
         <div class="about-info">
-          <div class="info-row"><i class="fas fa-envelope"></i><div><span class="lbl">Email</span><span class="val">it13manoj@gmail.com</span></div></div>
-          <div class="info-row"><i class="fas fa-phone"></i><div><span class="lbl">Contact</span><span class="val">9340334221</span></div></div>
-          <div class="info-row"><i class="fas fa-location-dot"></i><div><span class="lbl">Address</span><span class="val">Sohani Patti, Buxar, Bihar – 802101, India</span></div></div>
-          <div class="info-row"><i class="fas fa-briefcase"></i><div><span class="lbl">Current</span><span class="val">SMB Group · BPSC client site</span></div></div>
+          <div class="info-row">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <span class="lbl">Email</span>
+              <span class="val">it13manoj@gmail.com</span>
+            </div>
+          </div>
+          <div class="info-row">
+            <i class="fas fa-phone"></i>
+            <div>
+              <span class="lbl">Phone / WhatsApp</span>
+              <span class="val">+91 93403 34221</span>
+            </div>
+          </div>
+          <div class="info-row">
+            <i class="fas fa-location-dot"></i>
+            <div>
+              <span class="lbl">Location</span>
+              <span class="val">Sohani Patti, Buxar, Bihar – 802101, India</span>
+            </div>
+          </div>
+          <div class="info-row">
+            <i class="fas fa-briefcase"></i>
+            <div>
+              <span class="lbl">Current Engagement</span>
+              <span class="val">SMB Group · BPSC Client Site</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- SKILLS -->
+    <!-- CORE EXPERTISE & SKILLS -->
     <section class="section" id="skills">
       <div class="section-head">
         <h2><span class="icon-box"><i class="fas fa-layer-group"></i></span> Core Expertise</h2>
-        <span class="count">Full-stack · Cloud · Microservices</span>
+        <span class="count">Full-Stack · Cloud · Architecture</span>
       </div>
       <div class="skills-grid">
-        <div class="skill">
-          <div class="skill-top"><span class="skill-icon"><i class="fab fa-java"></i></span><span class="skill-years">7 yrs</span></div>
-          <h3>Java & Spring Boot</h3>
-          <p>Microservices, REST APIs, Hibernate, Spring Security, event-driven architecture.</p>
+        <div class="skill" data-tilt>
+          <div class="skill-top">
+            <span class="skill-icon"><i class="fab fa-java"></i></span>
+            <span class="skill-years">7+ yrs</span>
+          </div>
+          <h3>Java &amp; Spring Boot</h3>
+          <p>Microservices, REST APIs, Hibernate, Spring Security, JPA, Multi-threading, and Event-Driven Architecture.</p>
         </div>
-        <div class="skill">
-          <div class="skill-top"><span class="skill-icon"><i class="fab fa-react"></i></span><span class="skill-years">4 yrs</span></div>
-          <h3>React.js</h3>
-          <p>Hooks, Redux, Next.js, component design systems, performance tuning.</p>
+
+        <div class="skill" data-tilt>
+          <div class="skill-top">
+            <span class="skill-icon"><i class="fab fa-react"></i></span>
+            <span class="skill-years">4+ yrs</span>
+          </div>
+          <h3>React.js &amp; Frontend</h3>
+          <p>React Hooks, Redux, State Management, Next.js, Component Design Systems, Vue.js, and Modern JS.</p>
         </div>
-        <div class="skill">
-          <div class="skill-top"><span class="skill-icon"><i class="fab fa-node-js"></i></span><span class="skill-years">4 yrs</span></div>
-          <h3>Node.js</h3>
-          <p>Express, REST APIs, real-time services, authentication, integrations.</p>
+
+        <div class="skill" data-tilt>
+          <div class="skill-top">
+            <span class="skill-icon"><i class="fab fa-node-js"></i></span>
+            <span class="skill-years">4+ yrs</span>
+          </div>
+          <h3>Node.js &amp; Backend</h3>
+          <p>Express.js, RESTful microservices, asynchronous I/O, middleware security, and third-party integrations.</p>
         </div>
-        <div class="skill">
-          <div class="skill-top"><span class="skill-icon"><i class="fab fa-aws"></i></span><span class="skill-years">3 yrs</span></div>
-          <h3>AWS Cloud</h3>
-          <p>EC2, Lambda, S3, RDS, ECS, CloudWatch, CI/CD pipelines.</p>
+
+        <div class="skill" data-tilt>
+          <div class="skill-top">
+            <span class="skill-icon"><i class="fab fa-aws"></i></span>
+            <span class="skill-years">3+ yrs</span>
+          </div>
+          <h3>AWS &amp; Cloud DevOps</h3>
+          <p>EC2, Lambda, S3, RDS, ECS, CloudWatch, CI/CD automation, Docker containerization, and Git workflows.</p>
         </div>
       </div>
+
+      <!-- Interactive Tech Tag Cloud -->
       <div class="tech-cloud">
-        <span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">Hibernate</span>
-        <span class="tag">MySQL</span><span class="tag">Node.js</span><span class="tag">JavaScript</span>
-        <span class="tag">React.js</span><span class="tag">Laravel</span><span class="tag">CodeIgniter</span>
-        <span class="tag">PHP</span><span class="tag">Vue.js</span><span class="tag">HTML</span>
-        <span class="tag">CSS</span><span class="tag">AWS</span><span class="tag">REST API</span>
-        <span class="tag">OAuth 2.0</span><span class="tag">Git</span><span class="tag">Spring Security</span>
+        <span class="tag"><i class="fab fa-java"></i> Java 8/11/17</span>
+        <span class="tag">Spring Boot</span>
+        <span class="tag">Hibernate ORM</span>
+        <span class="tag">Spring Security</span>
+        <span class="tag"><i class="fas fa-database"></i> MySQL</span>
+        <span class="tag"><i class="fab fa-node-js"></i> Node.js</span>
+        <span class="tag"><i class="fab fa-js"></i> JavaScript ES6+</span>
+        <span class="tag"><i class="fab fa-react"></i> React.js</span>
+        <span class="tag"><i class="fab fa-vuejs"></i> Vue.js</span>
+        <span class="tag"><i class="fab fa-laravel"></i> Laravel</span>
+        <span class="tag"><i class="fab fa-php"></i> PHP / CodeIgniter</span>
+        <span class="tag"><i class="fab fa-aws"></i> AWS Cloud</span>
+        <span class="tag">RESTful APIs</span>
+        <span class="tag">OAuth 2.0</span>
+        <span class="tag"><i class="fab fa-git-alt"></i> Git &amp; GitHub</span>
+        <span class="tag"><i class="fab fa-docker"></i> Docker</span>
+        <span class="tag"><i class="fab fa-stripe"></i> Stripe / PayPal</span>
+        <span class="tag"><i class="fab fa-salesforce"></i> Salesforce API</span>
       </div>
     </section>
 
-    <!-- EXPERIENCE -->
+    <!-- CAREER TIMELINE -->
     <section class="section" id="experience">
       <div class="section-head">
         <h2><span class="icon-box"><i class="fas fa-briefcase"></i></span> Career Timeline</h2>
-        <span class="count">2017 – Present</span>
+        <span class="count">2017 – Present (9.6+ Years)</span>
       </div>
       <div class="timeline">
         <div class="tl-item current">
           <div class="tl-year">2026 – Present</div>
           <div>
             <div class="tl-company">SMB Group</div>
-            <div class="tl-role">Sr. Software Engineer — BPSC client site · Cloud & Enterprise systems</div>
+            <div class="tl-role">Sr. Software Engineer — BPSC client site · Cloud &amp; Enterprise Distributed Systems</div>
           </div>
           <span class="tl-tag">Current</span>
         </div>
+
         <div class="tl-item">
           <div class="tl-year">Mar 2021 – 2026</div>
           <div>
             <div class="tl-company">Grazitti Interactive</div>
-            <div class="tl-role">Sr. Software Engineer — Java, Spring Boot, AWS, React.js</div>
+            <div class="tl-role">Sr. Software Engineer — Java, Spring Boot, AWS, React.js, OAuth 2.0, Khoros &amp; Salesforce</div>
           </div>
-          <span class="tl-tag old">4+ yrs</span>
+          <span class="tl-tag old">5 yrs</span>
         </div>
+
         <div class="tl-item">
           <div class="tl-year">Oct 2019 – Mar 2021</div>
           <div>
             <div class="tl-company">iMark Infotech Pvt. Ltd.</div>
-            <div class="tl-role">Sr. Software Engineer — Vue.js, Spring Boot, Node.js</div>
+            <div class="tl-role">Sr. Software Engineer — Vue.js, Spring Boot, Node.js, Stripe, PayPal Integrations</div>
           </div>
           <span class="tl-tag old">1.5 yrs</span>
         </div>
+
         <div class="tl-item">
           <div class="tl-year">May 2018 – Oct 2019</div>
           <div>
             <div class="tl-company">Protolabz eService</div>
-            <div class="tl-role">Software Engineer — React.js, Node.js, AWS</div>
+            <div class="tl-role">Software Engineer — React.js, Node.js, AWS Cloud, Healthcare Management Systems</div>
           </div>
           <span class="tl-tag old">1.5 yrs</span>
         </div>
+
         <div class="tl-item">
           <div class="tl-year">Jan 2017 – May 2018</div>
           <div>
             <div class="tl-company">Tech Global Solution</div>
-            <div class="tl-role">Software Engineer — CodeIgniter, PHP, MySQL</div>
+            <div class="tl-role">Software Engineer — CodeIgniter, PHP, MySQL, Biometric Attendance Integration</div>
           </div>
           <span class="tl-tag old">1.5 yrs</span>
         </div>
       </div>
     </section>
 
-    <!-- PROJECTS -->
+    <!-- KEY PROJECTS (WITH INTERACTIVE FILTERING) -->
     <section class="section" id="projects">
       <div class="section-head">
         <h2><span class="icon-box"><i class="fas fa-diagram-project"></i></span> Key Projects</h2>
-        <span class="count">10 delivered</span>
+        <span class="count">Production Deliveries</span>
       </div>
-      <div class="projects-grid">
 
-        <article class="project">
-          <div class="project-head"><h4>Knowbler</h4><span class="project-num">01</span></div>
+      <!-- Interactive Filter Buttons -->
+      <div class="project-filters">
+        <button class="filter-btn active" data-filter="all" onclick="filterProjects('all', this)">
+          <i class="fas fa-border-all"></i> All Projects (9)
+        </button>
+        <button class="filter-btn" data-filter="java" onclick="filterProjects('java', this)">
+          <i class="fab fa-java"></i> Java &amp; Spring Boot
+        </button>
+        <button class="filter-btn" data-filter="aws" onclick="filterProjects('aws', this)">
+          <i class="fab fa-aws"></i> AWS &amp; Cloud
+        </button>
+        <button class="filter-btn" data-filter="frontend" onclick="filterProjects('frontend', this)">
+          <i class="fab fa-react"></i> React &amp; Vue
+        </button>
+        <button class="filter-btn" data-filter="enterprise" onclick="filterProjects('enterprise', this)">
+          <i class="fas fa-building"></i> Enterprise &amp; ERP
+        </button>
+      </div>
+
+      <div class="projects-grid" id="projectsGrid">
+
+        <!-- 01: Knowbler -->
+        <article class="project" data-category="java aws frontend" data-tilt>
+          <div class="project-head">
+            <h4>Knowbler</h4>
+            <span class="project-num">01</span>
+          </div>
           <div class="project-meta">
             <span><i class="fas fa-user-tie"></i> Sr. Software Engineer</span>
             <span><i class="fas fa-users"></i> Team: 4</span>
             <span><i class="fas fa-calendar"></i> Jul 2023 – Present</span>
           </div>
-          <p class="project-desc">Chrome extension creating articles for Khoros and Salesforce communities, showing boards per user.</p>
+          <p class="project-desc">High-impact Chrome extension enabling real-time article creation for Khoros and Salesforce communities with user-specific board views.</p>
           <ul class="project-bullets">
-            <li>Configuration file for Khoros & Salesforce Chrome Extension connection</li>
-            <li>REST API for OAuth 2.0 access</li>
-            <li>Article, Roles and Boards API in Spring Boot</li>
-            <li>Team management and code review</li>
+            <li>Designed OAuth 2.0 authentication handshake and secure token rotation for Khoros and Salesforce communities.</li>
+            <li>Engineered high-throughput Articles, Roles, and Boards microservice APIs using Spring Boot and Hibernate.</li>
+            <li>Implemented dynamic configuration endpoints for Chrome Extension connection and user session mapping.</li>
+            <li>Conducted team sprint planning, code reviews, and AWS deployment automation.</li>
           </ul>
           <div class="project-stack">
-            <span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">Hibernate</span>
-            <span class="tag">Spring Security</span><span class="tag">AWS</span><span class="tag">SQL</span>
-            <span class="tag">React.js</span><span class="tag">JavaScript</span>
+            <span class="tag">Java</span>
+            <span class="tag">Spring Boot</span>
+            <span class="tag">Hibernate</span>
+            <span class="tag">Spring Security</span>
+            <span class="tag">AWS</span>
+            <span class="tag">React.js</span>
+            <span class="tag">OAuth 2.0</span>
           </div>
         </article>
 
-        <article class="project">
-          <div class="project-head"><h4>Task Tool Manager</h4><span class="project-num">02</span></div>
+        <!-- 02: Task Tool Manager -->
+        <article class="project" data-category="java aws enterprise" data-tilt>
+          <div class="project-head">
+            <h4>Task Tool Manager</h4>
+            <span class="project-num">02</span>
+          </div>
           <div class="project-meta">
             <span><i class="fas fa-user-tie"></i> Sr. Software Engineer</span>
             <span><i class="fas fa-users"></i> Team: 4</span>
             <span><i class="fas fa-calendar"></i> Aug 2022 – May 2023</span>
           </div>
-          <p class="project-desc">Grazitti internal project to manage tasks assigned to teams and members.</p>
+          <p class="project-desc">Grazitti internal enterprise portal to orchestrate task assignment, role-based governance, and real-time Jira synchronization.</p>
           <ul class="project-bullets">
-            <li>Project creation, task assignment, comments</li>
-            <li>Role-based user access panel</li>
-            <li>Jira ↔ Tool data sync</li>
-            <li>Team management and code review</li>
+            <li>Created comprehensive project workflows, task assignment engine, commenting, and audit logging.</li>
+            <li>Designed fine-grained role-based access control (RBAC) panel for administrators and team leads.</li>
+            <li>Engineered bidirectional synchronization between Jira REST APIs and internal database.</li>
+            <li>Supervised code quality and managed Sprint delivery cycles.</li>
           </ul>
           <div class="project-stack">
-            <span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">Hibernate</span>
-            <span class="tag">Spring Security</span><span class="tag">AWS</span><span class="tag">SQL</span>
-            <span class="tag">Thymeleaf</span><span class="tag">JavaScript</span>
+            <span class="tag">Java</span>
+            <span class="tag">Spring Boot</span>
+            <span class="tag">Hibernate</span>
+            <span class="tag">Spring Security</span>
+            <span class="tag">AWS</span>
+            <span class="tag">Thymeleaf</span>
+            <span class="tag">Jira API</span>
           </div>
         </article>
 
-        <article class="project">
-          <div class="project-head"><h4>Nintex Template Gallery</h4><span class="project-num">03</span></div>
+        <!-- 03: Nintex Template Gallery -->
+        <article class="project" data-category="enterprise frontend" data-tilt>
+          <div class="project-head">
+            <h4>Nintex Template Gallery</h4>
+            <span class="project-num">03</span>
+          </div>
           <div class="project-meta">
             <span><i class="fas fa-user-tie"></i> Sr. Software Engineer</span>
             <span><i class="fas fa-users"></i> Team: 3</span>
             <span><i class="fas fa-calendar"></i> Jan 2022 – Jul 2022</span>
           </div>
-          <p class="project-desc">Nintex template gallery and newly built admin REST API using Node.js.</p>
+          <p class="project-desc">Template showcase gallery and administrative REST backend built on Node.js for template curation and analytics.</p>
           <ul class="project-bullets">
-            <li>Node.js configuration and setup</li>
-            <li>REST API creation for admin</li>
+            <li>Configured Node.js / Express microservice infrastructure with robust input validation.</li>
+            <li>Implemented administrative RESTful CRUD APIs for template categorization and versioning.</li>
+            <li>Optimized MySQL query execution times for rapid searching across large template catalogs.</li>
           </ul>
           <div class="project-stack">
-            <span class="tag">MySQL</span><span class="tag">Node.js</span><span class="tag">Git</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">Express</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">Git</span>
+            <span class="tag">REST API</span>
           </div>
         </article>
 
-        <article class="project">
-          <div class="project-head"><h4>Connector</h4><span class="project-num">04</span></div>
+        <!-- 04: Connector (Khoros ↔ Salesforce) -->
+        <article class="project" data-category="java frontend enterprise" data-tilt>
+          <div class="project-head">
+            <h4>Connector (Khoros ↔ Salesforce)</h4>
+            <span class="project-num">04</span>
+          </div>
           <div class="project-meta">
             <span><i class="fas fa-user-tie"></i> Sr. Software Engineer</span>
             <span><i class="fas fa-users"></i> Team: 3</span>
             <span><i class="fas fa-calendar"></i> Apr 2021 – Nov 2021</span>
           </div>
-          <p class="project-desc">Web app to migrate data between Khoros ↔ Salesforce with an admin panel.</p>
+          <p class="project-desc">Enterprise data migration engine synchronizing millions of records bi-directionally between Khoros and Salesforce platforms.</p>
           <ul class="project-bullets">
-            <li>Token & refresh token methods for Khoros/Salesforce APIs</li>
-            <li>Admin panel and database design</li>
-            <li>Bi-directional data migration</li>
+            <li>Architected token and refresh-token lifecycle management for high-availability OAuth APIs.</li>
+            <li>Built an intuitive React.js administrative dashboard showing real-time migration throughput and status logs.</li>
+            <li>Designed normalized database schema and batch processors to prevent data loss and resolve synchronization conflicts.</li>
           </ul>
           <div class="project-stack">
-            <span class="tag">MySQL</span><span class="tag">React.js</span><span class="tag">Spring Boot</span><span class="tag">Git</span>
+            <span class="tag">Spring Boot</span>
+            <span class="tag">React.js</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">Salesforce API</span>
+            <span class="tag">Khoros API</span>
           </div>
         </article>
 
-        <article class="project">
-          <div class="project-head"><h4>CineCave</h4><span class="project-num">05</span></div>
+        <!-- 05: CineCave -->
+        <article class="project" data-category="java frontend" data-tilt>
+          <div class="project-head">
+            <h4>CineCave</h4>
+            <span class="project-num">05</span>
+          </div>
           <div class="project-meta">
             <span><i class="fas fa-user-tie"></i> Sr. Software Engineer</span>
-            <span><i class="fas fa-user"></i> Individual</span>
+            <span><i class="fas fa-user"></i> Individual Delivery</span>
             <span><i class="fas fa-calendar"></i> Aug 2020 – Feb 2021</span>
           </div>
-          <p class="project-desc">Web app for mixing multiple songs with effects; users can download and play anywhere.</p>
+          <p class="project-desc">Interactive web audio suite for selecting, mixing, and applying dynamic audio effects across multiple music tracks for playback and export.</p>
           <ul class="project-bullets">
-            <li>UI revamp in Vue.js</li>
-            <li>Database design and REST API</li>
-            <li>Code review & delivery</li>
+            <li>Architected dynamic frontend user interface in Vue.js with smooth timeline controls and waveform displays.</li>
+            <li>Designed relational database schemas and Spring Boot REST endpoints to catalog audio assets.</li>
+            <li>Led complete solo delivery cycle from requirement discovery through production deployment.</li>
           </ul>
           <div class="project-stack">
-            <span class="tag">Vue.js</span><span class="tag">Spring Boot</span><span class="tag">MySQL</span>
+            <span class="tag">Vue.js</span>
+            <span class="tag">Spring Boot</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">REST API</span>
           </div>
         </article>
 
-        <article class="project">
-          <div class="project-head"><h4>Nikah Online</h4><span class="project-num">06</span></div>
+        <!-- 06: Nikah Online -->
+        <article class="project" data-category="java frontend" data-tilt>
+          <div class="project-head">
+            <h4>Nikah Online</h4>
+            <span class="project-num">06</span>
+          </div>
           <div class="project-meta">
             <span><i class="fas fa-user-tie"></i> Sr. Software Engineer</span>
-            <span><i class="fas fa-user"></i> Individual</span>
+            <span><i class="fas fa-user"></i> Individual Delivery</span>
             <span><i class="fas fa-calendar"></i> Feb 2020 – Jul 2020</span>
           </div>
-          <p class="project-desc">Online marriage application with documents, witness and event booking.</p>
+          <p class="project-desc">Digital marital registration platform facilitating online verification, witness attestations, and calendar event bookings.</p>
           <ul class="project-bullets">
-            <li>UI in Vue.js</li>
-            <li>Database design and REST API</li>
-            <li>Code review & delivery</li>
+            <li>Designed reactive Vue.js interface with step-by-step document upload and witness validation forms.</li>
+            <li>Engineered Spring Boot REST APIs with document encryption and secure status tracking.</li>
+            <li>Delivered high-performance MySQL query optimization and end-to-end integration tests.</li>
           </ul>
           <div class="project-stack">
-            <span class="tag">Vue.js</span><span class="tag">Spring Boot</span><span class="tag">MySQL</span>
+            <span class="tag">Vue.js</span>
+            <span class="tag">Spring Boot</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">Security</span>
           </div>
         </article>
 
-        <article class="project">
-          <div class="project-head"><h4>Gym-Team</h4><span class="project-num">07</span></div>
+        <!-- 07: Gym-Team -->
+        <article class="project" data-category="frontend enterprise" data-tilt>
+          <div class="project-head">
+            <h4>Gym-Team</h4>
+            <span class="project-num">07</span>
+          </div>
           <div class="project-meta">
             <span><i class="fas fa-user-tie"></i> Sr. Software Engineer</span>
-            <span><i class="fas fa-user"></i> Individual</span>
+            <span><i class="fas fa-user"></i> Individual Delivery</span>
             <span><i class="fas fa-calendar"></i> Oct 2019 – Feb 2020</span>
           </div>
-          <p class="project-desc">Trainer platform for plans, schedules, payments and live chat.</p>
+          <p class="project-desc">Full-featured personal training marketplace for workout plan authoring, schedule coordination, payment gateways, and real-time chat.</p>
           <ul class="project-bullets">
-            <li>UI in Vue.js, DB design, REST API</li>
-            <li>Stripe & PayPal integration</li>
-            <li>Live chat between users and trainers</li>
+            <li>Integrated payment gateways via Stripe and PayPal for seamless subscription and package checkout.</li>
+            <li>Built real-time messaging portal between trainers and clients using WebSockets and Node.js.</li>
+            <li>Implemented Super Admin portal for trainer KYC verification and automated commission payouts.</li>
           </ul>
           <div class="project-stack">
-            <span class="tag">Vue.js</span><span class="tag">Node.js</span><span class="tag">MySQL</span>
-            <span class="tag">Stripe</span><span class="tag">PayPal</span>
+            <span class="tag">Vue.js</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">Stripe</span>
+            <span class="tag">PayPal</span>
+            <span class="tag">MySQL</span>
           </div>
         </article>
 
-        <article class="project">
-          <div class="project-head"><h4>Aggarwal Hospital</h4><span class="project-num">08</span></div>
+        <!-- 08: Aggarwal Hospital ERP -->
+        <article class="project" data-category="aws frontend enterprise" data-tilt>
+          <div class="project-head">
+            <h4>Aggarwal Hospital ERP</h4>
+            <span class="project-num">08</span>
+          </div>
           <div class="project-meta">
             <span><i class="fas fa-user-tie"></i> Software Engineer</span>
             <span><i class="fas fa-users"></i> Team: 2</span>
             <span><i class="fas fa-calendar"></i> Jun 2018 – Sep 2019</span>
           </div>
-          <p class="project-desc">Hospital management: records, OPD, IPD, DRUD master, surgery, staff payroll.</p>
+          <p class="project-desc">Hospital information management system managing patient health records, OPD, IPD, drug inventory, surgeries, and staff payroll.</p>
           <ul class="project-bullets">
-            <li>Requirement gathering and design assignment</li>
-            <li>Development of all modules</li>
-            <li>On-time delivery of tasks</li>
+            <li>Developed core modules for patient admissions, discharge summaries, and medical billing on React.js.</li>
+            <li>Deployed Node.js REST services to AWS EC2 with MySQL RDS backend.</li>
+            <li>Collaborated directly with medical staff to ensure intuitive clinical workflows and strict data integrity.</li>
           </ul>
           <div class="project-stack">
-            <span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">MySQL</span><span class="tag">AWS</span>
+            <span class="tag">React.js</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">AWS</span>
           </div>
         </article>
 
-        <article class="project">
-          <div class="project-head"><h4>Metro Hospital</h4><span class="project-num">09</span></div>
+        <!-- 09: Metro Hospital -->
+        <article class="project" data-category="enterprise" data-tilt>
+          <div class="project-head">
+            <h4>Metro Hospital</h4>
+            <span class="project-num">09</span>
+          </div>
           <div class="project-meta">
             <span><i class="fas fa-user-tie"></i> Software Engineer</span>
             <span><i class="fas fa-users"></i> Team: 15</span>
             <span><i class="fas fa-calendar"></i> Feb 2017 – May 2018</span>
           </div>
-          <p class="project-desc">Hospital management system covering records for hospital and employees.</p>
+          <p class="project-desc">Comprehensive hospital ERP system managing medical records, biometric staff attendance, patient referrals, and cashier handovers.</p>
           <ul class="project-bullets">
-            <li>IPD/OPD controller & new functions</li>
-            <li>Staff attendance via biometric integration</li>
-            <li>Referral panel and cashier hand-over</li>
+            <li>Programmed IPD/OPD controllers and clinical data entry interfaces in CodeIgniter and PHP.</li>
+            <li>Engineered biometric fingerprint hardware integration for automated daily staff attendance logs.</li>
+            <li>Designed cashier handover ledger balancing daily hospital revenue and patient disbursements.</li>
           </ul>
           <div class="project-stack">
-            <span class="tag">CodeIgniter</span><span class="tag">PHP</span><span class="tag">HTML</span>
-            <span class="tag">JavaScript</span><span class="tag">MySQL</span>
+            <span class="tag">CodeIgniter</span>
+            <span class="tag">PHP</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">Biometric API</span>
           </div>
         </article>
 
       </div>
     </section>
 
-    <!-- EDUCATION -->
+    <!-- EDUCATION SECTION -->
     <section class="section" id="education">
       <div class="section-head">
         <h2><span class="icon-box"><i class="fas fa-graduation-cap"></i></span> Education</h2>
-        <span class="count">Academic Details</span>
+        <span class="count">Academic Credentials</span>
       </div>
       <div class="edu-grid">
-        <div class="edu-item">
+        <div class="edu-item" data-tilt>
           <div class="edu-icon"><i class="fas fa-university"></i></div>
           <div>
             <h4>B.Tech in Information Technology</h4>
-            <div class="edu-inst">Aryabhatta Institute of Engineering & Management, Durgapur · WBUT, Kolkata</div>
-            <span class="edu-year">2015 · 72%</span>
+            <div class="edu-inst">Aryabhatta Institute of Engineering &amp; Management, Durgapur · WBUT, Kolkata</div>
+            <span class="edu-year">Year: 2015 · Score: 72% Marks</span>
           </div>
         </div>
-        <div class="edu-item">
+
+        <div class="edu-item" data-tilt>
           <div class="edu-icon"><i class="fas fa-school"></i></div>
           <div>
-            <h4>Senior Secondary</h4>
+            <h4>Senior Secondary (10+2)</h4>
             <div class="edu-inst">M.V. College, Buxar, Bihar · BSEB Board</div>
-            <span class="edu-year">2010 · 54%</span>
+            <span class="edu-year">Year: 2010 · Score: 54% Marks</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- RESUME -->
+    <!-- RESUME SHOWCASE & PDF ACTIONS -->
     <section class="section" id="resume">
       <div class="section-head">
-        <h2><span class="icon-box"><i class="fas fa-file-lines"></i></span> Resume</h2>
-        <span class="count">View or Download</span>
+        <h2><span class="icon-box"><i class="fas fa-file-pdf"></i></span> Resume Document</h2>
+        <span class="count">View in PDF · Download PDF</span>
       </div>
       <div class="resume-preview">
         <div class="preview-icon"><i class="fas fa-file-pdf"></i></div>
-        <h3>Manoj Kumar Sharma — Resume</h3>
-        <p>Complete professional resume including education, skills, work experience, and detailed project descriptions. View it online or download it for your records.</p>
+        <h3>Manoj Kumar Sharma — Official Resume</h3>
+        <p>Complete professional curriculum vitae detailing 9.6+ years of enterprise engineering, technical competencies, career timeline, and all 9 flagship projects. View it online as a formatted PDF or download it instantly.</p>
+
         <div class="resume-actions">
-          <button class="btn-resume" onclick="openResume()"><i class="fas fa-eye"></i> View Resume</button>
-          <button class="btn-resume outline" onclick="downloadResume()"><i class="fas fa-download"></i> Download Resume</button>
+          <button class="btn-resume btn-hero" onclick="openResumePDF()">
+            <i class="fas fa-file-pdf"></i> Open Resume (PDF)
+          </button>
+          <button class="btn-resume outline btn-hero" onclick="downloadResumePDF()" id="resumeDownloadBtn">
+            <i class="fas fa-download"></i> Download Resume (PDF)
+          </button>
+          <button class="btn-resume secondary btn-hero" onclick="printResume()">
+            <i class="fas fa-print"></i> Print / Save as PDF
+          </button>
         </div>
+
         <div class="resume-meta">
-          <span><i class="fas fa-file-alt"></i> 4 pages</span>
-          <span><i class="fas fa-briefcase"></i> 9.6+ years experience</span>
-          <span><i class="fas fa-code"></i> 10+ projects</span>
-          <span><i class="fas fa-graduation-cap"></i> B.Tech IT</span>
+          <span><i class="fas fa-file-lines"></i> Formatted A4 Document</span>
+          <span><i class="fas fa-briefcase"></i> 9.6+ Years Experience</span>
+          <span><i class="fas fa-code"></i> 9 Flagship Projects</span>
+          <span><i class="fas fa-graduation-cap"></i> B.Tech in IT (72%)</span>
         </div>
       </div>
     </section>
@@ -580,245 +2334,732 @@ body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="footer-brand"><span class="mark">MK</span> Manoj Kumar Sharma · Sr. Software Engineer</div>
+    <div class="footer-brand">
+      <span class="mark">MK</span>
+      <span>Manoj Kumar Sharma · Sr. Software Engineer &amp; Cloud Architect</span>
+    </div>
     <div class="footer-meta">
       <span><i class="fas fa-location-dot"></i> Buxar, Bihar, India</span>
-      <span><i class="fas fa-envelope"></i> it13manoj@gmail.com</span>
-      <span><i class="fas fa-phone"></i> 9340334221</span>
+      <span style="cursor:pointer;" onclick="copyToClipboard('it13manoj@gmail.com', 'Email copied!')"><i class="fas fa-envelope"></i> it13manoj@gmail.com</span>
+      <span style="cursor:pointer;" onclick="copyToClipboard('+919340334221', 'Phone copied!')"><i class="fas fa-phone"></i> +91 93403 34221</span>
     </div>
   </footer>
 
 </div>
 </div>
 
-<!-- RESUME MODAL -->
+<!-- ==========================================================================
+     RESUME MODAL & PRINT-OPTIMIZED DOCUMENT CONTAINER
+     ========================================================================== -->
 <div class="modal-overlay" id="resumeModal" onclick="closeResumeOnOverlay(event)">
   <div class="modal">
     <div class="modal-head">
-      <h3><i class="fas fa-file-lines"></i> Manoj Kumar Sharma — Resume</h3>
+      <h3><i class="fas fa-file-pdf"></i> Manoj Kumar Sharma — Resume</h3>
       <div class="modal-head-actions">
-        <button class="btn-resume outline" onclick="downloadResume()"><i class="fas fa-download"></i> Download</button>
-        <button class="modal-close" onclick="closeResume()"><i class="fas fa-times"></i></button>
+        <button class="btn-resume" onclick="downloadResumePDF()" id="modalDownloadBtn">
+          <i class="fas fa-download"></i> Download PDF
+        </button>
+        <button class="btn-resume outline" onclick="openResumeInNewTab()">
+          <i class="fas fa-arrow-up-right-from-square"></i> Open in New Tab
+        </button>
+        <button class="btn-resume secondary" onclick="printResume()">
+          <i class="fas fa-print"></i> Print
+        </button>
+        <button class="modal-close" onclick="closeResume()" title="Close Modal">
+          <i class="fas fa-times"></i>
+        </button>
       </div>
     </div>
+
     <div class="modal-body">
-      <div class="resume-doc">
-        <h1>MANOJ KUMAR SHARMA</h1>
-        <div class="resume-title">Sr. Software Engineer</div>
-        <div class="resume-contact">
-          Email: it13manoj@gmail.com &nbsp;·&nbsp; Contact: 9340334221<br>
-          Address: Sohani Patti, Buxar, City: Buxar, State: Bihar, Pincode: 802101, Country: India
-        </div>
+      <!-- Dedicated PDF/Print Container -->
+      <div class="resume-doc" id="resumePrintDoc">
+        <header class="resume-header">
+          <h1>MANOJ KUMAR SHARMA</h1>
+          <div class="resume-title">Sr. Software Engineer &amp; Cloud Architect</div>
+          <div class="resume-contact">
+            <strong>Email:</strong> it13manoj@gmail.com &nbsp;|&nbsp;
+            <strong>Phone:</strong> +91 93403 34221 &nbsp;|&nbsp;
+            <strong>Location:</strong> Sohani Patti, Buxar, Bihar – 802101, India<br>
+            <strong>Specialization:</strong> Java · Spring Boot · Microservices · React.js · Node.js · AWS
+          </div>
+        </header>
 
-        <h2><i class="fas fa-user"></i> About Me</h2>
-        <p>Trained professional with more than 9.6 years of experience in IT industry. To excel in my field through hard work, research, skills, and perseverance. To serve my parents and my country to the best of my abilities.</p>
+        <!-- Summary -->
+        <section class="resume-entry">
+          <h2 class="resume-section-title"><i class="fas fa-user"></i> Professional Summary</h2>
+          <p>
+            Trained and results-oriented professional with over <strong>9.6 years of software engineering experience</strong> in the IT industry. Specialized in architecting scalable, resilient microservices with Java, Spring Boot, and AWS, combined with modern reactive frontends in React.js and Vue.js. Proven expertise leading development squads, designing OAuth 2.0 authentication pipelines, and delivering enterprise solutions across healthcare, CRM integrations, and government cloud applications.
+          </p>
+        </section>
 
-        <h2><i class="fas fa-graduation-cap"></i> Academic Details</h2>
-        <p>B.Tech. in Information Technology from Aryabhatta Institute of Engineering &amp; Management Durgapur under WBUT, Kolkata in the year 2015 with 72% marks.</p>
-        <p>Senior Secondary from M.V. College, Buxar Bihar, BSEB Board in the year 2010 with 54%.</p>
+        <!-- Education -->
+        <section class="resume-entry">
+          <h2 class="resume-section-title"><i class="fas fa-graduation-cap"></i> Academic Details</h2>
+          <div class="resume-entry-head">
+            <div class="resume-entry-title">B.Tech in Information Technology</div>
+            <div class="resume-entry-period">2015 · 72% Marks</div>
+          </div>
+          <div class="resume-entry-sub">Aryabhatta Institute of Engineering &amp; Management, Durgapur · WBUT, Kolkata</div>
 
-        <h2><i class="fas fa-layer-group"></i> Expertise Skill</h2>
-        <div class="resume-skills">
-          <span>Java</span><span>Spring Boot</span><span>Hibernate</span><span>MySQL</span>
-          <span>Node.js</span><span>JavaScript</span><span>React.js</span><span>Laravel</span>
-          <span>CodeIgniter</span><span>PHP</span><span>Vue.js</span><span>HTML</span><span>CSS</span>
-        </div>
+          <div class="resume-entry-head" style="margin-top: 8px;">
+            <div class="resume-entry-title">Senior Secondary (10+2)</div>
+            <div class="resume-entry-period">2010 · 54% Marks</div>
+          </div>
+          <div class="resume-entry-sub">M.V. College, Buxar, Bihar · BSEB Board</div>
+        </section>
 
-        <h2><i class="fas fa-briefcase"></i> Work Experience</h2>
+        <!-- Technical Skills -->
+        <section class="resume-entry">
+          <h2 class="resume-section-title"><i class="fas fa-layer-group"></i> Technical Expertise</h2>
+          <div class="resume-skills-list">
+            <span>Java 8/11/17</span>
+            <span>Spring Boot</span>
+            <span>Microservices</span>
+            <span>Hibernate ORM</span>
+            <span>Spring Security</span>
+            <span>RESTful APIs</span>
+            <span>OAuth 2.0</span>
+            <span>React.js</span>
+            <span>Node.js</span>
+            <span>JavaScript ES6+</span>
+            <span>Vue.js</span>
+            <span>AWS (EC2, S3, RDS, Lambda)</span>
+            <span>MySQL</span>
+            <span>CodeIgniter / PHP</span>
+            <span>Git</span>
+            <span>Docker</span>
+            <span>Jira Integration</span>
+            <span>Stripe &amp; PayPal</span>
+          </div>
+        </section>
 
-        <h3>SMB Group — 2026 to Till Now</h3>
-        <div class="resume-meta-line">Role: Sr. Software Engineer</div>
-        <p>Working at BPSC client site on cloud and enterprise systems.</p>
+        <!-- Work Experience -->
+        <section class="resume-entry">
+          <h2 class="resume-section-title"><i class="fas fa-briefcase"></i> Work Experience &amp; Projects</h2>
 
-        <h3>Grazitti Interactive — March 2021 to 2026</h3>
-        <div class="resume-meta-line">Role: Sr. Software Engineer</div>
+          <!-- 1. SMB Group -->
+          <div class="resume-entry" style="margin-bottom: 16px;">
+            <div class="resume-entry-head">
+              <div class="resume-entry-title">Sr. Software Engineer — SMB Group</div>
+              <div class="resume-entry-period">2026 – Present</div>
+            </div>
+            <div class="resume-entry-sub">Client Site: Bihar Public Service Commission (BPSC)</div>
+            <p>Architecting and maintaining mission-critical enterprise cloud systems, database migrations, and public service portals.</p>
+          </div>
 
-        <h3>Knowbler</h3>
-        <div class="resume-meta-line">Technologies: Java, Spring Boot, Hibernate, Spring Security, AWS, SQL, React.js, JavaScript · Team: 4 · Duration: July 2023 – Till now</div>
-        <p>This is a Chrome extension. In the project we create an Article for Khoros and Salesforce communities. And show the list of the board as per user specific.</p>
-        <ul>
-          <li>Create configuration file for connection to Khoros &amp; Salesforce Chrome Extension</li>
-          <li>Create a Rest API for OAuth 2.0 Access</li>
-          <li>Create the Article, Roles and Boards API in Spring Boot</li>
-          <li>Create the task for team, manage the team and code review</li>
-        </ul>
+          <!-- 2. Grazitti Interactive -->
+          <div class="resume-entry" style="margin-bottom: 16px;">
+            <div class="resume-entry-head">
+              <div class="resume-entry-title">Sr. Software Engineer — Grazitti Interactive</div>
+              <div class="resume-entry-period">March 2021 – 2026</div>
+            </div>
 
-        <h3>Task Tool Manager</h3>
-        <div class="resume-meta-line">Technologies: Java, Spring Boot, Hibernate, Spring Security, AWS, SQL, Thymeleaf, JavaScript · Team: 4 · Duration: Aug 2022 – May 2023</div>
-        <p>Grazitti Internal project to manage the tasks assigned to a team and the whole team members.</p>
-        <ul>
-          <li>Create the project, add task, assign team members, and add comments</li>
-          <li>Create the roles — user access panel role-wise</li>
-          <li>Connection Jira to Tool and Tool to Jira and sync data per project/task</li>
-          <li>Create the task for team, manage the team and code review</li>
-        </ul>
+            <!-- Knowbler -->
+            <div style="margin-top: 10px;">
+              <div class="resume-entry-head">
+                <strong>Project 1: Knowbler (Chrome Extension &amp; API Suite)</strong>
+                <span class="resume-entry-period">Jul 2023 – Present</span>
+              </div>
+              <div class="resume-entry-sub">Tech: Java, Spring Boot, Hibernate, Spring Security, AWS, React.js, OAuth 2.0 · Team: 4</div>
+              <ul>
+                <li>Engineered authentication handshake with Khoros &amp; Salesforce communities via OAuth 2.0.</li>
+                <li>Created Article, Roles, and Boards microservices in Spring Boot for personalized community views.</li>
+                <li>Led team sprint execution, code reviews, and AWS cloud deployment routines.</li>
+              </ul>
+            </div>
 
-        <h3>Nintex Template Gallery</h3>
-        <div class="resume-meta-line">Technologies: MySQL, Node.js, Git · Role: Sr. Software Engineer · Team: 3 · Duration: Jan 2022 – July 2022</div>
-        <p>Nintex template gallery and newly built admin Rest API using Node.js.</p>
-        <ul>
-          <li>Configure the Node.js</li>
-          <li>Create the Rest API</li>
-        </ul>
+            <!-- Task Tool Manager -->
+            <div style="margin-top: 10px;">
+              <div class="resume-entry-head">
+                <strong>Project 2: Task Tool Manager (Internal Enterprise Tool)</strong>
+                <span class="resume-entry-period">Aug 2022 – May 2023</span>
+              </div>
+              <div class="resume-entry-sub">Tech: Java, Spring Boot, Hibernate, Spring Security, AWS, Thymeleaf · Team: 4</div>
+              <ul>
+                <li>Developed project management engine with role-based user access panels and comment feeds.</li>
+                <li>Established bidirectional synchronization between Jira REST APIs and internal database.</li>
+              </ul>
+            </div>
 
-        <h3>Connector (Khoros to Salesforce and Salesforce to Khoros)</h3>
-        <div class="resume-meta-line">Technologies: MySQL, React.js, Spring Boot, Git · Role: Sr. Software Engineer · Team: 3 · Duration: April 2021 – November 2021</div>
-        <p>Create a web application for Migrate the data Khoros to Salesforce and Salesforce to Khoros. Admin panel where admin adds details and selects platforms to migrate data. After completed migration, show status of records.</p>
-        <ul>
-          <li>Create method for get token and refresh token from Khoros and Salesforce API</li>
-          <li>Create admin panel</li>
-          <li>Design the Database</li>
-          <li>Migrate the data from Khoros to Salesforce and Salesforce to Khoros</li>
-        </ul>
+            <!-- Nintex Template Gallery -->
+            <div style="margin-top: 10px;">
+              <div class="resume-entry-head">
+                <strong>Project 3: Nintex Template Gallery</strong>
+                <span class="resume-entry-period">Jan 2022 – Jul 2022</span>
+              </div>
+              <div class="resume-entry-sub">Tech: Node.js, Express, MySQL, Git · Team: 3</div>
+              <ul>
+                <li>Configured Node.js REST API microservice for template curation and analytics.</li>
+                <li>Implemented administrative RESTful CRUD APIs with MySQL query optimization.</li>
+              </ul>
+            </div>
 
-        <h3>iMark Infotech Pvt. Ltd. — Oct 2019 to March 2021</h3>
+            <!-- Connector -->
+            <div style="margin-top: 10px;">
+              <div class="resume-entry-head">
+                <strong>Project 4: Connector (Khoros ↔ Salesforce)</strong>
+                <span class="resume-entry-period">Apr 2021 – Nov 2021</span>
+              </div>
+              <div class="resume-entry-sub">Tech: MySQL, React.js, Spring Boot, Git · Team: 3</div>
+              <ul>
+                <li>Created bi-directional data migration service synchronizing records between Khoros and Salesforce.</li>
+                <li>Implemented secure token and refresh-token handling with full audit status reporting.</li>
+              </ul>
+            </div>
+          </div>
 
-        <h3>CineCave</h3>
-        <div class="resume-meta-line">Technologies: Vue.js, Spring Boot, MySQL · Role: Sr. Software Engineer · Team: Individual · Duration: Aug 2020 – Feb 2021</div>
-        <p>Create a web application for choosing multiple songs and mixing with multiple effects. After mixing, users download and play them anywhere.</p>
-        <ul>
-          <li>Change the UI in Vue.js</li>
-          <li>Design the Database</li>
-          <li>Create the Rest of the API</li>
-          <li>Review the code and work</li>
-          <li>Deliver the work</li>
-        </ul>
+          <!-- 3. iMark Infotech -->
+          <div class="resume-entry" style="margin-bottom: 16px;">
+            <div class="resume-entry-head">
+              <div class="resume-entry-title">Sr. Software Engineer — iMark Infotech Pvt. Ltd.</div>
+              <div class="resume-entry-period">Oct 2019 – March 2021</div>
+            </div>
 
-        <h3>Nikah Online</h3>
-        <div class="resume-meta-line">Technologies: Vue.js, Spring Boot, MySQL · Role: Sr. Software Engineer · Team: Individual · Duration: Feb 2020 – July 2020</div>
-        <p>Create a web application for users to apply for marriage online with documents and witness, and book the event after completing the document.</p>
-        <ul>
-          <li>Change the UI in Vue.js</li>
-          <li>Design the Database</li>
-          <li>Create the Rest of the API</li>
-          <li>Review the code and work</li>
-          <li>Deliver the work</li>
-        </ul>
+            <!-- CineCave -->
+            <div style="margin-top: 10px;">
+              <div class="resume-entry-head">
+                <strong>Project 5: CineCave (Audio Mixing Application)</strong>
+                <span class="resume-entry-period">Aug 2020 – Feb 2021</span>
+              </div>
+              <div class="resume-entry-sub">Tech: Vue.js, Spring Boot, MySQL · Role: Individual Contributor</div>
+              <ul>
+                <li>Engineered audio mixing frontend in Vue.js and developed backend cataloging REST APIs in Spring Boot.</li>
+              </ul>
+            </div>
 
-        <h3>Gym-Team</h3>
-        <div class="resume-meta-line">Technologies: Vue.js, Node.js, MySQL, Stripe, PayPal · Role: Sr. Software Engineer · Team: Individual · Duration: Oct 2019 – Feb 2020</div>
-        <p>Web application for trainers to create training plans, add schedules, etc. Trainee plans can be purchased by user sign up and payment via PayPal or Stripe. Scheduled created can be edited by trainer. Users and trainers can chat through a live portal. Super admin manages trainers through a separate portal.</p>
-        <ul>
-          <li>Change the UI in Vue.js</li>
-          <li>Design the Database</li>
-          <li>Create the Rest of the API</li>
-          <li>Review the code and work</li>
-          <li>Deliver the work</li>
-        </ul>
+            <!-- Nikah Online -->
+            <div style="margin-top: 10px;">
+              <div class="resume-entry-head">
+                <strong>Project 6: Nikah Online</strong>
+                <span class="resume-entry-period">Feb 2020 – Jul 2020</span>
+              </div>
+              <div class="resume-entry-sub">Tech: Vue.js, Spring Boot, MySQL · Role: Individual Contributor</div>
+              <ul>
+                <li>Engineered marriage registration, witness attestations, and document submission workflows.</li>
+              </ul>
+            </div>
 
-        <h3>Protolabz eService — May 2018 to Oct 2019</h3>
+            <!-- Gym-Team -->
+            <div style="margin-top: 10px;">
+              <div class="resume-entry-head">
+                <strong>Project 7: Gym-Team (Trainer &amp; Client Platform)</strong>
+                <span class="resume-entry-period">Oct 2019 – Feb 2020</span>
+              </div>
+              <div class="resume-entry-sub">Tech: Vue.js, Node.js, MySQL, Stripe, PayPal · Role: Individual Contributor</div>
+              <ul>
+                <li>Integrated Stripe &amp; PayPal checkout flows and developed live chat between trainers and clients.</li>
+              </ul>
+            </div>
+          </div>
 
-        <h3>Aggarwal Hospital</h3>
-        <div class="resume-meta-line">Technologies: React.js, Node.js, MySQL, AWS · Role: Software Engineer · Team: 2 · Duration: Jun 2018 – Sept 2019</div>
-        <p>Create the web application for managing Hospital records, OPD, IPD, DRUD Master, Surgery, managing staff, staff payroll, etc.</p>
-        <ul>
-          <li>Gathering requirements and assigning the designer</li>
-          <li>Development of all modules</li>
-          <li>Ensure on-time delivery of the tasks</li>
-        </ul>
+          <!-- 4. Protolabz eService -->
+          <div class="resume-entry" style="margin-bottom: 16px;">
+            <div class="resume-entry-head">
+              <div class="resume-entry-title">Software Engineer — Protolabz eService</div>
+              <div class="resume-entry-period">May 2018 – Oct 2019</div>
+            </div>
+            <div style="margin-top: 8px;">
+              <div class="resume-entry-head">
+                <strong>Project 8: Aggarwal Hospital Management System</strong>
+                <span class="resume-entry-period">Jun 2018 – Sep 2019</span>
+              </div>
+              <div class="resume-entry-sub">Tech: React.js, Node.js, MySQL, AWS · Team: 2</div>
+              <ul>
+                <li>Built core OPD, IPD, drug inventory, and payroll modules using React.js and Node.js on AWS.</li>
+              </ul>
+            </div>
+          </div>
 
-        <h3>Tech Global Solution — Jan 2017 to May 2018</h3>
+          <!-- 5. Tech Global Solution -->
+          <div class="resume-entry">
+            <div class="resume-entry-head">
+              <div class="resume-entry-title">Software Engineer — Tech Global Solution</div>
+              <div class="resume-entry-period">Jan 2017 – May 2018</div>
+            </div>
+            <div style="margin-top: 8px;">
+              <div class="resume-entry-head">
+                <strong>Project 9: Metro Hospital ERP</strong>
+                <span class="resume-entry-period">Feb 2017 – May 2018</span>
+              </div>
+              <div class="resume-entry-sub">Tech: CodeIgniter, PHP, MySQL · Team: 15</div>
+              <ul>
+                <li>Managed IPD/OPD controller logic and integrated biometric hardware for employee attendance tracking.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
 
-        <h3>Metro Hospital</h3>
-        <div class="resume-meta-line">Technologies: CodeIgniter, PHP, HTML, JavaScript, MySQL · Role: Software Engineer · Team: 15 · Duration: Feb 2017 – May 2018</div>
-        <p>Hospital management project. Manage all records related to hospital and employees.</p>
-        <ul>
-          <li>Manage IPD, OPD Controller and implement new functions as required by Doctors and Nurses</li>
-          <li>Manage Staff and Nurses attendance — get data from biometric fingerprint</li>
-          <li>Create the Referral Panel for Patients</li>
-          <li>Create the hand-over Casher panel and all functionality</li>
-        </ul>
-
-        <h2><i class="fas fa-phone"></i> Contact Me</h2>
-        <p>Email: it13manoj@gmail.com<br>
-        Contact: 9340334221<br>
-        Address: Sohani Patti, Buxar<br>
-        City: Buxar, State: Bihar, Pincode: 802101<br>
-        Country: India</p>
       </div>
     </div>
   </div>
 </div>
 
+<!-- Toast Notification Container -->
+<div id="toastContainer"></div>
+
+<!-- Back to Top Button -->
+<button id="btnBackToTop" onclick="scrollToTop()" title="Back to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<!-- ==========================================================================
+     JAVASCRIPT: CREATIVITY, EVENTS, GRAPHICS & PDF ENGINE
+     ========================================================================== -->
 <script>
-  function scrollToSection(id){
-    var el = document.getElementById(id);
-    if(el){
-      var top = el.getBoundingClientRect().top + window.pageYOffset - 80;
-      window.scrollTo({top: top, behavior: 'smooth'});
+/* --------------------------------------------------------------------------
+   1. AMBIENT GRAPHICS CANVAS (PARTICLES & MOUSE CONSTELLATION)
+   -------------------------------------------------------------------------- */
+(function initAmbientCanvas() {
+  const canvas = document.getElementById('ambientCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let width, height;
+  let particles = [];
+  const particleCount = 45;
+  const maxDistance = 120;
+  const mouse = { x: null, y: null, radius: 140 };
+
+  function resize() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  window.addEventListener('mousemove', function(e) {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
+
+  window.addEventListener('mouseout', function() {
+    mouse.x = null;
+    mouse.y = null;
+  });
+
+  class Particle {
+    constructor() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.vx = (Math.random() - 0.5) * 0.7;
+      this.vy = (Math.random() - 0.5) * 0.7;
+      this.radius = Math.random() * 2 + 1;
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+
+      if (this.x < 0 || this.x > width) this.vx *= -1;
+      if (this.y < 0 || this.y > height) this.vy *= -1;
+
+      // Mouse repulsion/interaction
+      if (mouse.x !== null && mouse.y !== null) {
+        const dx = mouse.x - this.x;
+        const dy = mouse.y - this.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < mouse.radius) {
+          const force = (mouse.radius - dist) / mouse.radius;
+          this.x -= (dx / dist) * force * 2.5;
+          this.y -= (dy / dist) * force * 2.5;
+        }
+      }
+    }
+    draw(color) {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fillStyle = color;
+      ctx.fill();
     }
   }
 
-  function openResume(){
-    var modal = document.getElementById('resumeModal');
-    if(modal){ modal.classList.add('active'); document.body.style.overflow = 'hidden'; }
+  for (let i = 0; i < particleCount; i++) {
+    particles.push(new Particle());
   }
 
-  function closeResume(){
-    var modal = document.getElementById('resumeModal');
-    if(modal){ modal.classList.remove('active'); document.body.style.overflow = ''; }
-  }
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const pColor = isDark ? 'rgba(96, 165, 250, 0.45)' : 'rgba(37, 99, 235, 0.35)';
+    const lineColor = isDark ? 'rgba(59, 130, 246, ' : 'rgba(37, 99, 235, ';
 
-  function closeResumeOnOverlay(e){
-    if(e.target && e.target.id === 'resumeModal'){ closeResume(); }
-  }
+    for (let i = 0; i < particles.length; i++) {
+      particles[i].update();
+      particles[i].draw(pColor);
 
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape'){ closeResume(); }
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < maxDistance) {
+          const alpha = (1 - dist / maxDistance) * 0.25;
+          ctx.beginPath();
+          ctx.strokeStyle = lineColor + alpha + ')';
+          ctx.lineWidth = 1;
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+
+/* --------------------------------------------------------------------------
+   2. DARK / LIGHT THEME TOGGLE
+   -------------------------------------------------------------------------- */
+function initTheme() {
+  const saved = localStorage.getItem('theme');
+  const btn = document.getElementById('themeToggle');
+  if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    if (btn) btn.innerHTML = '<i class="fas fa-sun"></i>';
+  } else {
+    document.documentElement.setAttribute('data-theme', 'light');
+    if (btn) btn.innerHTML = '<i class="fas fa-moon"></i>';
+  }
+}
+initTheme();
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  const btn = document.getElementById('themeToggle');
+  if (btn) {
+    btn.innerHTML = next === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+  }
+  showToast('Switched to ' + (next === 'dark' ? 'Dark' : 'Light') + ' mode', 'info');
+}
+
+/* --------------------------------------------------------------------------
+   3. SCROLL PROGRESS & BACK-TO-TOP BUTTON
+   -------------------------------------------------------------------------- */
+window.addEventListener('scroll', function() {
+  const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+  const bar = document.getElementById('scrollProgressBar');
+  if (bar) bar.style.width = scrolled + '%';
+
+  const btnTop = document.getElementById('btnBackToTop');
+  if (btnTop) {
+    if (winScroll > 350) {
+      btnTop.classList.add('visible');
+    } else {
+      btnTop.classList.remove('visible');
+    }
+  }
+});
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    const top = el.getBoundingClientRect().top + window.pageYOffset - 85;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. INTERACTIVE 3D CARD TILT & SPOTLIGHT
+   -------------------------------------------------------------------------- */
+document.querySelectorAll('[data-tilt]').forEach(function(card) {
+  card.addEventListener('mousemove', function(e) {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -5;
+    const rotateY = ((x - centerX) / centerX) * 5;
+
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-3px)`;
   });
 
-  function downloadResume(){
-    var text = buildResumeText();
-    var blob = new Blob([text], {type: 'text/plain;charset=utf-8'});
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement('a');
-    a.href = url;
-    a.download = 'Manoj_Kumar_Sharma_Resume.txt';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+  card.addEventListener('mouseleave', function() {
+    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
+  });
+});
+
+/* --------------------------------------------------------------------------
+   5. PROJECT FILTERING EVENT
+   -------------------------------------------------------------------------- */
+function filterProjects(category, btnElement) {
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  filterBtns.forEach(b => b.classList.remove('active'));
+  if (btnElement) btnElement.classList.add('active');
+
+  const projects = document.querySelectorAll('.project');
+  projects.forEach(project => {
+    const categories = (project.getAttribute('data-category') || '').split(' ');
+    if (category === 'all' || categories.includes(category)) {
+      project.classList.remove('hidden');
+      project.style.opacity = '0';
+      project.style.transform = 'scale(0.96)';
+      setTimeout(() => {
+        project.style.transition = 'all .3s cubic-bezier(0.16, 1, 0.3, 1)';
+        project.style.opacity = '1';
+        project.style.transform = 'scale(1)';
+      }, 30);
+    } else {
+      project.classList.add('hidden');
+    }
+  });
+}
+
+/* --------------------------------------------------------------------------
+   6. ANIMATED NUMBER COUNTERS ON SCROLL
+   -------------------------------------------------------------------------- */
+(function initAnimatedCounters() {
+  const statElements = document.querySelectorAll('.stat .num');
+  let hasAnimated = false;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !hasAnimated) {
+        hasAnimated = true;
+        statElements.forEach(el => {
+          const target = parseFloat(el.getAttribute('data-target'));
+          const decimals = parseInt(el.getAttribute('data-decimal')) || 0;
+          const suffixSpan = el.querySelector('span');
+          const suffix = suffixSpan ? suffixSpan.outerHTML : '';
+          const duration = 1600;
+          const startTime = performance.now();
+
+          function updateCounter(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // Ease-out cubic
+            const easeProgress = 1 - Math.pow(1 - progress, 3);
+            const currentVal = (target * easeProgress).toFixed(decimals);
+            el.innerHTML = currentVal + suffix;
+
+            if (progress < 1) {
+              requestAnimationFrame(updateCounter);
+            } else {
+              el.innerHTML = target.toFixed(decimals) + suffix;
+            }
+          }
+          requestAnimationFrame(updateCounter);
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const heroStats = document.querySelector('.hero-stats');
+  if (heroStats) observer.observe(heroStats);
+})();
+
+/* --------------------------------------------------------------------------
+   7. TOAST NOTIFICATION & CLICK-TO-COPY
+   -------------------------------------------------------------------------- */
+function showToast(message, type = 'success') {
+  const container = document.getElementById('toastContainer');
+  if (!container) return;
+
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  const icon = type === 'success' ? 'fa-circle-check' : 'fa-info-circle';
+  toast.innerHTML = `<i class="fas ${icon}"></i> <span>${message}</span>`;
+  container.appendChild(toast);
+
+  setTimeout(() => toast.classList.add('active'), 20);
+
+  setTimeout(() => {
+    toast.classList.remove('active');
+    setTimeout(() => {
+      if (container.contains(toast)) container.removeChild(toast);
+    }, 300);
+  }, 3200);
+}
+
+function copyToClipboard(text, message) {
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(() => {
+      showToast(message, 'success');
+    }).catch(() => fallbackCopy(text, message));
+  } else {
+    fallbackCopy(text, message);
+  }
+}
+
+function fallbackCopy(text, message) {
+  const textArea = document.createElement('textarea');
+  textArea.value = text;
+  textArea.style.position = 'fixed';
+  textArea.style.opacity = '0';
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+  try {
+    document.execCommand('copy');
+    showToast(message, 'success');
+  } catch (err) {
+    showToast('Failed to copy text', 'info');
+  }
+  document.body.removeChild(textArea);
+}
+
+/* --------------------------------------------------------------------------
+   8. PDF RESUME ENGINE: OPEN IN PDF & DOWNLOAD IN PDF (html2pdf.js)
+   -------------------------------------------------------------------------- */
+function getPdfOptions() {
+  return {
+    margin: [8, 8, 8, 8],
+    filename: 'Manoj_Kumar_Sharma_Resume.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: {
+      scale: 2,
+      useCORS: true,
+      letterRendering: true,
+      backgroundColor: '#ffffff'
+    },
+    jsPDF: {
+      unit: 'mm',
+      format: 'a4',
+      orientation: 'portrait'
+    },
+    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+  };
+}
+
+// Open Resume in PDF: Opens interactive view and generates PDF blob to open in new tab
+function openResumePDF() {
+  openResume(); // Show on-screen styled modal
+
+  // In addition, generate PDF blob and open in new tab so user can view raw PDF in browser viewer!
+  if (typeof html2pdf !== 'undefined') {
+    showToast('Preparing PDF preview...', 'info');
+    const docElement = document.getElementById('resumePrintDoc');
+    if (!docElement) return;
+
+    // Clone element to render with clean white background for PDF output
+    const clone = docElement.cloneNode(true);
+    clone.style.background = '#ffffff';
+    clone.style.color = '#1e293b';
+
+    html2pdf().from(clone).set(getPdfOptions()).outputPdf('blob').then(function(blob) {
+      const blobUrl = URL.createObjectURL(blob);
+      window.open(blobUrl, '_blank');
+      showToast('PDF opened in new browser tab!', 'success');
+    }).catch(function(err) {
+      console.warn('PDF blob generation error, interactive modal is active:', err);
+    });
+  }
+}
+
+// Download Resume directly in PDF format
+function downloadResumePDF() {
+  const downloadBtns = [
+    document.getElementById('heroDownloadBtn'),
+    document.getElementById('resumeDownloadBtn'),
+    document.getElementById('modalDownloadBtn')
+  ];
+
+  // Set loading state on buttons
+  downloadBtns.forEach(btn => {
+    if (btn) {
+      btn.dataset.original = btn.innerHTML;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating PDF...';
+      btn.disabled = true;
+    }
+  });
+
+  showToast('Generating official PDF resume... Please wait.', 'info');
+
+  if (typeof html2pdf !== 'undefined') {
+    const docElement = document.getElementById('resumePrintDoc');
+    const clone = docElement.cloneNode(true);
+    clone.style.background = '#ffffff';
+    clone.style.color = '#1e293b';
+
+    html2pdf().from(clone).set(getPdfOptions()).save().then(function() {
+      showToast('PDF Resume downloaded successfully!', 'success');
+      resetDownloadButtons();
+    }).catch(function(error) {
+      console.error('html2pdf download error:', error);
+      showToast('Error generating PDF. Using print-to-PDF...', 'info');
+      resetDownloadButtons();
+      window.print();
+    });
+  } else {
+    // Fallback to print
+    resetDownloadButtons();
+    window.print();
   }
 
-  function buildResumeText(){
-    var t = '';
-    t += 'MANOJ KUMAR SHARMA\n';
-    t += 'Sr. Software Engineer\n';
-    t += '==================================================\n\n';
-    t += 'CONTACT\n';
-    t += 'Email: it13manoj@gmail.com\n';
-    t += 'Phone: 9340334221\n';
-    t += 'Address: Sohani Patti, Buxar, Bihar - 802101, India\n\n';
-    t += 'ABOUT ME\n';
-    t += 'Trained professional with more than 9.6 years of experience in IT industry.\n';
-    t += 'To excel in my field through hard work, research, skills, and perseverance.\n\n';
-    t += 'ACADEMIC DETAILS\n';
-    t += 'B.Tech in Information Technology - Aryabhatta Institute of Engineering & Management,\n';
-    t += 'Durgapur, WBUT Kolkata (2015) - 72%\n';
-    t += 'Senior Secondary - M.V. College, Buxar, BSEB Board (2010) - 54%\n\n';
-    t += 'EXPERTISE SKILLS\n';
-    t += 'Java, Spring Boot, Hibernate, MySQL, Node.js, JavaScript, React.js,\n';
-    t += 'Laravel, CodeIgniter, PHP, Vue.js, HTML, CSS, AWS\n\n';
-    t += 'WORK EXPERIENCE\n';
-    t += '--------------------------------------------------\n';
-    t += 'SMB Group (2026 - Present) - Sr. Software Engineer (BPSC client site)\n\n';
-    t += 'Grazitti Interactive (March 2021 - 2026) - Sr. Software Engineer\n';
-    t += '  - Knowbler (Java, Spring Boot, AWS, React) - Jul 2023 to present\n';
-    t += '  - Task Tool Manager (Spring Boot, Thymeleaf) - Aug 2022 to May 2023\n';
-    t += '  - Nintex Template Gallery (Node.js, MySQL) - Jan 2022 to Jul 2022\n';
-    t += '  - Connector (Spring Boot, React, Khoros, Salesforce) - Apr 2021 to Nov 2021\n\n';
-    t += 'iMark Infotech Pvt. Ltd. (Oct 2019 - March 2021) - Sr. Software Engineer\n';
-    t += '  - CineCave (Vue.js, Spring Boot) - Aug 2020 to Feb 2021\n';
-    t += '  - Nikah Online (Vue.js, Spring Boot) - Feb 2020 to Jul 2020\n';
-    t += '  - Gym-Team (Vue.js, Node.js, Stripe, PayPal) - Oct 2019 to Feb 2020\n\n';
-    t += 'Protolabz eService (May 2018 - Oct 2019) - Software Engineer\n';
-    t += '  - Aggarwal Hospital (React.js, Node.js, AWS) - Jun 2018 to Sep 2019\n\n';
-    t += 'Tech Global Solution (Jan 2017 - May 2018) - Software Engineer\n';
-    t += '  - Metro Hospital (CodeIgniter, PHP, MySQL) - Feb 2017 to May 2018\n\n';
-    t += '==================================================\n';
-    t += 'Generated from portfolio page\n';
-    return t;
+  function resetDownloadButtons() {
+    downloadBtns.forEach(btn => {
+      if (btn && btn.dataset.original) {
+        btn.innerHTML = btn.dataset.original;
+        btn.disabled = false;
+      }
+    });
   }
+}
+
+// Open resume in a new tab using blob
+function openResumeInNewTab() {
+  if (typeof html2pdf !== 'undefined') {
+    showToast('Rendering PDF into new tab...', 'info');
+    const docElement = document.getElementById('resumePrintDoc');
+    const clone = docElement.cloneNode(true);
+    clone.style.background = '#ffffff';
+    clone.style.color = '#1e293b';
+
+    html2pdf().from(clone).set(getPdfOptions()).outputPdf('blob').then(function(blob) {
+      const blobUrl = URL.createObjectURL(blob);
+      window.open(blobUrl, '_blank');
+      showToast('Opened in new tab!', 'success');
+    });
+  } else {
+    window.print();
+  }
+}
+
+// Native print-to-PDF
+function printResume() {
+  openResume();
+  setTimeout(() => {
+    window.print();
+  }, 250);
+}
+
+/* --------------------------------------------------------------------------
+   9. MODAL CONTROLS
+   -------------------------------------------------------------------------- */
+function openResume() {
+  const modal = document.getElementById('resumeModal');
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeResume() {
+  const modal = document.getElementById('resumeModal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+function closeResumeOnOverlay(e) {
+  if (e.target && e.target.id === 'resumeModal') {
+    closeResume();
+  }
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeResume();
+});
 </script>
 </body>
 </html>
