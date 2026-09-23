@@ -634,6 +634,8 @@ body {
   font-size: .8rem;
   line-height: 1.7;
   color: #e2e8f0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .c-kw { color: #f43f5e; font-weight: 600; }
 .c-type { color: #38bdf8; font-weight: 600; }
@@ -646,10 +648,12 @@ body {
 .orbit-showcase-bar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px 14px;
   background: rgba(255, 255, 255, 0.03);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 12px 20px;
+  padding: 12px 18px;
 }
 .orbit-tag {
   display: inline-flex;
@@ -1897,12 +1901,44 @@ body {
 }
 
 /* ==========================================================================
-   RESPONSIVE DESIGN
+   RESPONSIVE DESIGN (ALL DEVICES: DESKTOP, TABLET, MOBILE, COMPACT)
    ========================================================================== */
+
+/* Universal Responsive & Viewport Protection */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Base Mobile Nav Toggle (Desktop Hidden) */
+.btn-mobile-nav {
+  display: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  color: var(--text);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  transition: all .2s ease;
+}
+.btn-mobile-nav:hover, .btn-mobile-nav.active {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: var(--accent-border);
+}
+
+/* 1. TABLET LANDSCAPE & MEDIUM SCREENS (<= 1024px) */
 @media (max-width: 1024px) {
-  .hero { padding: 44px 32px 40px; }
-  .main { padding: 38px 32px 44px; }
-  .footer { padding: 24px 32px; }
+  .hero { padding: 42px 32px 38px; }
+  .main { padding: 36px 28px 40px; }
+  .footer { padding: 24px 28px; }
   .hero-grid { grid-template-columns: 1fr; gap: 36px; }
   .skills-grid { grid-template-columns: repeat(2, 1fr); }
   .about-grid { grid-template-columns: 1fr; }
@@ -1910,33 +1946,266 @@ body {
   .modal-body { padding: 24px 24px 32px; }
 }
 
-@media (max-width: 768px) {
-  body { padding: 12px 10px 32px; }
-  .topnav { padding: 14px 18px; flex-direction: column; gap: 12px; }
-  .topnav-links { justify-content: center; }
-  .hero { padding: 32px 20px 30px; }
-  .main { padding: 30px 18px 36px; }
-  .footer { padding: 22px 18px; flex-direction: column; align-items: flex-start; }
-  .skills-grid, .projects-grid, .edu-grid { grid-template-columns: 1fr; }
-  .about-highlights { grid-template-columns: 1fr; }
-  .tl-item { grid-template-columns: 1fr; gap: 6px; padding: 14px 18px; }
-  .tl-item::before { left: -26px; }
-  .tl-tag { justify-self: start; }
-  .hero-stats { grid-template-columns: 1fr 1fr; }
-  .section-head { flex-direction: column; align-items: flex-start; }
-  .resume-preview { padding: 26px 18px; }
-  .resume-doc { padding: 20px 18px; }
-  .modal-head { padding: 16px 18px; }
-  #floatingDock { bottom: 12px; padding: 4px 10px; }
-  .dock-btn { padding: 6px 10px; font-size: .75rem; }
+/* 2. MOBILE NAVIGATION BREAKPOINT (<= 860px) */
+@media (max-width: 860px) {
+  .topnav {
+    padding: 12px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 90;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+  }
+  .btn-mobile-nav {
+    display: inline-flex;
+  }
+  .topnav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    border-bottom: 1.5px solid var(--border);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.16);
+    flex-direction: column;
+    padding: 14px 18px 20px;
+    gap: 6px;
+    z-index: 91;
+    backdrop-filter: blur(18px);
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  .topnav-links.open {
+    display: flex;
+    animation: slideDownMobileNav 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .nav-link {
+    width: 100%;
+    text-align: left;
+    padding: 11px 16px;
+    font-size: .95rem;
+    border-radius: 10px;
+    color: var(--text);
+  }
+  .nav-link:hover, .nav-link:active {
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+  .nav-actions .btn-resume {
+    display: none; /* Hide heavy navbar PDF buttons on mobile; floating dock & hero handle them */
+  }
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
+@keyframes slideDownMobileNav {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 3. TABLETS & PHABLETS (<= 768px) */
+@media (max-width: 768px) {
+  body {
+    padding: 10px 8px 84px; /* Generous bottom padding so dock never overlaps content */
+  }
+  .hero { padding: 30px 18px 28px; }
+  .hero h1 { font-size: clamp(1.85rem, 5vw, 2.5rem); }
+  .hero h1 .accent-line { font-size: clamp(1.15rem, 3.2vw, 1.65rem); }
+  .main { padding: 26px 16px 32px; }
+  .footer { padding: 22px 18px; flex-direction: column; align-items: flex-start; gap: 14px; }
+  
+  .skills-grid, .edu-grid { grid-template-columns: 1fr; }
+  .about-highlights { grid-template-columns: 1fr; }
+  
+  /* Timeline responsive alignment */
+  .timeline { padding-left: 26px; }
+  .timeline::before { left: 8px; }
+  .tl-item {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 14px 16px;
+  }
+  .tl-item::before { left: -26px; width: 14px; height: 14px; }
+  .tl-tag { justify-self: start; }
+  
+  .hero-stats { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .section-head { flex-direction: column; align-items: flex-start; gap: 8px; }
+  
+  /* System Architecture Blueprint */
+  .arch-container { padding: 18px 14px; }
+  .arch-top-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .arch-status-pill {
+    justify-content: center;
+    font-size: .74rem;
+    padding: 6px 10px;
+  }
+  .arch-mode-toggle {
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .arch-inspector {
+    padding: 16px 14px;
+  }
+  .arch-code-block {
+    padding: 12px 14px;
+    font-size: .75rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Resume Section & Modal */
+  .resume-preview { padding: 26px 16px; }
+  .resume-doc { padding: 18px 14px; font-size: .86rem; }
+  .modal-overlay { padding: 10px; }
+  .modal { max-height: 94vh; }
+  .modal-head { padding: 14px 16px; }
+}
+
+/* 4. LARGE PHONES & SMALL TABLETS (<= 640px) */
+@media (max-width: 640px) {
+  /* Bottom Floating Action Dock */
+  #floatingDock {
+    bottom: 12px;
+    max-width: 96vw;
+    width: max-content;
+    padding: 5px 8px;
+    gap: 5px;
+  }
+  .dock-btn {
+    padding: 7px 10px;
+    font-size: .76rem;
+    gap: 5px;
+  }
+  .dock-divider {
+    height: 14px;
+    margin: 0 1px;
+  }
+
+  /* Project Search & Filter Toolbar */
+  .project-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .project-search-box {
+    max-width: 100%;
+    min-width: unset;
+    width: 100%;
+  }
+  .project-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .filter-btn {
+    padding: 7px 12px;
+    font-size: .78rem;
+  }
+}
+
+/* 5. STANDARD PHONES (<= 480px) */
 @media (max-width: 480px) {
+  body {
+    padding: 8px 6px 88px;
+  }
+  .hero { padding: 22px 14px 22px; }
+  .eyebrow { font-size: 11px; padding: 6px 12px; }
+  .hero-subtitle { font-size: .92rem; line-height: 1.65; }
+  
+  .contact-chips {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .chip {
+    justify-content: center;
+    padding: 9px 12px;
+    font-size: .82rem;
+  }
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .btn-hero {
+    width: 100%;
+    justify-content: center;
+    padding: 11px 16px;
+    font-size: .86rem;
+  }
+  
+  /* Developer Terminal */
+  .dev-terminal-card { border-radius: 14px; }
+  .terminal-header { padding: 8px 10px; gap: 8px; }
+  .terminal-tab { padding: 4px 8px; font-size: .68rem; }
+  .terminal-btn-copy { font-size: .68rem; padding: 2px 7px; }
+  .terminal-body {
+    padding: 14px 12px;
+    font-size: .72rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .orbit-showcase-bar {
+    padding: 10px 12px;
+    gap: 6px 10px;
+  }
+  .orbit-tag { font-size: .7rem; }
+  
+  /* Floating Action Dock: Icon-First Compact Layout */
+  #floatingDock {
+    bottom: 10px;
+    padding: 5px 6px;
+    gap: 3px;
+  }
+  .dock-btn {
+    padding: 7px 8px;
+    font-size: .72rem;
+  }
+  /* On compact screens, hide secondary labels to prevent any overflow */
+  .dock-btn:not(.primary) .dock-text {
+    display: none;
+  }
+  .dock-btn.primary .dock-text {
+    display: inline;
+  }
+
+  /* Modal Dialog */
+  .modal-head {
+    padding: 12px 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .modal-head-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .modal-body {
+    padding: 14px 12px 20px;
+  }
+  .resume-doc {
+    padding: 14px 10px;
+  }
+  .btn-resume {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+/* 6. COMPACT PHONES (<= 360px - e.g. iPhone SE / Fold outer) */
+@media (max-width: 360px) {
   .hero-stats { grid-template-columns: 1fr; }
-  .contact-chips { flex-direction: column; align-items: stretch; }
-  .chip { justify-content: center; }
-  .hero-actions { flex-direction: column; align-items: stretch; }
-  .btn-resume { justify-content: center; width: 100%; }
+  .topnav-brand span:not(.mark) { font-size: .92rem; }
+  .stat .num { font-size: 1.8rem; }
+  .dock-btn { padding: 6px 7px; }
+  .dock-btn.primary .dock-text { font-size: .7rem; }
 }
 </style>
 </head>
@@ -1960,7 +2229,7 @@ body {
       <span class="mark">MK</span>
       <span>Manoj Kumar Sharma</span>
     </a>
-    <div class="topnav-links">
+    <div class="topnav-links" id="topnavLinks">
       <button class="nav-link" onclick="scrollToSection('about')">About</button>
       <button class="nav-link" onclick="scrollToSection('skills')">Skills</button>
       <button class="nav-link" onclick="scrollToSection('architecture')">Architecture</button>
@@ -1979,6 +2248,10 @@ body {
       <!-- Theme Switcher -->
       <button class="btn-theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle Dark / Light Mode">
         <i class="fas fa-moon"></i>
+      </button>
+      <!-- Mobile Hamburger Toggle -->
+      <button class="btn-mobile-nav" id="mobileNavToggle" onclick="toggleMobileNav()" aria-label="Toggle navigation menu" title="Menu">
+        <i class="fas fa-bars"></i>
       </button>
       <!-- Direct Navbar PDF Buttons -->
       <button class="btn-resume outline" onclick="openResumePDF()" title="Open PDF in new tab or viewer">
@@ -2976,23 +3249,23 @@ class KnowblerBridge {
      BOTTOM FLOATING QUICK ACTION DOCK
      ========================================================================== -->
 <div id="floatingDock">
-  <button class="dock-btn primary" onclick="openResumePDF()" title="Open PDF in new tab">
-    <i class="fas fa-file-pdf"></i> Open PDF
+  <button class="dock-btn primary" onclick="openResumePDF()" title="Open PDF in new tab" aria-label="Open PDF Resume">
+    <i class="fas fa-file-pdf"></i> <span class="dock-text">Open PDF</span>
   </button>
-  <button class="dock-btn" onclick="downloadResumePDF()" title="Download PDF directly">
-    <i class="fas fa-download"></i> Download PDF
+  <button class="dock-btn" onclick="downloadResumePDF()" title="Download PDF directly" aria-label="Download PDF Resume">
+    <i class="fas fa-download"></i> <span class="dock-text">Download PDF</span>
   </button>
   <div class="dock-divider"></div>
-  <button class="dock-btn" onclick="scrollToSection('architecture')" title="System Architecture Blueprint">
-    <i class="fas fa-network-wired"></i> Architecture
+  <button class="dock-btn" onclick="scrollToSection('architecture')" title="System Architecture Blueprint" aria-label="Architecture Blueprint">
+    <i class="fas fa-network-wired"></i> <span class="dock-text">Architecture</span>
   </button>
-  <button class="dock-btn" onclick="scrollToSection('contact')" title="Go to contact info">
-    <i class="fas fa-envelope"></i> Contact
+  <button class="dock-btn" onclick="scrollToSection('contact')" title="Go to contact info" aria-label="Contact Information">
+    <i class="fas fa-envelope"></i> <span class="dock-text">Contact</span>
   </button>
-  <button class="dock-btn" onclick="toggleTheme()" title="Toggle Dark/Light">
+  <button class="dock-btn" onclick="toggleTheme()" title="Toggle Dark/Light" aria-label="Toggle Theme">
     <i class="fas fa-circle-half-stroke"></i>
   </button>
-  <button class="dock-btn" onclick="scrollToTop()" title="Scroll to top">
+  <button class="dock-btn" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to Top">
     <i class="fas fa-arrow-up"></i>
   </button>
 </div>
@@ -3157,7 +3430,41 @@ function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+/* Mobile Navigation Handlers */
+function toggleMobileNav() {
+  const links = document.getElementById('topnavLinks');
+  const btn = document.getElementById('mobileNavToggle');
+  if (links) {
+    const isOpen = links.classList.toggle('open');
+    if (btn) {
+      btn.classList.toggle('active', isOpen);
+      btn.innerHTML = isOpen ? '<i class="fas fa-xmark"></i>' : '<i class="fas fa-bars"></i>';
+    }
+  }
+}
+
+function closeMobileNav() {
+  const links = document.getElementById('topnavLinks');
+  const btn = document.getElementById('mobileNavToggle');
+  if (links && links.classList.contains('open')) {
+    links.classList.remove('open');
+    if (btn) {
+      btn.classList.remove('active');
+      btn.innerHTML = '<i class="fas fa-bars"></i>';
+    }
+  }
+}
+
+// Auto-close mobile nav when clicking outside the top navigation
+document.addEventListener('click', function(e) {
+  const topnav = document.querySelector('.topnav');
+  if (topnav && !topnav.contains(e.target)) {
+    closeMobileNav();
+  }
+});
+
 function scrollToSection(id) {
+  closeMobileNav();
   const el = document.getElementById(id);
   if (el) {
     const top = el.getBoundingClientRect().top + window.pageYOffset - 85;
@@ -3166,10 +3473,11 @@ function scrollToSection(id) {
 }
 
 /* --------------------------------------------------------------------------
-   4. 3D CARD TILT EFFECT
+   4. 3D CARD TILT EFFECT (Disabled on touch & small screens for smooth scrolling)
    -------------------------------------------------------------------------- */
 document.querySelectorAll('[data-tilt]').forEach(function(card) {
   card.addEventListener('mousemove', function(e) {
+    if (window.innerWidth <= 768 || (window.matchMedia && window.matchMedia('(hover: none)').matches)) return;
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
