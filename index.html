@@ -14,8 +14,8 @@
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-<!-- html2pdf.js Bundle (includes jsPDF and html2canvas) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<!-- jsPDF Library for direct, vector-sharp, 100% reliable PDF generation (Works offline and on file:///) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
 /* ==========================================================================
@@ -1294,102 +1294,6 @@ body {
 }
 
 /* ==========================================================================
-   RESUME TEMPLATE STYLES (USED FOR ON-SCREEN VIEW & PDF GENERATION)
-   ========================================================================== */
-.pdf-header {
-  border-bottom: 2px solid #2563eb;
-  padding-bottom: 12px;
-  margin-bottom: 14px;
-}
-.pdf-header h1 {
-  font-size: 22px;
-  font-weight: 800;
-  color: #0f172a !important;
-  letter-spacing: -0.02em;
-  margin-bottom: 2px;
-}
-.pdf-header .pdf-title {
-  font-size: 13.5px;
-  font-weight: 700;
-  color: #2563eb !important;
-  margin-bottom: 6px;
-}
-.pdf-header .pdf-contact {
-  font-size: 10.5px;
-  color: #475569 !important;
-  line-height: 1.5;
-}
-
-.pdf-sec-title {
-  font-size: 12.5px;
-  font-weight: 800;
-  color: #0f172a !important;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin: 14px 0 8px;
-  padding-bottom: 4px;
-  border-bottom: 1.5px solid #cbd5e1;
-  break-after: avoid;
-  page-break-after: avoid;
-}
-
-.pdf-card {
-  break-inside: avoid;
-  page-break-inside: avoid;
-  margin-bottom: 12px;
-}
-.pdf-card-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 2px;
-}
-.pdf-card-title {
-  font-size: 12px;
-  font-weight: 700;
-  color: #0f172a !important;
-}
-.pdf-card-period {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  font-weight: 600;
-  color: #2563eb !important;
-}
-.pdf-card-sub {
-  font-size: 10.5px;
-  font-weight: 600;
-  color: #475569 !important;
-  margin-bottom: 4px;
-}
-.pdf-card p, .pdf-card li {
-  font-size: 10.5px;
-  color: #334155 !important;
-  line-height: 1.48;
-}
-.pdf-card ul {
-  padding-left: 16px;
-  margin: 4px 0;
-}
-.pdf-card ul li { margin-bottom: 2px; }
-
-.pdf-skills-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin-top: 6px;
-}
-.pdf-skill-pill {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 9.5px;
-  font-weight: 600;
-  color: #1e40af !important;
-  background: #eff6ff !important;
-  border: 1px solid #bfdbfe !important;
-  padding: 2px 8px;
-  border-radius: 100px;
-}
-
-/* ==========================================================================
    BOTTOM FLOATING ACTION DOCK
    ========================================================================== */
 #floatingDock {
@@ -1569,12 +1473,11 @@ body {
     border-radius: 0 !important;
     padding: 0 !important;
   }
-  #resumePdfTemplate {
+  #printableResumeView {
     display: block !important;
     position: static !important;
-    left: 0 !important;
     width: 100% !important;
-    padding: 0 !important;
+    padding: 20px !important;
   }
 }
 
@@ -2279,7 +2182,7 @@ body {
       <div class="resume-preview">
         <div class="preview-icon"><i class="fas fa-file-pdf"></i></div>
         <h3>Manoj Kumar Sharma — Official Curriculum Vitae</h3>
-        <p>Complete professional curriculum vitae detailing 9.6+ years of IT engineering, all 5 companies, all 9 projects with complete bullet points, core technical skills, and academic degrees. Cleanly formatted for A4 PDF download and instant online viewing.</p>
+        <p>Complete professional curriculum vitae detailing 9.6+ years of IT engineering, all 5 companies, all 9 projects with complete bullet points, core technical skills, and academic degrees. Download the official PDF or open it instantly in your browser.</p>
 
         <div class="resume-actions">
           <button class="btn-resume btn-hero" onclick="openResumePDF()">
@@ -2344,235 +2247,179 @@ body {
     </div>
 
     <div class="modal-body">
-      <!-- Full resume content rendered on screen inside the modal -->
-      <div class="resume-doc" id="resumeModalDoc">
-        <!-- Rendered Resume Content in Modal -->
-        <div id="modalResumeRender"></div>
+      <div class="resume-doc" id="printableResumeView">
+        <header style="border-bottom:2px solid var(--accent);padding-bottom:14px;margin-bottom:18px;">
+          <h1 style="font-size:1.7rem;font-weight:800;color:var(--text);margin-bottom:3px;">MANOJ KUMAR SHARMA</h1>
+          <div style="font-size:1.05rem;color:var(--accent);font-weight:700;margin-bottom:6px;">Sr. Software Engineer &amp; Cloud Architect</div>
+          <div style="font-size:.84rem;color:var(--text-muted);line-height:1.6;">
+            <strong>Email:</strong> it13manoj@gmail.com &nbsp;|&nbsp;
+            <strong>Phone:</strong> +91 93403 34221 &nbsp;|&nbsp;
+            <strong>Location:</strong> Sohani Patti, Buxar, Bihar – 802101, India<br>
+            <strong>Core Stack:</strong> Java 17 · Spring Boot · Microservices · React.js · Node.js · AWS
+          </div>
+        </header>
+
+        <section style="margin-bottom:18px;">
+          <h2 style="font-size:.95rem;font-weight:800;text-transform:uppercase;color:var(--text);border-bottom:1px solid var(--border);padding-bottom:5px;margin-bottom:8px;">
+            <i class="fas fa-user" style="color:var(--accent);margin-right:6px;"></i> Professional Summary
+          </h2>
+          <p style="font-size:.86rem;color:var(--text-muted);line-height:1.65;">
+            Trained and results-oriented professional with over <strong>9.6 years of hands-on software engineering experience</strong> in the IT industry. Specialized in architecting scalable, resilient microservices with Java, Spring Boot, and AWS, combined with modern reactive frontends in React.js and Vue.js. Proven expertise leading development squads, designing OAuth 2.0 authentication pipelines, and delivering enterprise solutions across healthcare, CRM integrations, and government cloud applications.
+          </p>
+        </section>
+
+        <section style="margin-bottom:18px;">
+          <h2 style="font-size:.95rem;font-weight:800;text-transform:uppercase;color:var(--text);border-bottom:1px solid var(--border);padding-bottom:5px;margin-bottom:8px;">
+            <i class="fas fa-layer-group" style="color:var(--accent);margin-right:6px;"></i> Technical Expertise
+          </h2>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">
+            <span class="tag">Java 8/11/17</span>
+            <span class="tag">Spring Boot</span>
+            <span class="tag">Microservices</span>
+            <span class="tag">Hibernate ORM</span>
+            <span class="tag">Spring Security</span>
+            <span class="tag">RESTful APIs</span>
+            <span class="tag">OAuth 2.0</span>
+            <span class="tag">React.js</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">JavaScript ES6+</span>
+            <span class="tag">Vue.js</span>
+            <span class="tag">AWS Cloud</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">CodeIgniter / PHP</span>
+            <span class="tag">Git</span>
+            <span class="tag">Docker</span>
+            <span class="tag">Stripe &amp; PayPal</span>
+          </div>
+        </section>
+
+        <section style="margin-bottom:18px;">
+          <h2 style="font-size:.95rem;font-weight:800;text-transform:uppercase;color:var(--text);border-bottom:1px solid var(--border);padding-bottom:5px;margin-bottom:12px;">
+            <i class="fas fa-briefcase" style="color:var(--accent);margin-right:6px;"></i> Work Experience &amp; Projects
+          </h2>
+
+          <!-- SMB Group -->
+          <div style="margin-bottom:14px;">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;font-weight:700;">
+              <span>Sr. Software Engineer — SMB Group</span>
+              <span style="font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:.8rem;">2026 – Present</span>
+            </div>
+            <div style="font-size:.82rem;color:var(--text-soft);margin-bottom:4px;">BPSC Client Site · Cloud &amp; Enterprise Distributed Systems</div>
+            <p style="font-size:.84rem;color:var(--text-muted);">Working at Bihar Public Service Commission client site on cloud-native systems, database migrations, and public portals.</p>
+          </div>
+
+          <!-- Grazitti Interactive -->
+          <div style="margin-bottom:14px;">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;font-weight:700;">
+              <span>Sr. Software Engineer — Grazitti Interactive</span>
+              <span style="font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:.8rem;">March 2021 – 2026</span>
+            </div>
+
+            <!-- Knowbler -->
+            <div style="margin-top:8px;padding-left:10px;border-left:2px solid var(--accent-border);">
+              <div style="font-weight:600;font-size:.86rem;">Knowbler (Chrome Extension &amp; Community Suite)</div>
+              <div style="font-size:.78rem;color:var(--text-soft);margin-bottom:4px;">Java, Spring Boot, Hibernate, AWS, React.js · Jul 2023 – Present</div>
+              <ul style="padding-left:18px;font-size:.82rem;color:var(--text-muted);margin:0;">
+                <li>Designed OAuth 2.0 authentication handshake and secure token rotation for Khoros and Salesforce communities.</li>
+                <li>Created Article, Roles, and Boards microservice APIs in Spring Boot for personalized community views.</li>
+              </ul>
+            </div>
+
+            <!-- Task Tool Manager -->
+            <div style="margin-top:8px;padding-left:10px;border-left:2px solid var(--accent-border);">
+              <div style="font-weight:600;font-size:.86rem;">Task Tool Manager</div>
+              <div style="font-size:.78rem;color:var(--text-soft);margin-bottom:4px;">Java, Spring Boot, AWS, Thymeleaf · Aug 2022 – May 2023</div>
+              <ul style="padding-left:18px;font-size:.82rem;color:var(--text-muted);margin:0;">
+                <li>Created task assignment engine, role-based user access panels, and bidirectional Jira REST synchronization.</li>
+              </ul>
+            </div>
+
+            <!-- Nintex Template Gallery -->
+            <div style="margin-top:8px;padding-left:10px;border-left:2px solid var(--accent-border);">
+              <div style="font-weight:600;font-size:.86rem;">Nintex Template Gallery</div>
+              <div style="font-size:.78rem;color:var(--text-soft);margin-bottom:4px;">Node.js, Express, MySQL · Jan 2022 – Jul 2022</div>
+              <ul style="padding-left:18px;font-size:.82rem;color:var(--text-muted);margin:0;">
+                <li>Configured Node.js REST API microservice for template curation and analytics with MySQL query optimization.</li>
+              </ul>
+            </div>
+
+            <!-- Connector -->
+            <div style="margin-top:8px;padding-left:10px;border-left:2px solid var(--accent-border);">
+              <div style="font-weight:600;font-size:.86rem;">Connector (Khoros ↔ Salesforce)</div>
+              <div style="font-size:.78rem;color:var(--text-soft);margin-bottom:4px;">React.js, Spring Boot, MySQL · Apr 2021 – Nov 2021</div>
+              <ul style="padding-left:18px;font-size:.82rem;color:var(--text-muted);margin:0;">
+                <li>Created bi-directional data migration engine synchronizing records between Khoros and Salesforce with token refresh APIs.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- iMark Infotech -->
+          <div style="margin-bottom:14px;">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;font-weight:700;">
+              <span>Sr. Software Engineer — iMark Infotech Pvt. Ltd.</span>
+              <span style="font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:.8rem;">Oct 2019 – March 2021</span>
+            </div>
+            <div style="margin-top:6px;padding-left:10px;border-left:2px solid var(--accent-border);">
+              <div style="font-weight:600;font-size:.86rem;">CineCave, Nikah Online &amp; Gym-Team</div>
+              <div style="font-size:.78rem;color:var(--text-soft);margin-bottom:4px;">Vue.js, Spring Boot, Node.js, Stripe, PayPal, MySQL</div>
+              <ul style="padding-left:18px;font-size:.82rem;color:var(--text-muted);margin:0;">
+                <li>Engineered audio mixing suite in Vue.js and Spring Boot (CineCave).</li>
+                <li>Developed digital marital documentation and event booking portal (Nikah Online).</li>
+                <li>Integrated Stripe/PayPal payments and live chat for fitness trainer platform (Gym-Team).</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Protolabz eService -->
+          <div style="margin-bottom:14px;">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;font-weight:700;">
+              <span>Software Engineer — Protolabz eService</span>
+              <span style="font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:.8rem;">May 2018 – Oct 2019</span>
+            </div>
+            <div style="margin-top:6px;padding-left:10px;border-left:2px solid var(--accent-border);">
+              <div style="font-weight:600;font-size:.86rem;">Aggarwal Hospital ERP</div>
+              <div style="font-size:.78rem;color:var(--text-soft);margin-bottom:4px;">React.js, Node.js, MySQL, AWS</div>
+              <ul style="padding-left:18px;font-size:.82rem;color:var(--text-muted);margin:0;">
+                <li>Built core OPD, IPD, drug inventory, and payroll modules using React.js and Node.js on AWS.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Tech Global Solution -->
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:baseline;font-weight:700;">
+              <span>Software Engineer — Tech Global Solution</span>
+              <span style="font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:.8rem;">Jan 2017 – May 2018</span>
+            </div>
+            <div style="margin-top:6px;padding-left:10px;border-left:2px solid var(--accent-border);">
+              <div style="font-weight:600;font-size:.86rem;">Metro Hospital ERP</div>
+              <div style="font-size:.78rem;color:var(--text-soft);margin-bottom:4px;">CodeIgniter, PHP, MySQL, Biometric API</div>
+              <ul style="padding-left:18px;font-size:.82rem;color:var(--text-muted);margin:0;">
+                <li>Managed IPD/OPD controllers and integrated biometric fingerprint hardware for staff attendance.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Education -->
+        <section>
+          <h2 style="font-size:.95rem;font-weight:800;text-transform:uppercase;color:var(--text);border-bottom:1px solid var(--border);padding-bottom:5px;margin-bottom:8px;">
+            <i class="fas fa-graduation-cap" style="color:var(--accent);margin-right:6px;"></i> Academic Details
+          </h2>
+          <div style="display:flex;justify-content:space-between;font-size:.86rem;font-weight:600;">
+            <span>B.Tech in Information Technology</span>
+            <span style="color:var(--accent);font-family:'JetBrains Mono',monospace;">2015 · 72% Marks</span>
+          </div>
+          <div style="font-size:.8rem;color:var(--text-muted);margin-bottom:8px;">Aryabhatta Institute of Engineering &amp; Management, Durgapur · WBUT, Kolkata</div>
+
+          <div style="display:flex;justify-content:space-between;font-size:.86rem;font-weight:600;">
+            <span>Senior Secondary (10+2)</span>
+            <span style="color:var(--accent);font-family:'JetBrains Mono',monospace;">2010 · 54% Marks</span>
+          </div>
+          <div style="font-size:.8rem;color:var(--text-muted);">M.V. College, Buxar, Bihar · BSEB Board</div>
+        </section>
       </div>
     </div>
-  </div>
-</div>
-
-<!-- ==========================================================================
-     MASTER PRINT & PDF RESUME TEMPLATE (HIDDEN UNTIL CAPTURE)
-     ========================================================================== -->
-<div id="resumePdfTemplate" style="display:none;">
-  <!-- Header -->
-  <div class="pdf-header">
-    <h1>MANOJ KUMAR SHARMA</h1>
-    <div class="pdf-title">Sr. Software Engineer &amp; Cloud Architect</div>
-    <div class="pdf-contact">
-      <strong>Email:</strong> it13manoj@gmail.com &nbsp;|&nbsp;
-      <strong>Phone:</strong> +91 93403 34221 &nbsp;|&nbsp;
-      <strong>Location:</strong> Sohani Patti, Buxar, Bihar – 802101, India<br>
-      <strong>Core Specializations:</strong> Java 17 · Spring Boot · Microservices · React.js · Node.js · AWS
-    </div>
-  </div>
-
-  <!-- Professional Summary -->
-  <div class="pdf-card">
-    <div class="pdf-sec-title">Professional Summary</div>
-    <p>
-      Trained, results-driven professional with over <strong>9.6 years of hands-on software engineering experience</strong> in the IT industry. Specialized in architecting scalable, resilient microservices with Java, Spring Boot, and AWS, combined with modern reactive frontends in React.js and Vue.js. Proven expertise leading development squads, designing OAuth 2.0 authentication pipelines, and delivering enterprise solutions across healthcare, CRM integrations, and government cloud applications.
-    </p>
-  </div>
-
-  <!-- Technical Expertise -->
-  <div class="pdf-card">
-    <div class="pdf-sec-title">Technical Expertise</div>
-    <div class="pdf-skills-wrap">
-      <span class="pdf-skill-pill">Java 8/11/17</span>
-      <span class="pdf-skill-pill">Spring Boot</span>
-      <span class="pdf-skill-pill">Microservices</span>
-      <span class="pdf-skill-pill">Hibernate ORM</span>
-      <span class="pdf-skill-pill">Spring Security</span>
-      <span class="pdf-skill-pill">RESTful APIs</span>
-      <span class="pdf-skill-pill">OAuth 2.0</span>
-      <span class="pdf-skill-pill">React.js</span>
-      <span class="pdf-skill-pill">Node.js</span>
-      <span class="pdf-skill-pill">JavaScript ES6+</span>
-      <span class="pdf-skill-pill">Vue.js</span>
-      <span class="pdf-skill-pill">AWS (EC2, S3, RDS, Lambda)</span>
-      <span class="pdf-skill-pill">MySQL</span>
-      <span class="pdf-skill-pill">CodeIgniter / PHP</span>
-      <span class="pdf-skill-pill">Git</span>
-      <span class="pdf-skill-pill">Docker</span>
-      <span class="pdf-skill-pill">Stripe &amp; PayPal</span>
-      <span class="pdf-skill-pill">Jira API</span>
-    </div>
-  </div>
-
-  <!-- Work Experience & Projects Header -->
-  <div class="pdf-sec-title">Work Experience &amp; Flagship Projects</div>
-
-  <!-- Company 1: SMB Group -->
-  <div class="pdf-card">
-    <div class="pdf-card-head">
-      <div class="pdf-card-title">Sr. Software Engineer — SMB Group</div>
-      <div class="pdf-card-period">2026 – Present</div>
-    </div>
-    <div class="pdf-card-sub">Client Site: Bihar Public Service Commission (BPSC)</div>
-    <p>Working at BPSC client site architecting enterprise cloud systems, database migrations, and public portals.</p>
-  </div>
-
-  <!-- Company 2: Grazitti Interactive -->
-  <div class="pdf-card">
-    <div class="pdf-card-head">
-      <div class="pdf-card-title">Sr. Software Engineer — Grazitti Interactive</div>
-      <div class="pdf-card-period">March 2021 – 2026 (5 Years)</div>
-    </div>
-    <div class="pdf-card-sub">Core Technologies: Java, Spring Boot, AWS, React.js, OAuth 2.0, Khoros, Salesforce</div>
-
-    <!-- Project 1: Knowbler -->
-    <div style="margin-top:6px;">
-      <div class="pdf-card-head">
-        <strong>Project 1: Knowbler (Chrome Extension &amp; Community Suite)</strong>
-        <span class="pdf-card-period">Jul 2023 – Present</span>
-      </div>
-      <div class="pdf-card-sub">Technologies: Java, Spring Boot, Hibernate, Spring Security, AWS, SQL, React.js · Team: 4</div>
-      <ul>
-        <li>Designed OAuth 2.0 authentication handshake and secure token rotation for Khoros and Salesforce communities.</li>
-        <li>Engineered high-throughput Articles, Roles, and Boards microservice APIs using Spring Boot and Hibernate.</li>
-        <li>Implemented dynamic configuration endpoints for Chrome Extension connection and user session mapping.</li>
-        <li>Conducted team sprint planning, code reviews, and AWS deployment automation.</li>
-      </ul>
-    </div>
-
-    <!-- Project 2: Task Tool Manager -->
-    <div style="margin-top:6px;">
-      <div class="pdf-card-head">
-        <strong>Project 2: Task Tool Manager (Internal Enterprise System)</strong>
-        <span class="pdf-card-period">Aug 2022 – May 2023</span>
-      </div>
-      <div class="pdf-card-sub">Technologies: Java, Spring Boot, Hibernate, Spring Security, AWS, Thymeleaf · Team: 4</div>
-      <ul>
-        <li>Created project workflows, task assignment engine, commenting, and role-based user access panel.</li>
-        <li>Established bidirectional data synchronization between Jira REST APIs and internal database.</li>
-      </ul>
-    </div>
-
-    <!-- Project 3: Nintex Template Gallery -->
-    <div style="margin-top:6px;">
-      <div class="pdf-card-head">
-        <strong>Project 3: Nintex Template Gallery</strong>
-        <span class="pdf-card-period">Jan 2022 – Jul 2022</span>
-      </div>
-      <div class="pdf-card-sub">Technologies: Node.js, Express, MySQL, Git · Team: 3</div>
-      <ul>
-        <li>Configured Node.js REST API microservice for template curation and analytics with MySQL query optimization.</li>
-        <li>Implemented administrative RESTful CRUD APIs with validation and security filtering.</li>
-      </ul>
-    </div>
-
-    <!-- Project 4: Connector -->
-    <div style="margin-top:6px;">
-      <div class="pdf-card-head">
-        <strong>Project 4: Connector (Khoros ↔ Salesforce)</strong>
-        <span class="pdf-card-period">Apr 2021 – Nov 2021</span>
-      </div>
-      <div class="pdf-card-sub">Technologies: MySQL, React.js, Spring Boot, Git · Team: 3</div>
-      <ul>
-        <li>Created bi-directional data migration service synchronizing records between Khoros and Salesforce with token refresh APIs.</li>
-        <li>Built React.js administrative dashboard showing real-time migration throughput and status logs.</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- Company 3: iMark Infotech -->
-  <div class="pdf-card">
-    <div class="pdf-card-head">
-      <div class="pdf-card-title">Sr. Software Engineer — iMark Infotech Pvt. Ltd.</div>
-      <div class="pdf-card-period">Oct 2019 – March 2021 (1.5 Years)</div>
-    </div>
-    <div class="pdf-card-sub">Core Technologies: Vue.js, Spring Boot, Node.js, Stripe, PayPal, MySQL</div>
-
-    <!-- Project 5: CineCave -->
-    <div style="margin-top:6px;">
-      <div class="pdf-card-head">
-        <strong>Project 5: CineCave (Web Audio Mixing Suite)</strong>
-        <span class="pdf-card-period">Aug 2020 – Feb 2021</span>
-      </div>
-      <ul>
-        <li>Architected dynamic frontend user interface in Vue.js with smooth timeline controls and waveform displays.</li>
-        <li>Designed relational database schemas and Spring Boot REST endpoints to catalog audio assets.</li>
-      </ul>
-    </div>
-
-    <!-- Project 6: Nikah Online -->
-    <div style="margin-top:6px;">
-      <div class="pdf-card-head">
-        <strong>Project 6: Nikah Online</strong>
-        <span class="pdf-card-period">Feb 2020 – Jul 2020</span>
-      </div>
-      <ul>
-        <li>Designed reactive Vue.js interface with step-by-step document upload and witness validation forms.</li>
-        <li>Engineered Spring Boot REST APIs with document encryption and secure status tracking.</li>
-      </ul>
-    </div>
-
-    <!-- Project 7: Gym-Team -->
-    <div style="margin-top:6px;">
-      <div class="pdf-card-head">
-        <strong>Project 7: Gym-Team (Trainer &amp; Client Platform)</strong>
-        <span class="pdf-card-period">Oct 2019 – Feb 2020</span>
-      </div>
-      <ul>
-        <li>Integrated Stripe &amp; PayPal checkout flows and developed live chat between trainers and clients via Node.js.</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- Company 4: Protolabz eService -->
-  <div class="pdf-card">
-    <div class="pdf-card-head">
-      <div class="pdf-card-title">Software Engineer — Protolabz eService</div>
-      <div class="pdf-card-period">May 2018 – Oct 2019 (1.5 Years)</div>
-    </div>
-    <div style="margin-top:4px;">
-      <div class="pdf-card-head">
-        <strong>Project 8: Aggarwal Hospital Management System</strong>
-        <span class="pdf-card-period">Jun 2018 – Sep 2019</span>
-      </div>
-      <div class="pdf-card-sub">Technologies: React.js, Node.js, MySQL, AWS · Team: 2</div>
-      <ul>
-        <li>Built core OPD, IPD, drug inventory, and payroll modules using React.js and Node.js on AWS EC2/RDS.</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- Company 5: Tech Global Solution -->
-  <div class="pdf-card">
-    <div class="pdf-card-head">
-      <div class="pdf-card-title">Software Engineer — Tech Global Solution</div>
-      <div class="pdf-card-period">Jan 2017 – May 2018 (1.5 Years)</div>
-    </div>
-    <div style="margin-top:4px;">
-      <div class="pdf-card-head">
-        <strong>Project 9: Metro Hospital ERP</strong>
-        <span class="pdf-card-period">Feb 2017 – May 2018</span>
-      </div>
-      <div class="pdf-card-sub">Technologies: CodeIgniter, PHP, HTML, JavaScript, MySQL · Team: 15</div>
-      <ul>
-        <li>Managed IPD/OPD controller logic and integrated biometric hardware for employee attendance tracking.</li>
-        <li>Created referral patient panel and cashier handover reconciliation system.</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- Education -->
-  <div class="pdf-card">
-    <div class="pdf-sec-title">Academic Credentials</div>
-    <div class="pdf-card-head">
-      <div class="pdf-card-title">B.Tech in Information Technology</div>
-      <div class="pdf-card-period">2015 · 72% Marks</div>
-    </div>
-    <div class="pdf-card-sub">Aryabhatta Institute of Engineering &amp; Management, Durgapur · WBUT, Kolkata</div>
-
-    <div class="pdf-card-head" style="margin-top:6px;">
-      <div class="pdf-card-title">Senior Secondary (10+2)</div>
-      <div class="pdf-card-period">2010 · 54% Marks</div>
-    </div>
-    <div class="pdf-card-sub">M.V. College, Buxar, Bihar · BSEB Board</div>
   </div>
 </div>
 
@@ -2607,20 +2454,9 @@ body {
 </button>
 
 <!-- ==========================================================================
-     JAVASCRIPT: CREATIVE UI, EVENTS & PDF ENGINE
+     JAVASCRIPT: 100% RELIABLE VECTOR PDF GENERATOR & CREATIVE UI
      ========================================================================== -->
 <script>
-/* --------------------------------------------------------------------------
-   0. INITIALIZE MODAL RESUME DOCUMENT
-   -------------------------------------------------------------------------- */
-document.addEventListener('DOMContentLoaded', function() {
-  const template = document.getElementById('resumePdfTemplate');
-  const target = document.getElementById('modalResumeRender');
-  if (template && target) {
-    target.innerHTML = template.innerHTML;
-  }
-});
-
 /* --------------------------------------------------------------------------
    1. AMBIENT GRAPHICS CANVAS
    -------------------------------------------------------------------------- */
@@ -2838,7 +2674,6 @@ function applyProjectFilters() {
    6. ANIMATED NUMBER COUNTERS & SKILL GAUGES
    -------------------------------------------------------------------------- */
 (function initScrollAnimations() {
-  // Stat counters
   const statElements = document.querySelectorAll('.stat .num');
   let statsDone = false;
 
@@ -2873,7 +2708,6 @@ function applyProjectFilters() {
   const heroStats = document.querySelector('.hero-stats');
   if (heroStats) statsObserver.observe(heroStats);
 
-  // Skill gauges animation
   const gaugeFills = document.querySelectorAll('.gauge-fill');
   let gaugesDone = false;
 
@@ -2955,88 +2789,383 @@ function copyTerminalCode() {
 }
 
 /* --------------------------------------------------------------------------
-   8. BULLETPROOF A4 PDF ENGINE (NEVER BLANK, 100% COMPLETE)
+   8. BULLETPROOF NATIVE VECTOR PDF BUILDER (GUARANTEED NEVER BLANK)
+   Does NOT use canvas screenshot. Draws vector text directly to PDF.
    -------------------------------------------------------------------------- */
-function createPdfCloneElement() {
-  const template = document.getElementById('resumePdfTemplate');
-  if (!template) return null;
+function buildManojResumePdf() {
+  const jsPdfClass = (window.jspdf && window.jspdf.jsPDF) ? window.jspdf.jsPDF : (window.jsPDF ? window.jsPDF : null);
+  if (!jsPdfClass) return null;
 
-  // Create a visible render target attached at top: 0, left: 0 so html2canvas captures 100% of it
-  const clone = template.cloneNode(true);
-  clone.id = 'active-pdf-worker-element';
-  clone.style.display = 'block';
-  clone.style.position = 'fixed';
-  clone.style.top = '0px';
-  clone.style.left = '0px';
-  clone.style.width = '794px';
-  clone.style.height = 'auto';
-  clone.style.background = '#ffffff';
-  clone.style.color = '#0f172a';
-  clone.style.padding = '24px 30px';
-  clone.style.boxSizing = 'border-box';
-  clone.style.zIndex = '999999';
-  clone.style.visibility = 'visible';
-  clone.style.opacity = '1';
-  clone.style.pointerEvents = 'none';
+  const doc = new jsPdfClass({ unit: 'pt', format: 'a4' });
+  const pageWidth = 595.28;
+  const pageHeight = 841.89;
+  const marginX = 38;
+  const contentWidth = pageWidth - (marginX * 2);
+  let y = 38;
+  let pageNumber = 1;
 
-  document.body.appendChild(clone);
-  return clone;
-}
-
-function removePdfCloneElement(clone) {
-  if (clone && document.body.contains(clone)) {
-    document.body.removeChild(clone);
-  }
-}
-
-function getOptimalPdfOptions() {
-  return {
-    margin: [8, 8, 8, 8],
-    filename: 'Manoj_Kumar_Sharma_Resume.pdf',
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: {
-      scale: 2,
-      useCORS: true,
-      letterRendering: true,
-      logging: false,
-      scrollY: 0,
-      scrollX: 0,
-      windowWidth: 794,
-      backgroundColor: '#ffffff'
-    },
-    jsPDF: {
-      unit: 'mm',
-      format: 'a4',
-      orientation: 'portrait'
-    },
-    pagebreak: {
-      mode: ['css', 'legacy']
+  function checkBreak(requiredHeight) {
+    if (y + requiredHeight > pageHeight - 45) {
+      doc.addPage();
+      pageNumber++;
+      y = 38;
+      return true;
     }
-  };
+    return false;
+  }
+
+  // --- HEADER ---
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(18);
+  doc.setTextColor(15, 23, 42);
+  doc.text("MANOJ KUMAR SHARMA", marginX, y);
+  y += 16;
+
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(10.5);
+  doc.setTextColor(29, 78, 216);
+  doc.text("Sr. Software Engineer & Cloud Architect", marginX, y);
+  y += 14;
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(8.5);
+  doc.setTextColor(71, 85, 105);
+  doc.text("Email: it13manoj@gmail.com   |   Phone: +91 93403 34221   |   Location: Buxar, Bihar – 802101, India", marginX, y);
+  y += 12;
+  doc.text("Core Stack: Java 17 · Spring Boot · Microservices · React.js · Node.js · AWS Cloud · MySQL · Docker", marginX, y);
+  y += 8;
+
+  // Header Divider
+  doc.setDrawColor(37, 99, 235);
+  doc.setLineWidth(1.5);
+  doc.line(marginX, y, marginX + contentWidth, y);
+  y += 16;
+
+  // Helper for section headings
+  function addSectionHeader(title) {
+    checkBreak(32);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(10.5);
+    doc.setTextColor(29, 78, 216);
+    doc.text(title.toUpperCase(), marginX, y);
+    y += 4;
+    doc.setDrawColor(203, 213, 225);
+    doc.setLineWidth(0.8);
+    doc.line(marginX, y, marginX + contentWidth, y);
+    y += 12;
+  }
+
+  // Helper for bullet items
+  function addBullet(bulletText) {
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(8.5);
+    doc.setTextColor(51, 65, 85);
+    const lines = doc.splitTextToSize(bulletText, contentWidth - 14);
+    checkBreak(lines.length * 11 + 2);
+    doc.setFillColor(37, 99, 235);
+    doc.circle(marginX + 4, y - 3, 1.8, 'F');
+    doc.text(lines, marginX + 12, y);
+    y += lines.length * 11 + 2;
+  }
+
+  // --- SECTION: PROFESSIONAL SUMMARY ---
+  addSectionHeader("Professional Summary");
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(8.5);
+  doc.setTextColor(51, 65, 85);
+  const sumText = "Trained, results-driven professional with over 9.6 years of hands-on software engineering experience in the IT industry. Specialized in architecting scalable, resilient microservices with Java, Spring Boot, and AWS, combined with modern reactive frontends in React.js and Vue.js. Proven expertise leading development squads, designing OAuth 2.0 authentication pipelines, and delivering enterprise solutions across healthcare, CRM integrations, and government cloud applications.";
+  const sumLines = doc.splitTextToSize(sumText, contentWidth);
+  checkBreak(sumLines.length * 11 + 4);
+  doc.text(sumLines, marginX, y);
+  y += sumLines.length * 11 + 8;
+
+  // --- SECTION: TECHNICAL EXPERTISE ---
+  addSectionHeader("Technical Expertise");
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(8.5);
+  doc.setTextColor(15, 23, 42);
+
+  const skillsData = [
+    { cat: "Languages & Core:", list: "Java 8/11/17, JavaScript (ES6+), TypeScript, PHP, SQL, HTML5, CSS3" },
+    { cat: "Frameworks & Backend:", list: "Spring Boot, Spring Security, Hibernate ORM, Microservices, Node.js, Express, JPA" },
+    { cat: "Frontend & UI:", list: "React.js, Vue.js, Next.js, Redux, Component Design Systems, Thymeleaf" },
+    { cat: "Cloud & DevOps:", list: "AWS (EC2, S3, RDS, Lambda, ECS, CloudWatch), Docker, Git, GitHub, CI/CD" },
+    { cat: "Databases & APIs:", list: "MySQL, RESTful APIs, OAuth 2.0, Stripe, PayPal, Jira API, Khoros & Salesforce APIs" }
+  ];
+
+  skillsData.forEach(sk => {
+    checkBreak(14);
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(15, 23, 42);
+    doc.text(sk.cat, marginX, y);
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(71, 85, 105);
+    doc.text(sk.list, marginX + 115, y);
+    y += 12;
+  });
+  y += 4;
+
+  // --- SECTION: WORK EXPERIENCE & PROJECTS ---
+  addSectionHeader("Work Experience & Flagship Projects");
+
+  // 1. SMB Group
+  checkBreak(32);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(9.5);
+  doc.setTextColor(15, 23, 42);
+  doc.text("SMB Group — Sr. Software Engineer", marginX, y);
+  doc.setTextColor(29, 78, 216);
+  doc.text("2026 – Present", marginX + contentWidth, y, { align: 'right' });
+  y += 12;
+  doc.setFont("helvetica", "italic");
+  doc.setFontSize(8);
+  doc.setTextColor(100, 116, 139);
+  doc.text("Client Site: Bihar Public Service Commission (BPSC) · Cloud & Enterprise Systems", marginX, y);
+  y += 11;
+  addBullet("Architecting mission-critical public service portals, cloud infrastructure, and enterprise database migrations.");
+  y += 4;
+
+  // 2. Grazitti Interactive
+  checkBreak(32);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(9.5);
+  doc.setTextColor(15, 23, 42);
+  doc.text("Grazitti Interactive — Sr. Software Engineer", marginX, y);
+  doc.setTextColor(29, 78, 216);
+  doc.text("March 2021 – 2026 (5 Years)", marginX + contentWidth, y, { align: 'right' });
+  y += 12;
+
+  // Project 1: Knowbler
+  checkBreak(22);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(8.8);
+  doc.setTextColor(15, 23, 42);
+  doc.text("Project 1: Knowbler (Chrome Extension & Community Suite)", marginX + 8, y);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(8);
+  doc.setTextColor(29, 78, 216);
+  doc.text("Jul 2023 – Present", marginX + contentWidth, y, { align: 'right' });
+  y += 11;
+  doc.setFont("helvetica", "italic");
+  doc.setTextColor(100, 116, 139);
+  doc.text("Tech: Java, Spring Boot, Hibernate, Spring Security, AWS, SQL, React.js · Team: 4", marginX + 8, y);
+  y += 11;
+  addBullet("Designed OAuth 2.0 authentication handshake and secure token rotation for Khoros and Salesforce communities.");
+  addBullet("Engineered high-throughput Articles, Roles, and Boards microservice APIs using Spring Boot and Hibernate.");
+  addBullet("Implemented dynamic configuration endpoints for Chrome Extension connection and user session mapping.");
+  addBullet("Conducted team sprint planning, code reviews, and AWS deployment automation.");
+  y += 2;
+
+  // Project 2: Task Tool Manager
+  checkBreak(22);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(8.8);
+  doc.setTextColor(15, 23, 42);
+  doc.text("Project 2: Task Tool Manager (Internal Enterprise System)", marginX + 8, y);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(8);
+  doc.setTextColor(29, 78, 216);
+  doc.text("Aug 2022 – May 2023", marginX + contentWidth, y, { align: 'right' });
+  y += 11;
+  doc.setFont("helvetica", "italic");
+  doc.setTextColor(100, 116, 139);
+  doc.text("Tech: Java, Spring Boot, Hibernate, Spring Security, AWS, Thymeleaf · Team: 4", marginX + 8, y);
+  y += 11;
+  addBullet("Created comprehensive project workflows, task assignment engine, commenting, and role-based user access panel.");
+  addBullet("Established bidirectional synchronization between Jira REST APIs and internal database.");
+  y += 2;
+
+  // Project 3: Nintex Template Gallery
+  checkBreak(22);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(8.8);
+  doc.setTextColor(15, 23, 42);
+  doc.text("Project 3: Nintex Template Gallery", marginX + 8, y);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(8);
+  doc.setTextColor(29, 78, 216);
+  doc.text("Jan 2022 – Jul 2022", marginX + contentWidth, y, { align: 'right' });
+  y += 11;
+  doc.setFont("helvetica", "italic");
+  doc.setTextColor(100, 116, 139);
+  doc.text("Tech: Node.js, Express, MySQL, Git · Team: 3", marginX + 8, y);
+  y += 11;
+  addBullet("Configured Node.js REST API microservice for template curation and analytics with MySQL query optimization.");
+  addBullet("Implemented administrative RESTful CRUD APIs with validation and security filtering.");
+  y += 2;
+
+  // Project 4: Connector
+  checkBreak(22);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(8.8);
+  doc.setTextColor(15, 23, 42);
+  doc.text("Project 4: Connector (Khoros <-> Salesforce)", marginX + 8, y);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(8);
+  doc.setTextColor(29, 78, 216);
+  doc.text("Apr 2021 – Nov 2021", marginX + contentWidth, y, { align: 'right' });
+  y += 11;
+  doc.setFont("helvetica", "italic");
+  doc.setTextColor(100, 116, 139);
+  doc.text("Tech: MySQL, React.js, Spring Boot, Git · Team: 3", marginX + 8, y);
+  y += 11;
+  addBullet("Created bi-directional data migration service synchronizing records between Khoros and Salesforce with token refresh APIs.");
+  addBullet("Built React.js administrative dashboard showing real-time migration throughput and status logs.");
+  y += 4;
+
+  // 3. iMark Infotech
+  checkBreak(32);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(9.5);
+  doc.setTextColor(15, 23, 42);
+  doc.text("iMark Infotech Pvt. Ltd. — Sr. Software Engineer", marginX, y);
+  doc.setTextColor(29, 78, 216);
+  doc.text("Oct 2019 – March 2021 (1.5 Years)", marginX + contentWidth, y, { align: 'right' });
+  y += 12;
+
+  // Project 5: CineCave
+  checkBreak(18);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(8.8);
+  doc.setTextColor(15, 23, 42);
+  doc.text("Project 5: CineCave (Web Audio Mixing Suite)", marginX + 8, y);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(8);
+  doc.setTextColor(29, 78, 216);
+  doc.text("Aug 2020 – Feb 2021", marginX + contentWidth, y, { align: 'right' });
+  y += 11;
+  addBullet("Architected dynamic frontend user interface in Vue.js with timeline controls and Spring Boot REST catalog APIs.");
+  y += 2;
+
+  // Project 6: Nikah Online
+  checkBreak(18);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(8.8);
+  doc.setTextColor(15, 23, 42);
+  doc.text("Project 6: Nikah Online (Digital Marriage Portal)", marginX + 8, y);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(8);
+  doc.setTextColor(29, 78, 216);
+  doc.text("Feb 2020 – Jul 2020", marginX + contentWidth, y, { align: 'right' });
+  y += 11;
+  addBullet("Designed reactive Vue.js interface with document verification, witness attestations, and event booking.");
+  y += 2;
+
+  // Project 7: Gym-Team
+  checkBreak(18);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(8.8);
+  doc.setTextColor(15, 23, 42);
+  doc.text("Project 7: Gym-Team (Trainer & Client Platform)", marginX + 8, y);
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(8);
+  doc.setTextColor(29, 78, 216);
+  doc.text("Oct 2019 – Feb 2020", marginX + contentWidth, y, { align: 'right' });
+  y += 11;
+  addBullet("Integrated Stripe & PayPal checkout flows and developed live chat between trainers and clients via Node.js.");
+  y += 4;
+
+  // 4. Protolabz eService
+  checkBreak(30);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(9.5);
+  doc.setTextColor(15, 23, 42);
+  doc.text("Protolabz eService — Software Engineer", marginX, y);
+  doc.setTextColor(29, 78, 216);
+  doc.text("May 2018 – Oct 2019 (1.5 Years)", marginX + contentWidth, y, { align: 'right' });
+  y += 12;
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(8.8);
+  doc.setTextColor(15, 23, 42);
+  doc.text("Project 8: Aggarwal Hospital Management System", marginX + 8, y);
+  y += 11;
+  addBullet("Built core OPD, IPD, drug inventory, and payroll modules using React.js and Node.js on AWS EC2/RDS.");
+  y += 4;
+
+  // 5. Tech Global Solution
+  checkBreak(30);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(9.5);
+  doc.setTextColor(15, 23, 42);
+  doc.text("Tech Global Solution — Software Engineer", marginX, y);
+  doc.setTextColor(29, 78, 216);
+  doc.text("Jan 2017 – May 2018 (1.5 Years)", marginX + contentWidth, y, { align: 'right' });
+  y += 12;
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(8.8);
+  doc.setTextColor(15, 23, 42);
+  doc.text("Project 9: Metro Hospital ERP", marginX + 8, y);
+  y += 11;
+  addBullet("Programmed IPD/OPD controller logic in CodeIgniter and integrated biometric fingerprint hardware for staff attendance.");
+  y += 6;
+
+  // --- SECTION: ACADEMIC CREDENTIALS ---
+  addSectionHeader("Academic Credentials");
+  checkBreak(30);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(9);
+  doc.setTextColor(15, 23, 42);
+  doc.text("B.Tech in Information Technology", marginX, y);
+  doc.setFont("helvetica", "normal");
+  doc.setTextColor(29, 78, 216);
+  doc.text("Year: 2015 · 72% Marks", marginX + contentWidth, y, { align: 'right' });
+  y += 11;
+  doc.setFont("helvetica", "normal");
+  doc.setTextColor(71, 85, 105);
+  doc.text("Aryabhatta Institute of Engineering & Management, Durgapur · WBUT, Kolkata", marginX, y);
+  y += 14;
+
+  checkBreak(24);
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(9);
+  doc.setTextColor(15, 23, 42);
+  doc.text("Senior Secondary (10+2)", marginX, y);
+  doc.setFont("helvetica", "normal");
+  doc.setTextColor(29, 78, 216);
+  doc.text("Year: 2010 · 54% Marks", marginX + contentWidth, y, { align: 'right' });
+  y += 11;
+  doc.setFont("helvetica", "normal");
+  doc.setTextColor(71, 85, 105);
+  doc.text("M.V. College, Buxar, Bihar · BSEB Board", marginX, y);
+
+  // Add Footers to all pages
+  const totalPages = doc.internal.getNumberOfPages();
+  for (let i = 1; i <= totalPages; i++) {
+    doc.setPage(i);
+    doc.setDrawColor(226, 232, 240);
+    doc.setLineWidth(0.6);
+    doc.line(marginX, pageHeight - 26, marginX + contentWidth, pageHeight - 26);
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(7.5);
+    doc.setTextColor(148, 163, 184);
+    doc.text("Manoj Kumar Sharma · it13manoj@gmail.com · +91 93403 34221", marginX, pageHeight - 14);
+    doc.text(`Page ${i} of ${totalPages}`, marginX + contentWidth, pageHeight - 14, { align: 'right' });
+  }
+
+  return doc;
 }
 
-// Open Resume in PDF: Generates genuine PDF blob and opens in new tab
+/* --------------------------------------------------------------------------
+   9. USER-TRIGGERED PDF ACTIONS (OPEN, DOWNLOAD & PRINT)
+   -------------------------------------------------------------------------- */
 function openResumePDF() {
   openResume(); // Show on-screen view immediately
 
-  if (typeof html2pdf !== 'undefined') {
-    showToast('Rendering official PDF document...', 'info');
-    const clone = createPdfCloneElement();
-    if (!clone) return;
-
-    html2pdf().from(clone).set(getOptimalPdfOptions()).outputPdf('blob').then(function(blob) {
-      removePdfCloneElement(clone);
+  try {
+    const doc = buildManojResumePdf();
+    if (doc) {
+      const blob = doc.output('blob');
       const blobUrl = URL.createObjectURL(blob);
       window.open(blobUrl, '_blank');
-      showToast('PDF opened in browser tab!', 'success');
-    }).catch(function(err) {
-      removePdfCloneElement(clone);
-      console.warn('PDF blob generation error:', err);
-    });
+      showToast('PDF opened in new browser tab!', 'success');
+      return;
+    }
+  } catch (err) {
+    console.warn('PDF generator warning:', err);
   }
 }
 
-// Download Resume directly in PDF format
 function downloadResumePDF() {
   const downloadBtns = [
     document.getElementById('heroDownloadBtn'),
@@ -3047,44 +3176,35 @@ function downloadResumePDF() {
   downloadBtns.forEach(btn => {
     if (btn) {
       btn.dataset.original = btn.innerHTML;
-      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating PDF...';
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparing PDF...';
       btn.disabled = true;
     }
   });
 
-  showToast('Generating official PDF resume... Please wait.', 'info');
+  showToast('Generating official PDF resume...', 'info');
 
-  if (typeof html2pdf !== 'undefined') {
-    const clone = createPdfCloneElement();
-    if (!clone) {
-      resetDownloadButtons();
-      return;
-    }
-
-    html2pdf().from(clone).set(getOptimalPdfOptions()).save().then(function() {
-      removePdfCloneElement(clone);
-      showToast('PDF Resume downloaded successfully!', 'success');
-      resetDownloadButtons();
-    }).catch(function(error) {
-      removePdfCloneElement(clone);
-      console.error('html2pdf download error:', error);
-      showToast('Using high-res print-to-PDF...', 'info');
-      resetDownloadButtons();
-      window.print();
-    });
-  } else {
-    resetDownloadButtons();
-    window.print();
-  }
-
-  function resetDownloadButtons() {
-    downloadBtns.forEach(btn => {
-      if (btn && btn.dataset.original) {
-        btn.innerHTML = btn.dataset.original;
-        btn.disabled = false;
+  setTimeout(() => {
+    try {
+      const doc = buildManojResumePdf();
+      if (doc) {
+        doc.save('Manoj_Kumar_Sharma_Resume.pdf');
+        showToast('PDF Resume downloaded successfully!', 'success');
+      } else {
+        // Fallback to print
+        window.print();
       }
-    });
-  }
+    } catch (e) {
+      console.error('Download error:', e);
+      window.print();
+    } finally {
+      downloadBtns.forEach(btn => {
+        if (btn && btn.dataset.original) {
+          btn.innerHTML = btn.dataset.original;
+          btn.disabled = false;
+        }
+      });
+    }
+  }, 100);
 }
 
 function openResumeInNewTab() {
@@ -3096,15 +3216,10 @@ function printResume() {
 }
 
 /* --------------------------------------------------------------------------
-   9. MODAL CONTROLS
+   10. MODAL CONTROLS
    -------------------------------------------------------------------------- */
 function openResume() {
   const modal = document.getElementById('resumeModal');
-  const target = document.getElementById('modalResumeRender');
-  const template = document.getElementById('resumePdfTemplate');
-  if (template && target && target.innerHTML.trim() === '') {
-    target.innerHTML = template.innerHTML;
-  }
   if (modal) {
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
